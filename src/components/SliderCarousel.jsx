@@ -2,8 +2,8 @@ import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
 const SliderCarousel = ({
-  popularMovieLists,
-  popularTvSeriesLists,
+  movieLists,
+  tvSeriesLists,
   isMovie,
 }) => {
   return (
@@ -24,7 +24,7 @@ const SliderCarousel = ({
             },
         }}
       >
-        {(isMovie ? popularMovieLists : popularTvSeriesLists)?.map(
+        {(isMovie ? movieLists : tvSeriesLists)?.map(
           (list, index) => (
             <SplideSlide key={index}>
               <img

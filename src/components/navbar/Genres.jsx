@@ -56,18 +56,18 @@ const Genres = () => {
           <HoverCard.Target>
             <button className=" text-lg font-semibold">Genres</button>
           </HoverCard.Target>
-          <HoverCard.Dropdown className=" bg-[#25262b] text-slate-200">
+          <HoverCard.Dropdown className=" bg-dark-4 text-slate-200">
             <span className=" text-sm font-semibold py-3 px-2 block text-center text-slate-300">
               Genres list
             </span>
             <ScrollArea h={250} scrollHideDelay={500}>
-              <div className=" hover:bg-slate-600 transition duration-300 rounded py-2 px-2 select-none cursor-pointer">
+              <div className=" hover:bg-my-dark transition duration-300 rounded py-2 px-2 select-none cursor-pointer">
                 All
               </div>
               {genres?.map((genre) => (
                 <div
                   onClick={() => handleGenre(genre.id)}
-                  className="  hover:bg-slate-600 transition duration-300 rounded py-2 px-2 select-none cursor-pointer"
+                  className="  hover:bg-my-dark transition duration-300 rounded py-2 px-2 select-none cursor-pointer"
                   key={genre.id}
                 >
                   {genre.name}

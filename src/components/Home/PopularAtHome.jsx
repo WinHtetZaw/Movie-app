@@ -1,29 +1,40 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGetPopularMoviesQuery } from "../../redux/services/movieListApi";
 import { useGetPopularTvSeriesQuery } from "../../redux/services/tvSeriesApi";
 import SliderCarousel from "../SliderCarousel";
 
-
 const PopularAtHome = () => {
-  // data fetching
+  // * data fetching
   const { data: popularMovieListsData, isLoading } = useGetPopularMoviesQuery();
   const { data: popularTvSeriesListsData } = useGetPopularTvSeriesQuery();
 
-  // states
+  // * states
   const [isMovie, setIsMovie] = useState(true);
-  const [isCarousel, setIsCarousel] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  // get  popular movie lists from data fetching
+
+  // * get  popular movie lists from data fetching
   const popularMovieLists = popularMovieListsData?.results;
-  popularMovieLists && console.log("popularMovieLists - ", popularMovieLists);
+  // popularMovieLists && console.log("popularMovieLists - ", popularMovieLists);
 
-  // get  popular tv-series lists from data fetching
+  // * get  popular tv-series lists from data fetching
   const popularTvSeriesLists = popularTvSeriesListsData?.results;
-  popularTvSeriesLists &&
-    console.log("popularTvSeriesLists - ", popularTvSeriesLists);
+  // popularTvSeriesLists &&
+  //   console.log("popularTvSeriesLists - ", popularTvSeriesLists);
 
-  // looping movie lists
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // * looping movie lists
   const popularMovieListsLooping = popularMovieLists?.map(
     (popularMovieList, index) => (
       <div className=" min-w-[200px] my-yellow" key={index}>
@@ -44,23 +55,7 @@ const PopularAtHome = () => {
     )
   );
 
-
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  console.log(windowWidth);
-
-  // looping movie lists
+  // looping tv series lists
   const popularTvSeriesListsLooping = popularTvSeriesLists?.map(
     (popularTvSeriesList, index) => (
       <div className=" min-w-[200px] my-yellow" key={index}>
@@ -80,7 +75,6 @@ const PopularAtHome = () => {
       </div>
     )
   );
-
   return (
     <div className="bg-dark-1 px-3 md:px-7 py-10">
       <div className="">
@@ -106,11 +100,15 @@ const PopularAtHome = () => {
       </div>
       {windowWidth > 640 ? (
         <div className=" popularAtHome overflow-x-scroll flex gap-7 pb-5">
-        {isMovie ? popularMovieListsLooping : popularTvSeriesListsLooping}
-      </div>
+          {isMovie ? popularMovieListsLooping : popularTvSeriesListsLooping}
+        </div>
       ) : (
         <div className="">
-          <SliderCarousel popularMovieLists={popularMovieLists} popularTvSeriesLists={popularTvSeriesLists} isMovie={isMovie}/>
+          <SliderCarousel
+            movieLists={popularMovieLists}
+            tvSeriesLists={popularTvSeriesLists}
+            isMovie={isMovie}
+          />
         </div>
       )}
     </div>
