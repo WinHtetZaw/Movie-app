@@ -17,13 +17,13 @@ const TrendingAtHome = () => {
   // * data fetching
   const {
     data: trendingMovieListsData,
-    isLoading: trendingMovieListsDataIsLoading,
+    isLoading: isTrendingMovieListsDataLoading,
     isError,
   } = useGetTrendingMoviesQuery(choseTime);
 
   const {
     data: trendingTvSeriesListsData,
-    isLoading: trendingTvSeriesListsDataIsLoading,
+    isLoading: isTrendingTvSeriesListsDataLoading,
   } = useGetTrendingTvSeriesQuery(choseTime);
 
   // * get  trending movie lists from data fetching
@@ -106,17 +106,18 @@ const TrendingAtHome = () => {
       <div className="bg-dark-1 px-3 md:px-7 py-10">
         <div className="">
           <h1 className=" flex gap-5 font-semibold mb-5">
-            <span className="text-xl">Trending : </span>
+            <span className="text-xl whitespace-nowrap">Trending : </span>
 
-            {/* Dropdown buttons */}
-            <div className="relative text-left w-[7rem]">
+            {/* Movie or Tv series choose button */}
+            <div className="relative hover:card-shadow text-left w-[7rem]">
               <button
-                // disabled={isLoading}
+                disabled={isTrendingMovieListsDataLoading}
                 onClick={() => {
                   setIsTypeOpen(!isTypeOpen);
+                  setIsChoseTimeOpen(false);
                 }}
                 type="button"
-                className="inline-flex w-full justify-center gap-x-1.5 rounded-md text-white px-3 py-2 text-sm font-semibold  shadow-sm ring-2 ring-white ring-inset "
+                className="inline-flex w-full disabled:opacity-60 justify-center gap-x-1.5 rounded-md text-white px-3 py-2 text-sm font-semibold  shadow-sm ring-2 ring-white ring-inset "
               >
                 {type === "movie" ? "Movie" : "Tv series"}
                 <svg
@@ -157,14 +158,16 @@ const TrendingAtHome = () => {
               </div>
             </div>
 
-            <div className="relative text-left w-[7rem]">
+            {/* day or week choose button */}
+            <div className="relative hover:card-shadow text-left w-[7rem]">
               <button
-                // disabled={isLoading}
+                disabled={isTrendingTvSeriesListsDataLoading}
                 onClick={() => {
                   setIsChoseTimeOpen(!isChoseTimeOpen);
+                  setIsTypeOpen(false);
                 }}
                 type="button"
-                className="inline-flex w-full justify-center gap-x-1.5 rounded-md text-white px-3 py-2 text-sm font-semibold  shadow-sm ring-2 ring-white ring-inset "
+                className="inline-flex w-full disabled:opacity-60 justify-center gap-x-1.5 rounded-md text-white px-3 py-2 text-sm font-semibold  shadow-sm ring-2 ring-white ring-inset "
               >
                 {choseTime === "day" ? "Today" : "This week"}
                 <svg
@@ -204,6 +207,7 @@ const TrendingAtHome = () => {
                 </div>
               </div>
             </div>
+
           </h1>
         </div>
         {windowWidth > 640 ? (

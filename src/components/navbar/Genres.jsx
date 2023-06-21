@@ -61,7 +61,7 @@ const Genres = () => {
               Genres list
             </span>
             <ScrollArea h={250} scrollHideDelay={500}>
-              <div className=" hover:bg-my-dark transition duration-300 rounded py-2 px-2 select-none cursor-pointer">
+              <div onClick={()=> handleGenre(0)} className=" hover:bg-my-dark transition duration-300 rounded py-2 px-2 select-none cursor-pointer">
                 All
               </div>
               {genres?.map((genre) => (

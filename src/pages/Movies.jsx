@@ -33,15 +33,15 @@ const Movies = () => {
 
   return (
     <>
-      <PaginationMui />
-      <div className=" flex flex-wrap justify-center items-center gap-5 md:gap-10 p-5">
-        <div
+      {/* <PaginationMui /> */}
+      <div className=" lg:max-w-[900px] lg:mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 sm:gap-7 p-3 md:p-5">
+        {/* <div
           className={`${
             isLoading ? "flex" : "hidden"
           } absolute w-full top-0 h-screen justify-center items-center`}
         >
           <Loader size={50} color="#FFFDE4" />
-        </div>
+        </div> */}
         {looping}
         {/* <div className="relative h-[300px] bg-blue-200 w-[200px] overflow-hidden">
         <span className=" top-[50px] absolute w-full h-full bg-gradient-to-b from-transparent to-black"></span>

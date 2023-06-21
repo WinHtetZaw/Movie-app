@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* #25262b */
+/* #fffde4 */
+
 html,
 body {
   background-color: #1a1b1e;
@@ -56,6 +59,11 @@ body {
   }
   .bg-my-dark {
     background-color: #25262b;
+  }
+
+  .card-shadow {
+    /* box-shadow: #fffde4 0px 5px 15px; */
+    box-shadow: rgb(255,253,228, 0.4) 0px 2px 8px 0px;
   }
 
   .popularAtHome::-webkit-scrollbar {
