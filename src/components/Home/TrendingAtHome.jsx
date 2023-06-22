@@ -7,7 +7,7 @@ import { useGetTrendingTvSeriesQuery } from "../../redux/services/tvSeriesApi";
 import SliderCarousel from "../SliderCarousel";
 
 const TrendingAtHome = () => {
-  // * states
+  // * hooks
   const [type, setType] = useState("movie");
   const [choseTime, setChoseTime] = useState("day");
   const [isTypeOpen, setIsTypeOpen] = useState(false);
@@ -80,7 +80,7 @@ const TrendingAtHome = () => {
     )
   );
 
-  // looping tv series lists
+  // * looping tv series lists
   const trendingTvSeriesListsLooping = trendingTvSeriesLists?.map(
     (trendingTvSeriesList, index) => (
       <div className=" min-w-[200px] my-yellow" key={index}>

@@ -8,7 +8,7 @@ const PopularAtHome = () => {
   const { data: popularMovieListsData, isLoading } = useGetPopularMoviesQuery();
   const { data: popularTvSeriesListsData } = useGetPopularTvSeriesQuery();
 
-  // * states
+  // * hooks
   const [isMovie, setIsMovie] = useState(true);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -81,7 +81,7 @@ const PopularAtHome = () => {
           <span>Popular : </span>
           <button
             onClick={() => setIsMovie(true)}
-            className={`mr-3  border-2 py-1 px-2 rounded cursor-pointer transition duration-300 ${
+            className={`mr-3 w-[7rem] border-2 py-1 px-2 rounded cursor-pointer transition duration-300 ${
               !isMovie && "opacity-40"
             } ${isMovie && "hover:card-shadow"}`}
           >
@@ -89,7 +89,7 @@ const PopularAtHome = () => {
           </button>
           <button
             onClick={() => setIsMovie(false)}
-            className={`mr-3 border-2 py-1 px-2 rounded cursor-pointer transition duration-300 ${
+            className={`mr-3 w-[7rem] border-2 py-1 px-2 rounded cursor-pointer transition duration-300 ${
               isMovie && "opacity-40"
             } ${!isMovie && "hover:card-shadow"}`}
           >

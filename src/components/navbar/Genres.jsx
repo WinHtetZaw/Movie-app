@@ -13,6 +13,8 @@ import { setNumber } from "../../redux/features/genreSlice";
 import { useLocation } from "react-router-dom";
 
 const Genres = () => {
+
+  // * hooks
   const [activeGenre, setActiveGenre] = useState(0);
   const { data } = useGetGenresQuery();
   const genres = data?.genres;

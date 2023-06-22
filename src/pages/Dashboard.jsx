@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PopularAtHome from "../components/Home/PopularAtHome";
 import MovieCarousel from "../components/MovieCarousel";
 import TrendingAtHome from "../components/Home/TrendingAtHome";

@@ -37,7 +37,7 @@ const RootLayout = () => {
               transition: { duration: 0.4, delay: 0.2, ease: "easeIn" },
             }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className=" bg-[#FFFDE4] z-[1000] h-[80px] fixed top-0 w-full"
+            className=" bg-[#032541] z-[1000] h-[80px] fixed top-0 w-full"
           >
             <Navbar />
           </motion.nav>
