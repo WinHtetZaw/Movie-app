@@ -26,7 +26,7 @@ const RootLayout = () => {
     };
   }, [prevScrollPos]);
   return (
-    <div className="">
+    <div className="relative max-w-[1000px] mx-auto ">
       <AnimatePresence>
         {showNavbar && (
           <motion.nav
@@ -37,13 +37,13 @@ const RootLayout = () => {
               transition: { duration: 0.4, delay: 0.2, ease: "easeIn" },
             }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className=" bg-[#032541] z-[1000] h-[80px] fixed top-0 w-full"
+            className=" bg-[#032541] z-[1000] h-[80px] fixed top-0 max-w-[1000px] w-full mx-auto"
           >
             <Navbar />
           </motion.nav>
         )}
       </AnimatePresence>
-      <main className=" mt-[80px] min-h-screen bg-transparent">
+      <main className=" mt-[80px] bg-transparent">
         <Outlet />
       </main>
     </div>

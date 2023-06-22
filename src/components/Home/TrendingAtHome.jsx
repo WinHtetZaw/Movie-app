@@ -105,8 +105,8 @@ const TrendingAtHome = () => {
     <div>
       <div className="bg-dark-1 px-3 md:px-7 py-10">
         <div className="">
-          <h1 className=" flex gap-5 font-semibold mb-5">
-            <span className="text-xl whitespace-nowrap">Trending : </span>
+          <div className=" flex gap-2 sm:gap-5 items-center font-semibold mb-5">
+            <h1 className="text-lg sm:text-xl whitespace-nowrap">Trending : </h1>
 
             {/* Movie or Tv series choose button */}
             <div className="relative hover:card-shadow text-left w-[7rem]">
@@ -208,7 +208,7 @@ const TrendingAtHome = () => {
               </div>
             </div>
 
-          </h1>
+          </div>
         </div>
         {windowWidth > 640 ? (
           <div className=" popularAtHome overflow-x-scroll flex gap-7 pb-5">

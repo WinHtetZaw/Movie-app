@@ -77,11 +77,11 @@ const PopularAtHome = () => {
   return (
     <div className="bg-dark-1 px-3 md:px-7 py-10">
       <div className="">
-        <h1 className=" text-xl font-semibold mb-5">
-          <span>Popular : </span>
+        <div className=" flex gap-2 sm:gap-5 items-center text-xl font-semibold mb-5">
+          <h2 className=" text-lg sm:text-xl whitespace-nowrap">Popular : </h2>
           <button
             onClick={() => setIsMovie(true)}
-            className={`mr-3 w-[7rem] border-2 py-1 px-2 rounded cursor-pointer transition duration-300 ${
+            className={` w-[7rem]  ring-2 ring-white ring-inset px-3 py-2 text-sm rounded cursor-pointer transition duration-300 ${
               !isMovie && "opacity-40"
             } ${isMovie && "hover:card-shadow"}`}
           >
@@ -89,13 +89,13 @@ const PopularAtHome = () => {
           </button>
           <button
             onClick={() => setIsMovie(false)}
-            className={`mr-3 w-[7rem] border-2 py-1 px-2 rounded cursor-pointer transition duration-300 ${
+            className={` w-[7rem]  ring-2 ring-white ring-inset px-3 py-2 text-sm rounded cursor-pointer transition duration-300 ${
               isMovie && "opacity-40"
             } ${!isMovie && "hover:card-shadow"}`}
           >
             Tv series
           </button>
-        </h1>
+        </div>
       </div>
       {windowWidth > 640 ? (
         <div className=" popularAtHome overflow-x-scroll flex gap-7 pb-5">

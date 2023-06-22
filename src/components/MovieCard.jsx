@@ -17,7 +17,7 @@ const MovieCard = (props) => {
 
   return (
     <div className="  group flex items-center justify-center">
-      <div className=" relative bg-[#25262b] min-w-[8rem] max-w-[200px] border border-[#fffde4] hover:card-shadow transition duration-300 rounded-lg overflow-hidden">
+      <div className=" relative bg-[#25262b] min-w-[8rem] max-w-[230px] border border-[#fffde4] hover:card-shadow transition duration-300 rounded-lg overflow-hidden">
         {/* card image */}
         <div className=" aspect-[199/298]">
           <img

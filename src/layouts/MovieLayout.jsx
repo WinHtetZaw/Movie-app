@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 const MovieLayout = () => {
   return (
-    <div>
+    <div className='px-3 sm:px-5 min-[1000px]:px-0'>
         <Outlet/>
     </div>
   )
