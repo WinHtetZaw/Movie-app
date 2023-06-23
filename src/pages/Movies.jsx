@@ -13,6 +13,10 @@ const Movies = () => {
   const location = useLocation();
   const pageNum = useRef(1);
 
+   useEffect(() => {
+    setSearchParams({ page: pageNum.current });
+  }, []);
+  
   // * if click Movie to set page number 1
   if (location?.state?.page) {
     pageNum.current = location?.state?.page;
@@ -35,9 +39,7 @@ const Movies = () => {
   const totalPages = 500;
   const currentPage = pageNum.current;
 
-  useEffect(() => {
-    setSearchParams({ page: pageNum.current });
-  }, []);
+ 
 
   // * looping movie lists by genre
   let filter;
@@ -60,6 +62,8 @@ const Movies = () => {
 
   // * handle functions
   const handlePaginationBtnClick = (type) => {
+
+
     if (type === "prev") {
       if (pageNum.current === 1) {
         return;
@@ -86,6 +90,7 @@ const Movies = () => {
 
   const handleInputOnChange = (e) => {
     if (e.target.value.length > 3) {
+      console.log(e.target.value.length)
       return;
     } else if (e.target.value > 500 || e.target.value == 0) {
       setInputError("Number must be between 1 and 500");
@@ -213,19 +218,16 @@ const Movies = () => {
                 onChange={handleInputOnChange}
                 className=" w-full outline-none bg-transparent p-2"
                 type="number"
-                min="1"
-                max="500"
-                step={1}
                 maxLength={3}
                 placeholder="0"
               />
-              <button type="submit" className="p-2 bg-gray-600">
+              <button disabled={input === 0} type="submit" className="p-2 bg-gray-600 disabled:opacity-50">
                 Go
               </button>
             </form>
             {/* <p>{inputError && inputError}</p> */}
           </div>
-          <div className=" w-[4rem] sm:w-[7rem] py-3  text-center sm:text-end">
+          <div className=" w-[4rem] sm:w-[7rem] py-3 mr-5 text-center sm:text-end">
             {pageNum.current} \ {totalPages}
           </div>
         </div>
