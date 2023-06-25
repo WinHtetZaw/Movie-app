@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useGetPopularMoviesQuery } from "../../redux/services/movieListApi";
 import { useGetPopularTvSeriesQuery } from "../../redux/services/tvSeriesApi";
 import SliderCarousel from "../SliderCarousel";
+import { Footer } from "@mantine/core";
 
 const PopularAtHome = () => {
   // * data fetching
@@ -81,20 +82,35 @@ const PopularAtHome = () => {
           <h2 className=" text-lg sm:text-xl whitespace-nowrap">Popular : </h2>
           <button
             onClick={() => setIsMovie(true)}
-            className={` w-[7rem]  ring-2 ring-white ring-inset px-3 py-2 text-sm rounded cursor-pointer transition duration-300 ${
-              !isMovie && "opacity-40"
-            } ${isMovie && "hover:card-shadow"}`}
+            className={`font-sans relative w-[7rem] flex items-center bg-gradient-to-r from-[#005C97] to-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300  ${
+              isMovie && "hover:card-shadow"
+            }`}
           >
-            Movie
+            <span
+              className={`${
+                !isMovie ? " opacity-0" : "opacity-100"
+              } w-3 h-3 bg-[#E0AB18] rounded-full transition duration-300 absolute top-0 bottom-0 my-auto left-3`}
+            ></span>
+            <span className=" w-full h-full text-center">Movie</span>
           </button>
+  
           <button
             onClick={() => setIsMovie(false)}
-            className={` w-[7rem]  ring-2 ring-white ring-inset px-3 py-2 text-sm rounded cursor-pointer transition duration-300 ${
-              isMovie && "opacity-40"
-            } ${!isMovie && "hover:card-shadow"}`}
+            className={`font-sans relative w-[8rem] bg-gradient-to-r from-[#005C97] to-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300  ${
+              isMovie && "hover:card-shadow"
+            }`}
           >
-            Tv series
+            <span
+              className={`${
+                isMovie ? " opacity-0" : "opacity-100"
+              } w-3 h-3 bg-[#E0AB18] rounded-full transition duration-300 absolute top-0 bottom-0 my-auto left-3`}
+            ></span>
+            <span className="w-full h-full text-center">Tv series</span>
           </button>
+          {/* <div className="flex gap-3 items-center bg-blue-600 w-[7rem] px-3 py-2 ">
+            <span className=" w-4 h-4 rounded-full bg-red-500"></span>
+            <span className=" text-white">Click</span>
+          </div> */}
         </div>
       </div>
       {windowWidth > 640 ? (

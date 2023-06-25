@@ -13,9 +13,7 @@ const Movies = () => {
   const location = useLocation();
   const pageNum = useRef(1);
 
-   useEffect(() => {
-    setSearchParams({ page: pageNum.current });
-  }, []);
+   
   
   // * if click Movie to set page number 1
   if (location?.state?.page) {
@@ -27,7 +25,13 @@ const Movies = () => {
   const { data, isLoading, isSuccess } = useGetPopularMoviesQuery(
     pageNum.current
   );
-  data && console.log(data);
+  // data && console.log(data);
+
+  useEffect(() => {
+    setSearchParams({ page: pageNum.current });
+  
+  }, []);
+
 
   // * get data globally
   const { genreNum } = useSelector((state) => state.genreSlice);
@@ -39,7 +43,6 @@ const Movies = () => {
   const totalPages = 500;
   const currentPage = pageNum.current;
 
- 
 
   // * looping movie lists by genre
   let filter;
@@ -60,10 +63,9 @@ const Movies = () => {
     )
   );
 
+
   // * handle functions
   const handlePaginationBtnClick = (type) => {
-
-
     if (type === "prev") {
       if (pageNum.current === 1) {
         return;
@@ -86,11 +88,12 @@ const Movies = () => {
       setSearchParams({ page: pageNum.current });
       return;
     }
+    setInput("")
   };
 
   const handleInputOnChange = (e) => {
     if (e.target.value.length > 3) {
-      console.log(e.target.value.length)
+      // console.log(e.target.value.length)
       return;
     } else if (e.target.value > 500 || e.target.value == 0) {
       setInputError("Number must be between 1 and 500");

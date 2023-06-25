@@ -3,11 +3,14 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../components/navbar/Navbar";
 import { AnimatePresence, motion } from "framer-motion";
 import { ScrollArea } from "@mantine/core";
+import { useSelector } from "react-redux";
+import Footer from "../components/footer/Footer";
 // linear-gradient(to right, rgb(0, 90, 167), rgb(255, 253, 228))
 const RootLayout = () => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
-  // console.dir(window);
+
+  const {openSidebar} = useSelector(state => state.sidebarSlice)
 
   useEffect(() => {
     // start - when scroll navbar show and hide
@@ -26,7 +29,7 @@ const RootLayout = () => {
     };
   }, [prevScrollPos]);
   return (
-    <div className="relative max-w-[1000px] mx-auto ">
+    <div className={`relative max-w-[1000px] mx-auto ${openSidebar ? " h-screen overflow-hidden" : " h-auto"}`}>
       <AnimatePresence>
         {showNavbar && (
           <motion.nav
@@ -37,15 +40,16 @@ const RootLayout = () => {
               transition: { duration: 0.4, delay: 0.2, ease: "easeIn" },
             }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className=" bg-[#032541] z-[1000] h-[80px] fixed top-0 max-w-[1000px] w-full mx-auto"
+            className=" bg-dark-5 z-[1000] h-[80px] fixed top-0 max-w-[1000px] w-full mx-auto"
           >
             <Navbar />
           </motion.nav>
         )}
       </AnimatePresence>
-      <main className=" mt-[80px] bg-transparent">
+      <main className="mt-[80px] bg-transparent">
         <Outlet />
-      </main>
+      </main> 
+<Footer/>
     </div>
   );
 };
