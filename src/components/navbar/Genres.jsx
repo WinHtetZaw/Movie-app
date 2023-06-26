@@ -25,7 +25,7 @@ const Genres = () => {
 
   //   console.log(activeGenre);
   const handleGenre = (num) => {
-    if (location.pathname === "/movies" || location.pathname === "/tv-series") {
+    if (location.pathname === "/movie" || location.pathname === "/tv-series") {
       console.log("right pathname");
       dispatch(setNumber(num));
     }

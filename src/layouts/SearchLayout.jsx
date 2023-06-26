@@ -1,12 +1,12 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-const MovieLayout = () => {
+const SearchLayout = () => {
   return (
-    <div className=''>
+    <div>
         <Outlet/>
     </div>
   )
 }
 
-export default MovieLayout
+export default SearchLayout

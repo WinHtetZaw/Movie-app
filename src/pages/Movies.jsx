@@ -13,8 +13,6 @@ const Movies = () => {
   const location = useLocation();
   const pageNum = useRef(1);
 
-   
-  
   // * if click Movie to set page number 1
   if (location?.state?.page) {
     pageNum.current = location?.state?.page;
@@ -29,9 +27,7 @@ const Movies = () => {
 
   useEffect(() => {
     setSearchParams({ page: pageNum.current });
-  
   }, []);
-
 
   // * get data globally
   const { genreNum } = useSelector((state) => state.genreSlice);
@@ -42,7 +38,6 @@ const Movies = () => {
 
   const totalPages = 500;
   const currentPage = pageNum.current;
-
 
   // * looping movie lists by genre
   let filter;
@@ -63,7 +58,6 @@ const Movies = () => {
     )
   );
 
-
   // * handle functions
   const handlePaginationBtnClick = (type) => {
     if (type === "prev") {
@@ -81,14 +75,13 @@ const Movies = () => {
     } else if (type === "start") {
       pageNum.current = 1;
       setSearchParams({ page: pageNum.current });
-      console.log("u click start");
       return;
     } else if (type === "end") {
       pageNum.current = totalPages;
       setSearchParams({ page: pageNum.current });
       return;
     }
-    setInput("")
+    setInput("");
   };
 
   const handleInputOnChange = (e) => {
@@ -108,8 +101,9 @@ const Movies = () => {
     setSearchParams({ page: pageNum.current });
   };
 
+
   return (
-    <div className=" ">
+    <div className="px-3 sm:px-5 min-[1281px]:px-0">
       {/* pagination  */}
       <div className=" flex sm:justify-between gap-5 py-5 sm:py-7 flex-col-reverse sm:flex-row">
         <div className=" flex gap-3 justify-evenly items-center min-[400px]:justify-start">
@@ -117,9 +111,7 @@ const Movies = () => {
           <button
             disabled={pageNum.current === 1}
             onClick={() => handlePaginationBtnClick("start")}
-            className={`${
-              pageNum.current !== 1 && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer  text-slate-100`}
+            className={`${pageNum.current !== 1 && "hvr-radial-in"} w-16 h-8 disabled:opacity-50 flex items-center  bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -141,9 +133,7 @@ const Movies = () => {
           <button
             disabled={pageNum.current === 1}
             onClick={() => handlePaginationBtnClick("prev")}
-            className={`${
-              pageNum.current !== 1 && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer  text-slate-100`}
+            className={`${pageNum.current !== 1 && "hvr-radial-in"} w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -165,9 +155,7 @@ const Movies = () => {
           <button
             disabled={pageNum.current === totalPages}
             onClick={() => handlePaginationBtnClick("next")}
-            className={`${
-              pageNum.current !== totalPages && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer  text-slate-100`}
+            className={`${pageNum.current !== totalPages && "hvr-radial-in"}  w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -189,9 +177,7 @@ const Movies = () => {
           <button
             disabled={pageNum.current === totalPages}
             onClick={() => handlePaginationBtnClick("end")}
-            className={`${
-              pageNum.current !== totalPages && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer text-slate-100`}
+            className={`${pageNum.current !== totalPages && "hvr-radial-in"} w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -224,31 +210,34 @@ const Movies = () => {
                 maxLength={3}
                 placeholder="0"
               />
-              <button disabled={input === 0} type="submit" className="p-2 bg-gray-600 disabled:opacity-50">
+              <button
+                disabled={input === 0}
+                type="submit"
+                className="p-2 bg-gray-600 disabled:opacity-50"
+              >
                 Go
               </button>
             </form>
             {/* <p>{inputError && inputError}</p> */}
           </div>
-          <div className=" w-[4rem] sm:w-[7rem] py-3 mr-5 text-center sm:text-end">
+          <div className=" whitespace-nowrap w-[4rem] sm:w-[7rem] py-3 mr-5 text-center sm:text-end">
             {pageNum.current} \ {totalPages}
           </div>
         </div>
       </div>
 
       {/* movie lists show  */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">
         {looping}
       </div>
 
-      <div className=" flex gap-3 my-5 justify-evenly items-center min-[400px]:justify-end">
+   
+      <div className=" flex gap-3 py-10 justify-evenly items-center min-[400px]:justify-end">
           {/* start  */}
           <button
             disabled={pageNum.current === 1}
             onClick={() => handlePaginationBtnClick("start")}
-            className={`${
-              pageNum.current !== 1 && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer  text-slate-100`}
+            className={`${pageNum.current !== 1 && "hvr-radial-in"} w-16 h-8 disabled:opacity-50 flex items-center  bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -270,9 +259,7 @@ const Movies = () => {
           <button
             disabled={pageNum.current === 1}
             onClick={() => handlePaginationBtnClick("prev")}
-            className={`${
-              pageNum.current !== 1 && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer  text-slate-100`}
+            className={`${pageNum.current !== 1 && "hvr-radial-in"} w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -294,9 +281,7 @@ const Movies = () => {
           <button
             disabled={pageNum.current === totalPages}
             onClick={() => handlePaginationBtnClick("next")}
-            className={`${
-              pageNum.current !== totalPages && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer  text-slate-100`}
+            className={`${pageNum.current !== totalPages && "hvr-radial-in"}  w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -318,9 +303,7 @@ const Movies = () => {
           <button
             disabled={pageNum.current === totalPages}
             onClick={() => handlePaginationBtnClick("end")}
-            className={`${
-              pageNum.current !== totalPages && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer text-slate-100`}
+            className={`${pageNum.current !== totalPages && "hvr-radial-in"} w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

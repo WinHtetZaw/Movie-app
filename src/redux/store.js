@@ -4,11 +4,15 @@ import genreSlice from "./features/genreSlice";
 import { tvSeriesApi } from "./services/tvSeriesApi";
 import sideBar, { isOpenSidebar } from "./features/sidebarSlice";
 import sidebarSlice from "./features/sidebarSlice";
+import storeSlice from "./features/storeSlice";
+import searchSlice from "./features/searchSlice";
 
 export const store = configureStore({
   reducer: {
     genreSlice: genreSlice,
     sidebarSlice: sidebarSlice,
+    storeSlice: storeSlice,
+    searchSlice : searchSlice,
     [movieListApi.reducerPath]: movieListApi.reducer,
     [tvSeriesApi.reducerPath]: tvSeriesApi.reducer,
   },

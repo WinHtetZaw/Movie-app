@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Genres from "./Genres";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isOpenSidebar } from "../../redux/features/sidebarSlice";
+import InputSearch from "./InputSearch";
 
 const Navbar = () => {
+  // * hooks
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isShrink, setIsShrink] = useState(false);
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const { openSidebar } = useSelector((state) => state.sidebarSlice);
 
+  // * useEffects
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
@@ -28,13 +31,17 @@ const Navbar = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   return (
-    <div className=" font-sans w-full flex items-center z-50 h-full text-slate-200">
+    <div className=" font-sans w-full justify-between flex items-center z-50 h-full text-slate-200">
+      {/* logo  */}
       <Link to={"/"}>
-        <h3 className=" text-2xl text-slate-200 py-1 px-2 font-semibold font-serif hover:text-neon">
-          Movie app
+        <h3 className=" ml-5 text-lg sm:text-2xl flex flex-col items-center justify-center text-slate-200 font-semibold font-serif">
+          <span>Movie</span>
+          <span>App</span>
         </h3>
       </Link>
+
       {/* burger menu  */}
       <div className="absolute z-[1000] top-0 right-0 h-[80px] flex items-center justify-center mr-5">
         <button
@@ -68,39 +75,60 @@ const Navbar = () => {
           className=" absolute top-0 h-screen w-full bg-black opacity-50"
         ></div>
       )}
-      <div
-        className={` ${
-          isShrink &&
-          isMenuOpen &&
-          " absolute top-0 right-0 pt-20 bg-dark-3 h-screen overflow-hidden w-[70vw] flex flex-col gap-5"
-        } ${
-          !isMenuOpen && "hidden"
-        } sm:flex items-center ml-auto gap-7 sm:mr-5`}
-      >
-        <NavLink to={"/"}>
-          <h3 onClick={()=>setIsMenuOpen(false)} className=" text-lg font-semibold transition duration-300">
-            Home
-          </h3>
-        </NavLink>
 
-        <NavLink
-          to={{
-            pathname: "/movies",
-            state: { page: 1 },
-          }}
+      {/* menus & search */}
+      <div className=" flex gap-8">
+        <InputSearch />
+        <div
+          className={` ${
+            isShrink &&
+            isMenuOpen &&
+            " absolute top-0 right-0 pt-20 bg-dark-3 h-screen overflow-hidden w-[70vw] flex flex-col gap-5"
+          } ${!isMenuOpen && "hidden"} sm:flex items-center gap-5 sm:mr-5`}
         >
-          <h3 onClick={()=>setIsMenuOpen(false)} className=" text-lg font-semibold transition duration-300">
-            Movies
-          </h3>
-        </NavLink>
+          <NavLink to={"/"}>
+            <h3
+              onClick={() => {
+                dispatch(isOpenSidebar(false));
+                setIsMenuOpen(false);
+              }}
+              className=" text-lg font-semibold transition duration-300"
+            >
+              Home
+            </h3>
+          </NavLink>
 
-        <NavLink to={"/tv-series"}>
-          <h3 onClick={()=>setIsMenuOpen(false)} className=" text-lg font-semibold transition duration-300">
-            Tv series
-          </h3>
-        </NavLink>
+          <NavLink
+            to={{
+              pathname: "/movie",
+              state: { page: 1 },
+            }}
+          >
+            <h3
+              onClick={() => {
+                dispatch(isOpenSidebar(false));
+                setIsMenuOpen(false);
+              }}
+              className=" text-lg font-semibold transition duration-300"
+            >
+              Movies
+            </h3>
+          </NavLink>
 
-        <Genres />
+          <NavLink to={"/tv"}>
+            <h3
+              onClick={() => {
+                dispatch(isOpenSidebar(false));
+                setIsMenuOpen(false);
+              }}
+              className=" text-lg font-semibold transition duration-300"
+            >
+              Tv series
+            </h3>
+          </NavLink>
+
+          <Genres />
+        </div>
       </div>
     </div>
   );

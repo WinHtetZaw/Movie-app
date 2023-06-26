@@ -16,7 +16,13 @@ export const tvSeriesApi = createApi({
       providesTags: ["tvseries"],
     }),
     getTrendingTvSeries: builder.query({
-      query: (name) => `/trending/tv/${name}?api_key=75646841a0d1a2eb783fc0ad070dcec4&language=en-US&page=1`,
+      query: (name) =>
+        `/trending/tv/${name}?api_key=75646841a0d1a2eb783fc0ad070dcec4&language=en-US&page=1`,
+      providesTags: ["tvseries"],
+    }),
+    getTvDetail: builder.query({
+      query: (id) =>
+        `/tv/${id}?api_key=75646841a0d1a2eb783fc0ad070dcec4&language=en-US&page=1`,
       providesTags: ["tvseries"],
     }),
   }),
@@ -26,6 +32,7 @@ export const {
   useGetPopularTvSeriesQuery,
   useGetGenresQuery,
   useGetTrendingTvSeriesQuery,
+  useGetTvDetailQuery,
 } = tvSeriesApi;
 // https://api.themoviedb.org/3/movie/popular?api_key=75646841a0d1a2eb783fc0ad070dcec4&language=en-US&page=1
 // https://api.themoviedb.org/3/trending/tv/{time_window}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/navbar/Navbar";
 import { AnimatePresence, motion } from "framer-motion";
 import { ScrollArea } from "@mantine/core";
@@ -9,12 +9,16 @@ import Footer from "../components/footer/Footer";
 const RootLayout = () => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
+  const location = useLocation();
 
-  const {openSidebar} = useSelector(state => state.sidebarSlice)
+  const { openSidebar } = useSelector((state) => state.sidebarSlice);
 
   useEffect(() => {
-    // start - when scroll navbar show and hide
+    // when scroll navbar show and hide
     const handleScroll = () => {
+      // if (location.pathname.includes("/movie/detail")) {
+      //   return;
+      // }
       const currentScrollPos = window.scrollY;
       // console.log(currentScrollPos);
       const isScrollingUp = prevScrollPos > currentScrollPos;
@@ -22,14 +26,17 @@ const RootLayout = () => {
       setPrevScrollPos(currentScrollPos);
     };
     window.addEventListener("scroll", handleScroll);
-    // end - when scroll navbar show and hide
 
     return () => {
-      window.removeEventListener("scroll", handleScroll); // when scroll navbar show and hide
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [prevScrollPos]);
   return (
-    <div className={`relative max-w-[1000px] mx-auto ${openSidebar ? " h-screen overflow-hidden" : " h-auto"}`}>
+    <div
+      className={`relative max-w-[1280px] mx-auto ${
+        openSidebar ? " h-screen overflow-hidden" : " h-auto"
+      }`}
+    >
       <AnimatePresence>
         {showNavbar && (
           <motion.nav
@@ -40,7 +47,7 @@ const RootLayout = () => {
               transition: { duration: 0.4, delay: 0.2, ease: "easeIn" },
             }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className=" bg-dark-5 z-[1000] h-[80px] fixed top-0 max-w-[1000px] w-full mx-auto"
+            className=" bg-dark-5 z-[1000] h-[80px] fixed top-0 max-w-[1280px] w-full mx-auto"
           >
             <Navbar />
           </motion.nav>
@@ -48,8 +55,8 @@ const RootLayout = () => {
       </AnimatePresence>
       <main className="mt-[80px] bg-transparent">
         <Outlet />
-      </main> 
-<Footer/>
+      </main>
+      <Footer />
     </div>
   );
 };

@@ -11,15 +11,27 @@ import Movies from "./pages/Movies";
 import TvSeries from "./pages/TvSeries";
 import MovieDetail from "./pages/MovieDetail";
 import MovieLayout from "./layouts/MovieLayout";
+import TvLayout from "./layouts/TvLayout";
+import TvDetail from "./pages/TvDetail";
+import SearchLayout from "./layouts/SearchLayout";
+import SearchPage from "./pages/SearchPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />} errorElement={<NotFound />}>
       <Route index element={<Dashboard />} />
-      <Route path="tv-series" element={<TvSeries />}></Route>
-      <Route path="movies" element={<MovieLayout />}>
+      <Route path="tv" element={<TvLayout />}>
+        <Route index element={<TvSeries />} />
+        <Route path="detail/:id" element={<TvDetail />} />
+      </Route>
+      <Route path="movie" element={<MovieLayout />}>
         <Route index element={<Movies />} />
         <Route path="detail/:id" element={<MovieDetail />} />
+      </Route>
+      <Route path="search" element={<SearchLayout />}>
+        <Route index element={<SearchPage />} />
+        <Route path="movie"/>
+        <Route path="tv"/>
       </Route>
     </Route>
   )

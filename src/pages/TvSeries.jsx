@@ -99,17 +99,15 @@ const TvSeries = () => {
     };
 
   return (
-    <div className=" ">
+    <div className="px-3 sm:px-5 min-[1281px]:px-0">
       {/* pagination  */}
       <div className=" flex sm:justify-between gap-5 py-5 sm:py-7 flex-col-reverse sm:flex-row">
-        <div className=" flex gap-3 justify-evenly items-center min-[400px]:justify-start">
+      <div className=" flex gap-3 justify-evenly items-center min-[400px]:justify-start">
           {/* start  */}
           <button
             disabled={pageNum.current === 1}
             onClick={() => handlePaginationBtnClick("start")}
-            className={`${
-              pageNum.current !== 1 && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer  text-slate-100`}
+            className={`${pageNum.current !== 1 && "hvr-radial-in"} w-16 h-8 disabled:opacity-50 flex items-center  bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -131,9 +129,7 @@ const TvSeries = () => {
           <button
             disabled={pageNum.current === 1}
             onClick={() => handlePaginationBtnClick("prev")}
-            className={`${
-              pageNum.current !== 1 && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer  text-slate-100`}
+            className={`${pageNum.current !== 1 && "hvr-radial-in"} w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -155,9 +151,7 @@ const TvSeries = () => {
           <button
             disabled={pageNum.current === totalPages}
             onClick={() => handlePaginationBtnClick("next")}
-            className={`${
-              pageNum.current !== totalPages && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer  text-slate-100`}
+            className={`${pageNum.current !== totalPages && "hvr-radial-in"}  w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -179,9 +173,7 @@ const TvSeries = () => {
           <button
             disabled={pageNum.current === totalPages}
             onClick={() => handlePaginationBtnClick("end")}
-            className={`${
-              pageNum.current !== totalPages && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer text-slate-100`}
+            className={`${pageNum.current !== totalPages && "hvr-radial-in"} w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -220,7 +212,7 @@ const TvSeries = () => {
             </form>
             {/* <p>{inputError && inputError}</p> */}
           </div>
-          <div className=" w-[4rem] sm:w-[7rem] py-3 mr-5 text-center sm:text-end">
+          <div className="whitespace-nowrap w-[4rem] sm:w-[7rem] py-3 mr-5 text-center sm:text-end">
             {pageNum.current} \ {totalPages}
           </div>
         </div>
@@ -231,14 +223,12 @@ const TvSeries = () => {
       {looping}
     </div> 
 
-      <div className=" flex gap-3 my-5 justify-evenly items-center min-[400px]:justify-end">
+    <div className=" flex gap-3 py-10 justify-evenly items-center min-[400px]:justify-end">
           {/* start  */}
           <button
             disabled={pageNum.current === 1}
             onClick={() => handlePaginationBtnClick("start")}
-            className={`${
-              pageNum.current !== 1 && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer  text-slate-100`}
+            className={`${pageNum.current !== 1 && "hvr-radial-in"} w-16 h-8 disabled:opacity-50 flex items-center  bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -260,9 +250,7 @@ const TvSeries = () => {
           <button
             disabled={pageNum.current === 1}
             onClick={() => handlePaginationBtnClick("prev")}
-            className={`${
-              pageNum.current !== 1 && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer  text-slate-100`}
+            className={`${pageNum.current !== 1 && "hvr-radial-in"} w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -284,9 +272,7 @@ const TvSeries = () => {
           <button
             disabled={pageNum.current === totalPages}
             onClick={() => handlePaginationBtnClick("next")}
-            className={`${
-              pageNum.current !== totalPages && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer  text-slate-100`}
+            className={`${pageNum.current !== totalPages && "hvr-radial-in"}  w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -308,9 +294,7 @@ const TvSeries = () => {
           <button
             disabled={pageNum.current === totalPages}
             onClick={() => handlePaginationBtnClick("end")}
-            className={`${
-              pageNum.current !== totalPages && "hover:card-shadow"
-            }  w-16 h-8 disabled:opacity-50  ring-2 ring-white ring-inset px-3 py-2 rounded cursor-pointer text-slate-100`}
+            className={`${pageNum.current !== totalPages && "hvr-radial-in"} w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

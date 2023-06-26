@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useGetPopularMoviesQuery } from "../../redux/services/movieListApi";
 import { useGetPopularTvSeriesQuery } from "../../redux/services/tvSeriesApi";
 import SliderCarousel from "../SliderCarousel";
-import { Footer } from "@mantine/core";
 
 const PopularAtHome = () => {
   // * data fetching
@@ -37,7 +36,7 @@ const PopularAtHome = () => {
   // * looping movie lists
   const popularMovieListsLooping = popularMovieLists?.map(
     (popularMovieList, index) => (
-      <div className=" min-w-[200px] my-yellow" key={index}>
+      <div className="font-1 min-w-[200px] my-yellow" key={index}>
         <img
           className=" rounded mb-5"
           src={
@@ -76,15 +75,13 @@ const PopularAtHome = () => {
     )
   );
   return (
-    <div className="bg-dark-1 px-3 md:px-7 py-10">
+    <div className="bg-dark-1 px-3 md:px-7 py-10 mt-10">
       <div className="">
         <div className=" flex gap-2 sm:gap-5 items-center text-xl font-semibold mb-5">
-          <h2 className=" text-lg sm:text-xl whitespace-nowrap">Popular : </h2>
+          <h2 className=" font-serif text-lg sm:text-xl whitespace-nowrap">Popular : </h2>
           <button
             onClick={() => setIsMovie(true)}
-            className={`font-sans relative w-[7rem] flex items-center bg-gradient-to-r from-[#005C97] to-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300  ${
-              isMovie && "hover:card-shadow"
-            }`}
+            className={`hvr-radial-in font-sans text-gray-800 relative w-[7rem] flex items-center bg-gradient-to-r from-[#005C97] to-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300 `}
           >
             <span
               className={`${
@@ -96,9 +93,7 @@ const PopularAtHome = () => {
   
           <button
             onClick={() => setIsMovie(false)}
-            className={`font-sans relative w-[8rem] bg-gradient-to-r from-[#005C97] to-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300  ${
-              isMovie && "hover:card-shadow"
-            }`}
+            className={`hvr-radial-in font-sans text-gray-800 relative w-[8rem] bg-gradient-to-r from-[#005C97] to-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300 `}
           >
             <span
               className={`${
