@@ -1,35 +1,26 @@
-import React, { useRef, useState } from "react";
+import { useRef } from "react";
 import "./inputSearch.css";
-import { useSearchMovieQuery } from "../../redux/services/movieListApi";
-import { useDispatch, useSelector } from "react-redux";
-import { addSearchMovies } from "../../redux/features/searchSlice";
+import { useSelector } from "react-redux";
+
+import { useNavigate } from "react-router-dom";
 
 const InputSearch = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [input, setInput] = useState("");
   const inputRef = useRef("");
-  const dispatch = useDispatch();
-  const { searchMovies } = useSelector((state) => state.searchSlice);
-  searchMovies.length > 0 && console.log("searchMovies", searchMovies);
+  const navigate = useNavigate();
 
-  const { data, isLoading, isSuccess } = useSearchMovieQuery(searchQuery);
-  isSuccess && console.log(data);
+  const { showNavbar } = useSelector((state) => state.generalSlice);
 
-  const searchMovieLists = data?.results;
-  searchMovieLists?.length > 0 && console.log(searchMovieLists);
-
-  // handles
+  // * handles
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setSearchQuery(input);
-    // console.log("input", input);
-    // console.log("state", searchQuery);
-    // if (searchMovieLists.length > 0) {
-    //   dispatch(addSearchMovies(searchMovieLists));
-    //   console.log("successfully added");
-    // }
-    dispatch(addSearchMovies(data?.results))
-    console.log(searchMovies)
+    if (!inputRef.current) {
+      return;
+    }
+    localStorage.setItem("searchInput", inputRef.current);
+    navigate({
+      pathname: `/search`,
+      search: `?query=${inputRef.current}&page=1`,
+    });
   };
   return (
     <div className=" mr-16 sm:mr-0">
@@ -62,9 +53,7 @@ const InputSearch = () => {
         className=" flex items-center border-b border-gray-300"
       >
         <input
-          ref={inputRef}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => (inputRef.current = e.target.value)}
           className=" py-2 px-3 outline-none bg-transparent placeholder:tracking-wider"
           type="text"
           placeholder="Type to search ..."

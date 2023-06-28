@@ -26,8 +26,8 @@ export const movieListApi = createApi({
       providesTags: ["movie"],
     }),
     searchMovie: builder.query({
-      query: (query, include_adult = false) =>
-        `/search/movie?api_key=75646841a0d1a2eb783fc0ad070dcec4&query=${query}&include_adult=${include_adult}&&language=en-US&page=1`,
+      query: ({query,page}) =>
+        `/search/movie?api_key=75646841a0d1a2eb783fc0ad070dcec4&query=${query}&include_adult=false&&language=en-US&page=${page}`,
       providesTags: ["movie"],
     }),
   }),

@@ -26,12 +26,12 @@ const router = createBrowserRouter(
       </Route>
       <Route path="movie" element={<MovieLayout />}>
         <Route index element={<Movies />} />
-        <Route path="detail/:id" element={<MovieDetail />} />
       </Route>
+      <Route path="movie/detail/:id" element={<MovieDetail />} />
       <Route path="search" element={<SearchLayout />}>
         <Route index element={<SearchPage />} />
-        <Route path="movie"/>
-        <Route path="tv"/>
+        <Route path="movie" />
+        <Route path="tv" />
       </Route>
     </Route>
   )

@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import Genres from "./Genres";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isOpenSidebar } from "../../redux/features/sidebarSlice";
 import InputSearch from "./InputSearch";
+import { AnimatePresence, motion } from "framer-motion";
+import { toggleShowNavbar } from "../../redux/features/generalSlice";
 
 const Navbar = () => {
   // * hooks
@@ -12,8 +14,14 @@ const Navbar = () => {
   const [isShrink, setIsShrink] = useState(false);
   const navigate = useNavigate();
 
+  // const [showNavbar, setShowNavbar] = useState(true);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
+  const location = useLocation();
+
   const dispatch = useDispatch();
   const { openSidebar } = useSelector((state) => state.sidebarSlice);
+
+  const { showNavbar } = useSelector((state) => state.generalSlice);
 
   // * useEffects
   useEffect(() => {
@@ -32,105 +40,243 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    // when scroll navbar show and hide
+    const handleScroll = () => {
+      // if (location.pathname.includes("/movie/detail")) {
+      //   return;
+      // }
+      const currentScrollPos = window.scrollY;
+      // console.log(currentScrollPos);
+      const isScrollingUp = prevScrollPos > currentScrollPos;
+      dispatch(
+        toggleShowNavbar( isScrollingUp || currentScrollPos < 1 )
+      );
+      setPrevScrollPos(currentScrollPos);
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollPos]);
+
   return (
-    <div className=" font-sans w-full justify-between flex items-center z-50 h-full text-slate-200">
-      {/* logo  */}
-      <Link to={"/"}>
-        <h3 className=" ml-5 text-lg sm:text-2xl flex flex-col items-center justify-center text-slate-200 font-semibold font-serif">
-          <span>Movie</span>
-          <span>App</span>
-        </h3>
-      </Link>
-
-      {/* burger menu  */}
-      <div className="absolute z-[1000] top-0 right-0 h-[80px] flex items-center justify-center mr-5">
-        <button
-          onClick={() => {
-            dispatch(isOpenSidebar(!openSidebar));
-            setIsMenuOpen(!isMenuOpen);
-          }}
-          className={`menu ${
-            isMenuOpen && "opened"
-          }  w-9 h-9 ml-auto sm:hidden`}
-        >
-          <svg className=" w-full h-full" viewBox="0 0 100 100">
-            <path
-              className="line line1"
-              d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"
-            />
-            <path className="line line2" d="M 20,50 H 80" />
-            <path
-              className="line line3"
-              d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"
-            />
-          </svg>
-        </button>
-      </div>
-      {isMenuOpen && (
-        <div
-          onClick={() => {
-            dispatch(isOpenSidebar(!openSidebar));
-            setIsMenuOpen(!isMenuOpen);
-          }}
-          className=" absolute top-0 h-screen w-full bg-black opacity-50"
-        ></div>
-      )}
-
-      {/* menus & search */}
-      <div className=" flex gap-8">
-        <InputSearch />
-        <div
-          className={` ${
-            isShrink &&
-            isMenuOpen &&
-            " absolute top-0 right-0 pt-20 bg-dark-3 h-screen overflow-hidden w-[70vw] flex flex-col gap-5"
-          } ${!isMenuOpen && "hidden"} sm:flex items-center gap-5 sm:mr-5`}
-        >
-          <NavLink to={"/"}>
-            <h3
-              onClick={() => {
-                dispatch(isOpenSidebar(false));
-                setIsMenuOpen(false);
-              }}
-              className=" text-lg font-semibold transition duration-300"
-            >
-              Home
-            </h3>
-          </NavLink>
-
-          <NavLink
-            to={{
-              pathname: "/movie",
-              state: { page: 1 },
+    <>
+      <AnimatePresence>
+        {showNavbar && (
+          <motion.nav
+            initial={{ y: -80 }}
+            animate={{ y: 0 }}
+            exit={{
+              y: -80,
+              transition: { duration: 0.4, delay: 0.2, ease: "easeIn" },
             }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className=" bg-dark-5 z-[1000] h-[80px] fixed top-0 max-w-[1280px] w-full mx-auto"
           >
-            <h3
-              onClick={() => {
-                dispatch(isOpenSidebar(false));
-                setIsMenuOpen(false);
-              }}
-              className=" text-lg font-semibold transition duration-300"
-            >
-              Movies
-            </h3>
-          </NavLink>
+            <div className=" font-sans w-full justify-between flex items-center z-50 h-full text-slate-200">
+              {/* logo  */}
+              <Link to={"/"}>
+                <h3 className=" ml-5 text-lg sm:text-2xl flex flex-col items-center justify-center text-slate-200 font-semibold font-serif">
+                  <span>Movie</span>
+                  <span>App</span>
+                </h3>
+              </Link>
 
-          <NavLink to={"/tv"}>
-            <h3
-              onClick={() => {
-                dispatch(isOpenSidebar(false));
-                setIsMenuOpen(false);
-              }}
-              className=" text-lg font-semibold transition duration-300"
-            >
-              Tv series
-            </h3>
-          </NavLink>
+              {/* burger menu  */}
+              <div className="absolute z-[1000] top-0 right-0 h-[80px] flex items-center justify-center mr-5">
+                <button
+                  onClick={() => {
+                    dispatch(isOpenSidebar(!openSidebar));
+                    setIsMenuOpen(!isMenuOpen);
+                  }}
+                  className={`menu ${
+                    isMenuOpen && "opened"
+                  }  w-9 h-9 ml-auto sm:hidden`}
+                >
+                  <svg className=" w-full h-full" viewBox="0 0 100 100">
+                    <path
+                      className="line line1"
+                      d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"
+                    />
+                    <path className="line line2" d="M 20,50 H 80" />
+                    <path
+                      className="line line3"
+                      d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"
+                    />
+                  </svg>
+                </button>
+              </div>
+              {isMenuOpen && (
+                <div
+                  onClick={() => {
+                    dispatch(isOpenSidebar(!openSidebar));
+                    setIsMenuOpen(!isMenuOpen);
+                  }}
+                  className=" absolute top-0 h-screen w-full bg-black opacity-50"
+                ></div>
+              )}
 
-          <Genres />
-        </div>
-      </div>
-    </div>
+              {/* menus & search */}
+              <div className=" flex gap-8">
+                <InputSearch />
+                <div
+                  className={` ${
+                    isShrink &&
+                    isMenuOpen &&
+                    " absolute top-0 right-0 pt-20 bg-dark-3 h-screen overflow-hidden w-[70vw] flex flex-col gap-5"
+                  } ${
+                    !isMenuOpen && "hidden"
+                  } sm:flex items-center gap-5 sm:mr-5`}
+                >
+                  <NavLink to={"/"}>
+                    <h3
+                      onClick={() => {
+                        dispatch(isOpenSidebar(false));
+                        setIsMenuOpen(false);
+                      }}
+                      className=" text-lg font-semibold transition duration-300"
+                    >
+                      Home
+                    </h3>
+                  </NavLink>
+
+                  <NavLink
+                    to={{
+                      pathname: "/movie",
+                      state: { page: 1 },
+                    }}
+                  >
+                    <h3
+                      onClick={() => {
+                        dispatch(isOpenSidebar(false));
+                        setIsMenuOpen(false);
+                      }}
+                      className=" text-lg font-semibold transition duration-300"
+                    >
+                      Movies
+                    </h3>
+                  </NavLink>
+
+                  <NavLink to={"/tv"}>
+                    <h3
+                      onClick={() => {
+                        dispatch(isOpenSidebar(false));
+                        setIsMenuOpen(false);
+                      }}
+                      className=" text-lg font-semibold transition duration-300"
+                    >
+                      Tv series
+                    </h3>
+                  </NavLink>
+
+                  <Genres />
+                </div>
+              </div>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </>
+    // <div className=" font-sans w-full justify-between flex items-center z-50 h-full text-slate-200">
+    //   {/* logo  */}
+    //   <Link to={"/"}>
+    //     <h3 className=" ml-5 text-lg sm:text-2xl flex flex-col items-center justify-center text-slate-200 font-semibold font-serif">
+    //       <span>Movie</span>
+    //       <span>App</span>
+    //     </h3>
+    //   </Link>
+
+    //   {/* burger menu  */}
+    //   <div className="absolute z-[1000] top-0 right-0 h-[80px] flex items-center justify-center mr-5">
+    //     <button
+    //       onClick={() => {
+    //         dispatch(isOpenSidebar(!openSidebar));
+    //         setIsMenuOpen(!isMenuOpen);
+    //       }}
+    //       className={`menu ${
+    //         isMenuOpen && "opened"
+    //       }  w-9 h-9 ml-auto sm:hidden`}
+    //     >
+    //       <svg className=" w-full h-full" viewBox="0 0 100 100">
+    //         <path
+    //           className="line line1"
+    //           d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"
+    //         />
+    //         <path className="line line2" d="M 20,50 H 80" />
+    //         <path
+    //           className="line line3"
+    //           d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"
+    //         />
+    //       </svg>
+    //     </button>
+    //   </div>
+    //   {isMenuOpen && (
+    //     <div
+    //       onClick={() => {
+    //         dispatch(isOpenSidebar(!openSidebar));
+    //         setIsMenuOpen(!isMenuOpen);
+    //       }}
+    //       className=" absolute top-0 h-screen w-full bg-black opacity-50"
+    //     ></div>
+    //   )}
+
+    //   {/* menus & search */}
+    //   <div className=" flex gap-8">
+    //     <InputSearch />
+    //     <div
+    //       className={` ${
+    //         isShrink &&
+    //         isMenuOpen &&
+    //         " absolute top-0 right-0 pt-20 bg-dark-3 h-screen overflow-hidden w-[70vw] flex flex-col gap-5"
+    //       } ${!isMenuOpen && "hidden"} sm:flex items-center gap-5 sm:mr-5`}
+    //     >
+    //       <NavLink to={"/"}>
+    //         <h3
+    //           onClick={() => {
+    //             dispatch(isOpenSidebar(false));
+    //             setIsMenuOpen(false);
+    //           }}
+    //           className=" text-lg font-semibold transition duration-300"
+    //         >
+    //           Home
+    //         </h3>
+    //       </NavLink>
+
+    //       <NavLink
+    //         to={{
+    //           pathname: "/movie",
+    //           state: { page: 1 },
+    //         }}
+    //       >
+    //         <h3
+    //           onClick={() => {
+    //             dispatch(isOpenSidebar(false));
+    //             setIsMenuOpen(false);
+    //           }}
+    //           className=" text-lg font-semibold transition duration-300"
+    //         >
+    //           Movies
+    //         </h3>
+    //       </NavLink>
+
+    //       <NavLink to={"/tv"}>
+    //         <h3
+    //           onClick={() => {
+    //             dispatch(isOpenSidebar(false));
+    //             setIsMenuOpen(false);
+    //           }}
+    //           className=" text-lg font-semibold transition duration-300"
+    //         >
+    //           Tv series
+    //         </h3>
+    //       </NavLink>
+
+    //       <Genres />
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 

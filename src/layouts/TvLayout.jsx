@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 const TvLayout = () => {
   return (
-    <div>
+    <div className=' min-h-screen'>
         <Outlet/>
     </div>
   )

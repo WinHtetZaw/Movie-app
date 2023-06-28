@@ -1,12 +1,11 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet } from "react-router-dom";
 
 const SearchLayout = () => {
   return (
-    <div>
-        <Outlet/>
+    <div className=" min-h-screen">
+      <Outlet />
     </div>
-  )
-}
+  );
+};
 
-export default SearchLayout
+export default SearchLayout;

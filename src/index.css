@@ -12,6 +12,9 @@ body {
   background-color: #33353b;
   /* font-family: "Patua One", cursive; */
   letter-spacing: 1px;
+  /* overflow-x: hidden; */
+  min-height: 100vh;
+  padding: 0;
 }
 
 .mantine-pagination-item {
@@ -392,6 +395,10 @@ input[type="number"] {
   }
   .bg-my-dark {
     background-color: #25262b;
+  }
+
+  .shadow-1 {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
   }
 
   .text-neon-1 {

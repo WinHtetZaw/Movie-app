@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  searchParams: "",
   searchMovies: [],
 };
 
@@ -11,8 +12,11 @@ export const searchSlice = createSlice({
     addSearchMovies: (state, { payload }) => {
       state.searchMovies = [...payload];
     },
+    addSearchParams: (state, { payload }) => {
+      state.searchParams = payload;
+    },
   },
 });
 
-export const { addSearchMovies } = searchSlice.actions;
+export const { addSearchMovies, addSearchParams } = searchSlice.actions;
 export default searchSlice.reducer;

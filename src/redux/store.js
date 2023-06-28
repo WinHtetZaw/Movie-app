@@ -6,6 +6,7 @@ import sideBar, { isOpenSidebar } from "./features/sidebarSlice";
 import sidebarSlice from "./features/sidebarSlice";
 import storeSlice from "./features/storeSlice";
 import searchSlice from "./features/searchSlice";
+import generalSlice from "./features/generalSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     sidebarSlice: sidebarSlice,
     storeSlice: storeSlice,
     searchSlice : searchSlice,
+    generalSlice : generalSlice,
     [movieListApi.reducerPath]: movieListApi.reducer,
     [tvSeriesApi.reducerPath]: tvSeriesApi.reducer,
   },

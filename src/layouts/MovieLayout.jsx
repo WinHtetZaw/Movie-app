@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 const MovieLayout = () => {
   return (
-    <div className=''>
+    <div className=' min-h-screen'>
         <Outlet/>
     </div>
   )

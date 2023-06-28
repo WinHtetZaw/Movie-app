@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import PopularAtHome from "../components/Home/PopularAtHome";
-import MovieCarousel from "../components/MovieCarousel";
 import TrendingAtHome from "../components/Home/TrendingAtHome";
 
 const Dashboard = () => {
@@ -9,8 +7,8 @@ const Dashboard = () => {
       <div className="mb-5 md:mb-16">
         <PopularAtHome />
       </div>
-      <div className="">
-        <TrendingAtHome/>
+      <div className=" mb-16">
+        <TrendingAtHome />
       </div>
     </div>
   );

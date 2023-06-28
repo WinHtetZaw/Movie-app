@@ -2,7 +2,7 @@ import "@lottiefiles/lottie-player";
 
 const Footer = () => {
   return (
-    <div className=" flex items-center pt-5 pb-16 gap-5 flex-col w-full bg-dark-5 text-white">
+    <div className=" absolute z-[100] flex items-center pt-5 pb-16 gap-5 flex-col w-full bg-dark-5 text-white">
       
       <ul className=" grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5">
         <li className=" w-[70px] sm:w-[100px] aspect-square">

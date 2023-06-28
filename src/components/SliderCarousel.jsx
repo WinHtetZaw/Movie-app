@@ -5,9 +5,10 @@ const SliderCarousel = ({
   movieLists,
   tvSeriesLists,
   isMovie,
+  setImgUrl
 }) => {
   return (
-    <div>
+    <div >
       <Splide
         className=" relative"
         options={{
@@ -26,7 +27,9 @@ const SliderCarousel = ({
       >
         {(isMovie ? movieLists : tvSeriesLists)?.map(
           (list, index) => (
-            <SplideSlide key={index}>
+            <SplideSlide onMouseEnter={() => {
+              setImgUrl(`https://image.tmdb.org/t/p/original/${list.backdrop_path}`)
+             }} key={index}>
               <img
               className=" rounded"
                 src={
