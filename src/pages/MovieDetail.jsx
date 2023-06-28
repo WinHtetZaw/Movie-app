@@ -18,19 +18,15 @@ const MovieDetail = () => {
       {isLoading ? (
         <PageLoading />
       ) : (
-        <div className="">
-          <div className=" fixed top-0 z-10">
-            <img
-              className=" min-h-[100vh] object-cover"
-              src={
-                data?.backdrop_path
-                  ? `https://image.tmdb.org/t/p/original${data?.backdrop_path}`
-                  : `https://getuikit.com/v2/docs/images/placeholder_600x400.svg`
-              }
-              alt=""
-            />
-          </div>
-          <div className=" pt-[20vh] pb-16 z-50 flex flex-col md:flex-row absolute -top-[80px] bg-opacity-80  bg-[#25262b] ">
+        <div
+          style={{
+            backgroundImage:
+              `url(https://image.tmdb.org/t/p/original${data?.backdrop_path})` ??
+              `url(https://getuikit.com/v2/docs/images/placeholder_600x400.svg)`,
+          }}
+          className=" min-h-screen max-h-full bg-fixed bg-cover bg-center bg-no-repeat"
+        >
+          <div className=" min-h-screen pt-[10vh] pb-16 flex flex-col md:flex-row  bg-opacity-80  bg-[#25262b] ">
             {/* left  */}
             <div className=" w-[200px] md:w-4/12 rounded-lg overflow-hidden p-5">
               <img

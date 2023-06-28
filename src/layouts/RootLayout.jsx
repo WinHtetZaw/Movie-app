@@ -7,11 +7,10 @@ import Footer from "../components/footer/Footer";
 const RootLayout = () => {
   const { openSidebar } = useSelector((state) => state.sidebarSlice);
   const { isPageLoading } = useSelector((state) => state.generalSlice);
-  console.log(isPageLoading);
 
   return (
     <div
-      className={`relative max-w-[1280px] mx-auto ${
+      className={`relative max-w-[1280px] mx-auto bg-dark-1 ${
         openSidebar ? " h-screen overflow-hidden" : ""
       }`}
     >
@@ -21,7 +20,9 @@ const RootLayout = () => {
       <main className="mt-[80px] min-h-screen bg-transparent">
         <Outlet />
       </main>
-      <Footer />
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 };

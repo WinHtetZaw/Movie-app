@@ -7,6 +7,7 @@ import { isOpenSidebar } from "../../redux/features/sidebarSlice";
 import InputSearch from "./InputSearch";
 import { AnimatePresence, motion } from "framer-motion";
 import { toggleShowNavbar } from "../../redux/features/generalSlice";
+import {BsPersonCircle} from "react-icons/bs"
 
 const Navbar = () => {
   // * hooks
@@ -26,7 +27,7 @@ const Navbar = () => {
   // * useEffects
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 640) {
+      if (window.innerWidth < 768) {
         setIsShrink(true);
       } else {
         setIsShrink(false);
@@ -49,9 +50,7 @@ const Navbar = () => {
       const currentScrollPos = window.scrollY;
       // console.log(currentScrollPos);
       const isScrollingUp = prevScrollPos > currentScrollPos;
-      dispatch(
-        toggleShowNavbar( isScrollingUp || currentScrollPos < 1 )
-      );
+      dispatch(toggleShowNavbar(isScrollingUp || currentScrollPos < 1));
       setPrevScrollPos(currentScrollPos);
     };
     window.addEventListener("scroll", handleScroll);
@@ -93,7 +92,7 @@ const Navbar = () => {
                   }}
                   className={`menu ${
                     isMenuOpen && "opened"
-                  }  w-9 h-9 ml-auto sm:hidden`}
+                  }  w-9 h-9 ml-auto md:hidden`}
                 >
                   <svg className=" w-full h-full" viewBox="0 0 100 100">
                     <path
@@ -128,7 +127,7 @@ const Navbar = () => {
                     " absolute top-0 right-0 pt-20 bg-dark-3 h-screen overflow-hidden w-[70vw] flex flex-col gap-5"
                   } ${
                     !isMenuOpen && "hidden"
-                  } sm:flex items-center gap-5 sm:mr-5`}
+                  } md:flex items-center gap-5 md:mr-5`}
                 >
                   <NavLink to={"/"}>
                     <h3
@@ -173,6 +172,11 @@ const Navbar = () => {
 
                   <Genres />
                 </div>
+              </div>
+
+              {/* profile  */}
+              <div className=" w-16 p-2 text-gray-800">
+                <BsPersonCircle className=" w-full h-full"/>
               </div>
             </div>
           </motion.nav>
