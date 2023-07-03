@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isPageLoading: false,
   showNavbar: true,
+  scrollable: true,
 };
 
 export const generalSlice = createSlice({
@@ -15,8 +16,11 @@ export const generalSlice = createSlice({
     setIsPageLoading: (state, { payload }) => {
       state.isPageLoading = payload;
     },
+    setScrollable: (state, { payload }) => {
+      state.scrollable = payload;
+    },
   },
 });
 
-export const { toggleShowNavbar, setIsPageLoading } = generalSlice.actions;
+export const { toggleShowNavbar, setIsPageLoading ,setScrollable} = generalSlice.actions;
 export default generalSlice.reducer;

@@ -96,7 +96,7 @@ const PopularAtHome = () => {
   );
   return (
     <>
-    {isLoading ? (<div className=" w-[100px] md:w-[150px] mx-auto">
+    {isLoading || !popularMovieLists ? (<div className=" w-[100px] md:w-[150px] mx-auto">
         <lottie-player
           autoplay
           loop
@@ -125,7 +125,7 @@ const PopularAtHome = () => {
             </h2>
             <button
               onClick={() => setIsMovie(true)}
-              className={`hvr-radial-in font-sans text-gray-800 relative w-[7rem] flex items-center bg-gradient-to-r from-[#005C97] to-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300 `}
+              className={`hvr-radial-in font-sans text-gray-800 relative w-[7rem] flex items-center  py-2 text-sm rounded cursor-pointer transition duration-300 `}
             >
               <span
                 className={`${
@@ -137,7 +137,7 @@ const PopularAtHome = () => {
 
             <button
               onClick={() => setIsMovie(false)}
-              className={`hvr-radial-in font-sans text-gray-800 relative w-[8rem] bg-gradient-to-r from-[#005C97] to-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300 `}
+              className={`hvr-radial-in font-sans text-gray-800 relative w-[8rem]  py-2 text-sm rounded cursor-pointer transition duration-300 `}
             >
               <span
                 className={`${

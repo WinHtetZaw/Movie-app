@@ -28,16 +28,15 @@ const TrendingAtHome = () => {
 
   // * get  trending movie lists from data fetching
   const trendingMovieLists = trendingMovieListsData?.results;
-  trendingMovieLists &&
-    console.log("trendingMovieLists - ", trendingMovieLists);
+  // trendingMovieLists &&
+  //   console.log("trendingMovieLists - ", trendingMovieLists);
 
   // * get trending tv-series lists from data fetching
   const trendingTvSeriesLists = trendingTvSeriesListsData?.results;
-  trendingTvSeriesLists &&
-    console.log("trendingTvSeriesLists - ", trendingTvSeriesLists);
+  // trendingTvSeriesLists &&
+  //   console.log("trendingTvSeriesLists - ", trendingTvSeriesLists);
 
-  // const url = `https://image.tmdb.org/t/p/original${trendingTvSeriesLists[0]?.backdrop_path}`
-  //  isSuccess && console.log(url)
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -123,7 +122,7 @@ const TrendingAtHome = () => {
 
   return (
     <>
-    {isLoading ? (
+    {isLoading || !trendingTvSeriesLists ? (
       <div className=" w-[100px] md:w-[150px] mx-auto">
       <lottie-player
         autoplay
@@ -155,7 +154,7 @@ const TrendingAtHome = () => {
               </h1>
 
               {/* Movie or Tv series choose button */}
-              <div className="font-sans group text-gray-800 relative text-left w-[7rem]">
+              <div className="font-sans relative group text-gray-800 text-left w-[7rem]">
                 <button
                   disabled={isLoading}
                   onClick={() => {
@@ -163,11 +162,11 @@ const TrendingAtHome = () => {
                     setIsChoseTimeOpen(false);
                   }}
                   type="button"
-                  className="inline-flex items-center w-full bg-[#1CB5E0] group-hover:bg-[#005C97] group-hover:text-slate-200 transition duration-300 text-gray-800 disabled:opacity-60 justify-center gap-x-1.5 rounded-md  px-3 py-2 text-sm font-semibold "
+                  className=" hvr-radial-in w-full pr-6 transition duration-300 text-gray-800 disabled:opacity-60 rounded-md  px-3 py-2 text-sm font-semibold "
                 >
                   {type === "movie" ? "Movie" : "Tv series"}
                   <svg
-                    className={`-mr-1 h-5 w-5 text-gray-800 group-hover:text-slate-200 ${
+                    className={` absolute top-0 bottom-0 my-auto right-2 h-5 w-5 text-gray-800 group-hover:text-slate-200 ${
                       isTypeOpen && " rotate-180"
                     } transition duration-300`}
                     viewBox="0 0 20 20"
@@ -185,24 +184,9 @@ const TrendingAtHome = () => {
                 <div
                   className={` ${
                     isTypeOpen ? "block" : "hidden"
-                  } absolute bg-dark-4 left-0 z-10 mt-2 w-56 origin-top-right rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
+                  } absolute bg-glass-1 left-0 z-10 mt-2 w-56 origin-top-right rounded shadow-lg ring-1 ring-[#fffde4] ring-opacity-50 focus:outline-none`}
                 >
-                  <div className="px-2 py-3  rounded  text-slate-200 border border-[#fffde4]">
-                    <button
-                      value={"movie"}
-                      onClick={(e) => handleTypeClick(e.target.value)}
-                      className=" py-3 px-2 block w-full text-left cursor-pointer border-b last:border-b-0 border-b-[#25262b]"
-                    >
-                      Movie
-                    </button>
-                    <button
-                      value={"tv"}
-                      onClick={(e) => handleTypeClick(e.target.value)}
-                      className=" py-3 px-2 block w-full text-left cursor-pointer border-b last:border-b-0 border-b-[#25262b]"
-                    >
-                      Tv series
-                    </button>
-                  </div>
+                  <div className="px-2 py-3  text-slate-700">
                   <svg
                     onClick={() => {
                       setIsTypeOpen(!isTypeOpen);
@@ -213,7 +197,7 @@ const TrendingAtHome = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6 absolute top-3 right-3 active:scale-90 text-slate-200 bg-gray-800 hover:bg-gray-700 rounded-full"
+                    className="w-6 h-6 absolute top-2 right-2 active:scale-90 text-slate-200 bg-gray-800 hover:bg-gray-700 rounded-full"
                   >
                     <path
                       strokeLinecap="round"
@@ -221,6 +205,22 @@ const TrendingAtHome = () => {
                       d="M6 18L18 6M6 6l12 12"
                     />
                   </svg>
+                    <button
+                      value={"movie"}
+                      onClick={(e) => handleTypeClick(e.target.value)}
+                      className="hover:bg-gray-100 hover:rounded hover:bg-opacity-40 transition duration-300 py-3 px-2 block w-full text-left cursor-pointer border-b border-gray-400 last:border-none"
+                    >
+                      Movie
+                    </button>
+                    <button
+                      value={"tv"}
+                      onClick={(e) => handleTypeClick(e.target.value)}
+                      className="hover:bg-gray-100 hover:rounded hover:bg-opacity-40 transition duration-300 py-3 px-2 block w-full text-left cursor-pointer border-b border-gray-400 last:border-none"
+                    >
+                      Tv series
+                    </button>
+                  </div>
+                  
                 </div>
               </div>
 
@@ -233,11 +233,11 @@ const TrendingAtHome = () => {
                     setIsTypeOpen(false);
                   }}
                   type="button"
-                  className="inline-flex w-full transition duration-300  bg-[#1CB5E0] group-hover:bg-[#005C97] group-hover:text-slate-200 disabled:opacity-60 justify-center gap-x-1.5 rounded-md text-gray-800 px-3 py-2 text-sm font-semibold "
+                  className="inline-flex w-full pr-6 transition duration-300 hvr-radial-in disabled:opacity-60 justify-center gap-x-1.5 rounded-md text-gray-800 px-3 py-2 text-sm font-semibold "
                 >
                   {choseTime === "day" ? "Today" : "This week"}
                   <svg
-                    className={`-mr-1 h-5 w-5 text-gray-800 group-hover:text-slate-200 ${
+                    className={`absolute top-0 bottom-0 my-auto right-2 h-5 w-5 text-gray-800 group-hover:text-slate-200 ${
                       isChoseTimeOpen && " rotate-180"
                     } transition duration-300`}
                     viewBox="0 0 20 20"
@@ -255,24 +255,9 @@ const TrendingAtHome = () => {
                 <div
                   className={` ${
                     isChoseTimeOpen ? "block" : "hidden"
-                  } absolute left-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
+                  } absolute left-0 z-10 mt-2 w-56 bg-glass-1 text-slate-700 origin-top-right rounded bg-white shadow-lg ring-1 ring-[#fffde4] ring-opacity-50 focus:outline-none`}
                 >
-                  <div className="px-2 py-3  rounded bg-dark-4 text-slate-200 border border-[#fffde4]">
-                    <button
-                      value={"day"}
-                      onClick={(e) => handleChoseTimeClick(e.target.value)}
-                      className=" py-3 px-2 block w-full text-left cursor-pointer border-b last:border-b-0 border-b-[#25262b]"
-                    >
-                      Today
-                    </button>
-                    <button
-                      value={"week"}
-                      onClick={(e) => handleChoseTimeClick(e.target.value)}
-                      className=" py-3 px-2 block w-full text-left cursor-pointer border-b last:border-b-0 border-b-[#25262b]"
-                    >
-                      This week
-                    </button>
-                  </div>
+                  <div className="px-2 py-3  ">
                   <svg
                     onClick={() => {
                       setIsChoseTimeOpen(!isChoseTimeOpen);
@@ -283,7 +268,7 @@ const TrendingAtHome = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6 absolute top-3 right-3 active:scale-90 text-slate-200 bg-gray-800 hover:bg-gray-700 rounded-full"
+                    className="w-6 h-6 absolute top-2 right-2 active:scale-90 text-slate-200 bg-gray-800 hover:bg-gray-700 rounded-full"
                   >
                     <path
                       strokeLinecap="round"
@@ -291,6 +276,22 @@ const TrendingAtHome = () => {
                       d="M6 18L18 6M6 6l12 12"
                     />
                   </svg>
+                    <button
+                      value={"day"}
+                      onClick={(e) => handleChoseTimeClick(e.target.value)}
+                      className=" hover:bg-gray-100 hover:rounded hover:bg-opacity-40 transition duration-300 py-3 px-2 block w-full text-left cursor-pointer border-b border-gray-400 last:border-none"
+                    >
+                      Today
+                    </button>
+                    <button
+                      value={"week"}
+                      onClick={(e) => handleChoseTimeClick(e.target.value)}
+                      className="hover:bg-gray-100 hover:rounded hover:bg-opacity-40 transition duration-300 py-3 px-2 block w-full text-left cursor-pointer border-b border-gray-400 last:border-none"
+                    >
+                      This week
+                    </button>
+                  </div>
+                 
                 </div>
               </div>
             </div>

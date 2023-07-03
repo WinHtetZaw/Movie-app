@@ -398,7 +398,8 @@ input[type="number"] {
   }
 
   .shadow-1 {
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+      rgba(0, 0, 0, 0.22) 0px 10px 10px;
   }
 
   .text-neon-1 {
@@ -521,48 +522,47 @@ input[type="number"] {
     touch-action: manipulation;
   }
 
-/* Radial In */
-.hvr-radial-in {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  position: relative;
-  overflow: hidden;
-  background: #005C97;
-  -webkit-transition-property: color;
-  transition-property: color;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-}
-.hvr-radial-in:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #1CB5E0;
-  border-radius: 100%;
-  -webkit-transform: scale(2);
-  transform: scale(2);
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
-}
-.hvr-radial-in:hover {
-  color: white;
-}
-.hvr-radial-in:hover:before {
-  -webkit-transform: scale(0);
-  transform: scale(0);
-}
-
+  /* Radial In */
+  .hvr-radial-in {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    overflow: hidden;
+    background: #2f274d;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+  }
+  .hvr-radial-in:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #3da2f1;
+    border-radius: 100%;
+    -webkit-transform: scale(2);
+    transform: scale(2);
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+  .hvr-radial-in:hover {
+    color: white;
+  }
+  .hvr-radial-in:hover:before {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
 
   .button-43:hover {
     background-image: linear-gradient(-180deg, #1d95c9 0%, #17759c 100%);
@@ -573,6 +573,23 @@ input[type="number"] {
       padding: 1rem 2rem;
     }
   }
+
+  .bg-glass-1 {
+    background: rgba(255, 255, 255, 0.49);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.46);
+  }
+  .bg-glass-2 {
+    background: rgba(255, 255, 255, 0.40);
+    /* border-radius: 16px; */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    /* border: 1px solid rgba(255, 255, 255, 0.3); */
+  }
+
 }
 .splide__pagination {
   bottom: -1.5rem;
@@ -621,7 +638,7 @@ input[type="number"] {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #005C97;
+  background: #005c97;
   -webkit-transform: scaleX(0);
   transform: scaleX(0);
   -webkit-transform-origin: 100% 50%;
@@ -633,10 +650,14 @@ input[type="number"] {
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
-.hvr-sweep-to-left:hover, .hvr-sweep-to-left:focus, .hvr-sweep-to-left:active {
+.hvr-sweep-to-left:hover,
+.hvr-sweep-to-left:focus,
+.hvr-sweep-to-left:active {
   color: white;
 }
-.hvr-sweep-to-left:hover:before, .hvr-sweep-to-left:focus:before, .hvr-sweep-to-left:active:before {
+.hvr-sweep-to-left:hover:before,
+.hvr-sweep-to-left:focus:before,
+.hvr-sweep-to-left:active:before {
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
 }
@@ -662,7 +683,7 @@ input[type="number"] {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #005C97;
+  background: #005c97;
   -webkit-transform: scaleX(0);
   transform: scaleX(0);
   -webkit-transform-origin: 0 50%;

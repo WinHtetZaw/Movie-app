@@ -34,12 +34,12 @@ const SearchPage = () => {
   const currentPage = pageNum.current;
 
   //* effects
-  useEffect(() => {
-    setSearchParams({
-      query: searchQuery,
-      page: pageNum.current,
-    });
-  }, [pageNum.current]);
+  // useEffect(() => {
+  //   setSearchParams({
+  //     query: searchQuery,
+  //     page: pageNum.current,
+  //   });
+  // }, [pageNum.current]);
 
   // * looping movie lists
   const looping = lists?.map((list) => (
@@ -85,7 +85,12 @@ const SearchPage = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    pageNum.current = input;
+    if(lists.length === 0) {
+      pageNum.current = 0
+    } else {
+
+      pageNum.current = input;
+    }
     setSearchParams({ page: pageNum.current });
   };
 
@@ -222,7 +227,7 @@ const SearchPage = () => {
       </div>
 
       {/*  lists show  */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">
+      <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">
         {looping}
       </div>
     </div>

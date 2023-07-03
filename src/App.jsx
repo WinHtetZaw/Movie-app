@@ -15,6 +15,10 @@ import TvLayout from "./layouts/TvLayout";
 import TvDetail from "./pages/TvDetail";
 import SearchLayout from "./layouts/SearchLayout";
 import SearchPage from "./pages/SearchPage";
+import AccSignup from "./components/account/AccSignup";
+import AccSignin from "./components/account/AccSignin";
+import { Toaster } from "react-hot-toast";
+import Favorite from "./pages/Favorite";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,12 +37,20 @@ const router = createBrowserRouter(
         <Route path="movie" />
         <Route path="tv" />
       </Route>
+      <Route path="sign-up" element={ <AccSignup/> } />
+      <Route path="sign-in" element={<AccSignin/>} />
+      <Route path="favorite" element={<Favorite/>} />
     </Route>
   )
 );
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+    <div><Toaster   position="top-right"/></div>
+    <RouterProvider router={router} />
+    </>
+  );
 };
 
 export default App;

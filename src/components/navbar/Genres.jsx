@@ -53,7 +53,7 @@ const Genres = () => {
         </Menu.Dropdown>
       </Menu> */}
 
-      <Group position="center">
+      <Group position="start">
         <HoverCard width={200} shadow="md" closeDelay={500}>
           <HoverCard.Target>
             <button className=" text-lg font-semibold">Genres</button>

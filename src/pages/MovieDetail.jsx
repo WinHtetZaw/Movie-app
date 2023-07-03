@@ -1,13 +1,15 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetMovieDetailQuery } from "../redux/services/movieListApi";
 import { AiOutlineEye } from "react-icons/ai";
 import { RingProgress } from "@mantine/core";
 import PageLoading from "../components/PageLoading";
+import {MdArrowBackIos} from "react-icons/md"
 
 const MovieDetail = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetMovieDetailQuery(id);
+  const navigate = useNavigate()
   // console.log(data);
 
   // * variables define
@@ -26,6 +28,9 @@ const MovieDetail = () => {
           }}
           className=" min-h-screen max-h-full bg-fixed bg-cover bg-center bg-no-repeat"
         >
+          <button onClick={()=>navigate(-1)} className=" absolute top-5 left-5">
+            <MdArrowBackIos className=" text-3xl"/>
+          </button>
           <div className=" min-h-screen pt-[10vh] pb-16 flex flex-col md:flex-row  bg-opacity-80  bg-[#25262b] ">
             {/* left  */}
             <div className=" w-[200px] md:w-4/12 rounded-lg overflow-hidden p-5">
@@ -90,6 +95,7 @@ const MovieDetail = () => {
               </div>
             </div>
           </div>
+          
         </div>
       )}
     </>
