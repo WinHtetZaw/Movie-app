@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import React from "react";
 import { BsPersonCircle } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { isOpenSidebar } from "../../redux/features/sidebarSlice";
 
 const MenuModal = ({
   setIsProfileModelOpen,
@@ -11,7 +13,9 @@ const MenuModal = ({
   isProfileModelOpen,
   useInfo,
   handleLogoutClick,
+  setIsMenuOpen
 }) => {
+  const dispatch = useDispatch();
   const parentVariant = {
     hidden: { opacity: 0 },
     show: {
@@ -33,11 +37,17 @@ const MenuModal = ({
       },
     },
   };
+
+  const handleCloseBurgerMenu = () => {
+    dispatch(isOpenSidebar(false));
+    setIsMenuOpen(false);
+  };
   return (
     <div className=" flex justify-center h-screen items-center flex-col">
       <motion.div
-      initial={{scale: 0}}
-      animate={{scale:1}}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5 }}
         // onMouseEnter={() => setIsProfileModelOpen(true)}
         onMouseLeave={handleMouseLeave}
         onMouseOver={() => setIsProfileModelOpen(true)}
@@ -71,7 +81,10 @@ const MenuModal = ({
             />
           </svg>
           <Link to={"/favorite"}>
-            <li className=" select-none cursor-pointer py-2 px-3 border-b border-gray-400 last:border-none">
+            <li
+              onClick={handleCloseBurgerMenu}
+              className=" select-none cursor-pointer py-2 px-3 border-b border-gray-400 last:border-none"
+            >
               Favorite
             </li>
           </Link>
@@ -80,7 +93,7 @@ const MenuModal = ({
               <span onClick={handleLogoutClick}>Log out</span>
             ) : (
               <Link to={"/sign-in"}>
-                <span className="w-full block">Sing in</span>
+                <span onClick={handleCloseBurgerMenu} className="w-full block">Sing in</span>
               </Link>
             )}
           </li>

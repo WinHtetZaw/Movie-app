@@ -78,7 +78,8 @@ const Navbar = () => {
   }, [prevScrollPos]);
 
   // * handles
-  const handleProfileClick = () => {
+  const handleProfileClick = (e) => {
+    e.stopPropagation();
     setIsProfileModelOpen(!isProfileModelOpen);
   };
 
@@ -153,7 +154,7 @@ const Navbar = () => {
                     }}
                     className=" absolute top-0 h-screen w-full bg-black bg-opacity-80"
                   >
-                    <MenuModal isProfileModelOpen={isProfileModelOpen} useInfo={useInfo} handleLogoutClick={handleLogoutClick} isShrink={isShrink} handleProfileClick={handleProfileClick} handleMouseLeave={handleMouseLeave} setIsProfileModelOpen={setIsProfileModelOpen}/>
+                    <MenuModal setIsMenuOpen={setIsMenuOpen} isProfileModelOpen={isProfileModelOpen} useInfo={useInfo} handleLogoutClick={handleLogoutClick} isShrink={isShrink} handleProfileClick={handleProfileClick} handleMouseLeave={handleMouseLeave} setIsProfileModelOpen={setIsProfileModelOpen}/>
                   </div>
                 )}
 
