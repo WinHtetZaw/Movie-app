@@ -4,6 +4,10 @@ import { useSelector } from "react-redux";
 import { useGetPopularTvSeriesQuery } from "../redux/services/tvSeriesApi";
 import { useLocation, useSearchParams } from "react-router-dom";
 import PageLoading from "../components/PageLoading";
+import StartBtn from "../components/pagination.jsx/StartBtn";
+import PrevBtn from "../components/pagination.jsx/PrevBtn";
+import NextBtn from "../components/pagination.jsx/NextBtn";
+import EndBtn from "../components/pagination.jsx/EndBtn";
 
 const TvSeries = () => {
   // * hooks
@@ -114,234 +118,32 @@ const TvSeries = () => {
         <div className="px-3 sm:px-5 min-[1281px]:px-0">
           {/* pagination  */}
           <div className=" flex sm:justify-between gap-5 py-5 sm:py-7 flex-col-reverse sm:flex-row">
-          <div className=" flex gap-5 justify-evenly items-center min-[400px]:justify-start">
-              {/* start  */}
-             
-
-              <button
-                disabled={pageNum.current === 1}
-                onClick={() => handlePaginationBtnClick("start")}
-                className={`${
-                  pageNum.current !== 1 && "group"
-                } overflow-hidden  relative justify-center w-10 h-8 active:scale-90 bg-transparent disabled:opacity-50 flex items-center border-b-2 border-[#fffde4] text-gray-200 py-2 cursor-pointer transition duration-300`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute translate-x-0 group-hover:-translate-x-7 transition-all duration-500"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"
-                  />
-                </svg>
-
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute translate-x-7 group-hover:translate-x-0 transition-all duration-500"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"
-                  />
-                </svg>
-              </button>
+            <div className=" flex gap-5 justify-evenly items-center min-[400px]:justify-start">
+               {/* start  */}
+               <StartBtn
+                pageNum={pageNum.current}
+                handlePaginationBtnClick={handlePaginationBtnClick}
+              />
 
               {/* previous  */}
-              {/* <button
-                disabled={pageNum.current === 1}
-                onClick={() => handlePaginationBtnClick("prev")}
-                className={`${
-                  pageNum.current !== 1 && "hvr-radial-in"
-                } w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 mx-auto"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 19.5L8.25 12l7.5-7.5"
-                  />
-                </svg>
-              </button> */}
-
-              <button
-                 disabled={pageNum.current === 1}
-                 onClick={() => handlePaginationBtnClick("prev")}
-                className={`${
-                  pageNum.current !== 1 && "group"
-                } overflow-hidden  relative justify-center w-10 h-8 active:scale-90 bg-transparent disabled:opacity-50 flex items-center border-b-2 border-[#fffde4] text-gray-200 py-2 cursor-pointer transition duration-300`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute translate-x-0 group-hover:-translate-x-7 transition-all duration-500"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 19.5L8.25 12l7.5-7.5"
-                  />
-                </svg>
-
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute translate-x-7 group-hover:translate-x-0 transition-all duration-500"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 19.5L8.25 12l7.5-7.5"
-                  />
-                </svg>
-              </button>
+              <PrevBtn
+                pageNum={pageNum.current}
+                handlePaginationBtnClick={handlePaginationBtnClick}
+              />
 
               {/* next  */}
-              {/* <button
-                disabled={pageNum.current === totalPages}
-                onClick={() => handlePaginationBtnClick("next")}
-                className={`${
-                  pageNum.current !== totalPages && "hvr-radial-in"
-                }  w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 mx-auto"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-              </button> */}
-
-               {/* next  */}
-               <button
-               disabled={pageNum.current === totalPages}
-               onClick={() => handlePaginationBtnClick("next")}
-                className={`${
-                  pageNum.current !== totalPages && "group"
-                } overflow-hidden  relative justify-center w-10 h-8 active:scale-90 bg-transparent disabled:opacity-50 flex items-center border-b-2 border-[#fffde4] text-gray-200 py-2 cursor-pointer transition duration-300`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute translate-x-0 group-hover:translate-x-7 transition-all duration-500"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute -translate-x-7 group-hover:translate-x-0 transition-all duration-500"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-              </button>
+              <NextBtn
+                totalPages={totalPages}
+                pageNum={pageNum.current}
+                handlePaginationBtnClick={handlePaginationBtnClick}
+              />
 
               {/* end  */}
-              {/* <button
-                disabled={pageNum.current === totalPages}
-                onClick={() => handlePaginationBtnClick("end")}
-                className={`${
-                  pageNum.current !== totalPages && "hvr-radial-in"
-                } w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 mx-auto"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-              </button> */}
-
-              <button
-               disabled={pageNum.current === totalPages}
-               onClick={() => handlePaginationBtnClick("end")}
-                className={`${
-                  pageNum.current !== totalPages && "group"
-                } overflow-hidden  relative justify-center w-10 h-8 active:scale-90 bg-transparent disabled:opacity-50 flex items-center border-b-2 border-[#fffde4] text-gray-200 py-2 cursor-pointer transition duration-300`}
-              >
-                <svg
-                 xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute translate-x-0 group-hover:translate-x-7 transition-all duration-500"
-                >
-                 <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-
-                <svg
-                 xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute -translate-x-7 group-hover:translate-x-0 transition-all duration-500"
-                >
-                 <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-              </button>
+              <EndBtn
+                totalPages={totalPages}
+                pageNum={pageNum.current}
+                handlePaginationBtnClick={handlePaginationBtnClick}
+              />
             </div>
 
             <div className="text-slate-200 flex items-center justify-between">
@@ -375,259 +177,36 @@ const TvSeries = () => {
           </div>
 
           {/* tv series lists show  */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">
             {looping}
           </div>
 
           <div className=" flex gap-5 my-10 justify-evenly items-center min-[400px]:justify-end">
-            {/* start  */}
-            {/* <button
-                disabled={pageNum.current === 1}
-                onClick={() => handlePaginationBtnClick("start")}
-                className={`${
-                  pageNum.current !== 1 && "hvr-radial-in"
-                } w-16 h-8 disabled:opacity-50 flex items-center  bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 mx-auto"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"
-                  />
-                </svg>
-              </button> */}
+             {/* start  */}
+             <StartBtn
+                pageNum={pageNum.current}
+                handlePaginationBtnClick={handlePaginationBtnClick}
+              />
 
-            <button
-              disabled={pageNum.current === 1}
-              onClick={() => handlePaginationBtnClick("start")}
-              className={`${
-                pageNum.current !== 1 && "group"
-              } overflow-hidden  relative justify-center w-10 h-8 active:scale-90 bg-transparent disabled:opacity-50 flex items-center border-b-2 border-[#fffde4] text-gray-200 py-2 cursor-pointer transition duration-300`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute translate-x-0 group-hover:-translate-x-7 transition-all duration-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"
-                />
-              </svg>
+              {/* previous  */}
+              <PrevBtn
+                pageNum={pageNum.current}
+                handlePaginationBtnClick={handlePaginationBtnClick}
+              />
 
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute translate-x-7 group-hover:translate-x-0 transition-all duration-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"
-                />
-              </svg>
-            </button>
+              {/* next  */}
+              <NextBtn
+                totalPages={totalPages}
+                pageNum={pageNum.current}
+                handlePaginationBtnClick={handlePaginationBtnClick}
+              />
 
-            {/* previous  */}
-            {/* <button
-                disabled={pageNum.current === 1}
-                onClick={() => handlePaginationBtnClick("prev")}
-                className={`${
-                  pageNum.current !== 1 && "hvr-radial-in"
-                } w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 mx-auto"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 19.5L8.25 12l7.5-7.5"
-                  />
-                </svg>
-              </button> */}
-
-            <button
-              disabled={pageNum.current === 1}
-              onClick={() => handlePaginationBtnClick("prev")}
-              className={`${
-                pageNum.current !== 1 && "group"
-              } overflow-hidden  relative justify-center w-10 h-8 active:scale-90 bg-transparent disabled:opacity-50 flex items-center border-b-2 border-[#fffde4] text-gray-200 py-2 cursor-pointer transition duration-300`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute translate-x-0 group-hover:-translate-x-7 transition-all duration-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 19.5L8.25 12l7.5-7.5"
-                />
-              </svg>
-
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute translate-x-7 group-hover:translate-x-0 transition-all duration-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 19.5L8.25 12l7.5-7.5"
-                />
-              </svg>
-            </button>
-
-            {/* next  */}
-            {/* <button
-                disabled={pageNum.current === totalPages}
-                onClick={() => handlePaginationBtnClick("next")}
-                className={`${
-                  pageNum.current !== totalPages && "hvr-radial-in"
-                }  w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 mx-auto"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-              </button> */}
-
-            {/* next  */}
-            <button
-              disabled={pageNum.current === totalPages}
-              onClick={() => handlePaginationBtnClick("next")}
-              className={`${
-                pageNum.current !== totalPages && "group"
-              } overflow-hidden  relative justify-center w-10 h-8 active:scale-90 bg-transparent disabled:opacity-50 flex items-center border-b-2 border-[#fffde4] text-gray-200 py-2 cursor-pointer transition duration-300`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute translate-x-0 group-hover:translate-x-7 transition-all duration-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                />
-              </svg>
-
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute -translate-x-7 group-hover:translate-x-0 transition-all duration-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </button>
-
-            {/* end  */}
-            {/* <button
-                disabled={pageNum.current === totalPages}
-                onClick={() => handlePaginationBtnClick("end")}
-                className={`${
-                  pageNum.current !== totalPages && "hvr-radial-in"
-                } w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4 md:w-7 md:h-7 md:pb-2 mx-auto"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-              </button> */}
-
-            <button
-              disabled={pageNum.current === totalPages}
-              onClick={() => handlePaginationBtnClick("end")}
-              className={`${
-                pageNum.current !== totalPages && "group"
-              } overflow-hidden  relative justify-center w-10 h-8 active:scale-90 bg-transparent disabled:opacity-50 flex items-center border-b-2 border-[#fffde4] text-gray-200 py-2 cursor-pointer transition duration-300`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute translate-x-0 group-hover:translate-x-7 transition-all duration-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
-                />
-              </svg>
-
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-4 h-4 md:w-7 md:h-7 md:pb-2 absolute -translate-x-7 group-hover:translate-x-0 transition-all duration-500"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </button>
+              {/* end  */}
+              <EndBtn
+                totalPages={totalPages}
+                pageNum={pageNum.current}
+                handlePaginationBtnClick={handlePaginationBtnClick}
+              />
           </div>
         </div>
       )}

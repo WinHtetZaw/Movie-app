@@ -2,6 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSearchMovieQuery } from "../redux/services/movieListApi";
 import MovieCard from "../components/MovieCard";
+import StartBtn from "../components/pagination.jsx/StartBtn";
+import PrevBtn from "../components/pagination.jsx/PrevBtn";
+import NextBtn from "../components/pagination.jsx/NextBtn";
+import EndBtn from "../components/pagination.jsx/EndBtn";
 
 const SearchPage = () => {
   // * hooks
@@ -85,115 +89,44 @@ const SearchPage = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if(lists.length === 0) {
-      pageNum.current = 0
+    if (lists.length === 0) {
+      pageNum.current = 0;
     } else {
-
       pageNum.current = input;
     }
     setSearchParams({ page: pageNum.current });
   };
 
   return (
-    <div className=" py-16 px-3 sm:px-5 min-[1281px]:px-0">
+    <div className=" px-3 sm:px-5 min-[1281px]:px-0">
       {/* pagination  */}
       <div className=" flex sm:justify-between gap-5 py-5 sm:py-7 flex-col-reverse sm:flex-row">
         <div className=" flex gap-3 justify-evenly items-center min-[400px]:justify-start">
           {/* start  */}
-          <button
-            disabled={pageNum.current === 1}
-            onClick={() => handlePaginationBtnClick("start")}
-            className={`${
-              pageNum.current !== 1 && "hvr-radial-in"
-            } w-16 h-8 disabled:opacity-50 flex items-center  bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-4 h-4 mx-auto"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"
-              />
-            </svg>
-          </button>
+          <StartBtn
+            pageNum={pageNum.current}
+            handlePaginationBtnClick={handlePaginationBtnClick}
+          />
 
           {/* previous  */}
-          <button
-            disabled={pageNum.current === 1}
-            onClick={() => handlePaginationBtnClick("prev")}
-            className={`${
-              pageNum.current !== 1 && "hvr-radial-in"
-            } w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-4 h-4 mx-auto"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 19.5L8.25 12l7.5-7.5"
-              />
-            </svg>
-          </button>
+          <PrevBtn
+            pageNum={pageNum.current}
+            handlePaginationBtnClick={handlePaginationBtnClick}
+          />
 
           {/* next  */}
-          <button
-            disabled={pageNum.current === totalPages}
-            onClick={() => handlePaginationBtnClick("next")}
-            className={`${
-              pageNum.current !== totalPages && "hvr-radial-in"
-            }  w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-4 h-4 mx-auto"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </button>
+          <NextBtn
+            totalPages={totalPages}
+            pageNum={pageNum.current}
+            handlePaginationBtnClick={handlePaginationBtnClick}
+          />
 
           {/* end  */}
-          <button
-            disabled={pageNum.current === totalPages}
-            onClick={() => handlePaginationBtnClick("end")}
-            className={`${
-              pageNum.current !== totalPages && "hvr-radial-in"
-            } w-16 h-8 disabled:opacity-50 flex items-center bg-[#1CB5E0] py-2 text-sm rounded cursor-pointer transition duration-300`}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-4 h-4 mx-auto"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </button>
+          <EndBtn
+            totalPages={totalPages}
+            pageNum={pageNum.current}
+            handlePaginationBtnClick={handlePaginationBtnClick}
+          />
         </div>
 
         <div className="text-slate-200 flex items-center justify-between">
@@ -229,6 +162,34 @@ const SearchPage = () => {
       {/*  lists show  */}
       <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">
         {looping}
+      </div>
+
+      <div className=" flex gap-5 my-10 justify-evenly items-center min-[400px]:justify-end">
+        {/* start  */}
+        <StartBtn
+          pageNum={pageNum.current}
+          handlePaginationBtnClick={handlePaginationBtnClick}
+        />
+
+        {/* previous  */}
+        <PrevBtn
+          pageNum={pageNum.current}
+          handlePaginationBtnClick={handlePaginationBtnClick}
+        />
+
+        {/* next  */}
+        <NextBtn
+          totalPages={totalPages}
+          pageNum={pageNum.current}
+          handlePaginationBtnClick={handlePaginationBtnClick}
+        />
+
+        {/* end  */}
+        <EndBtn
+          totalPages={totalPages}
+          pageNum={pageNum.current}
+          handlePaginationBtnClick={handlePaginationBtnClick}
+        />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ const initialState = {
   isPageLoading: false,
   showNavbar: true,
   scrollable: true,
+  isImgLoading: true,
 };
 
 export const generalSlice = createSlice({
@@ -19,8 +20,16 @@ export const generalSlice = createSlice({
     setScrollable: (state, { payload }) => {
       state.scrollable = payload;
     },
+    setIsImgLoading: (state, { payload }) => {
+      state.isImgLoading = payload;
+    },
   },
 });
 
-export const { toggleShowNavbar, setIsPageLoading ,setScrollable} = generalSlice.actions;
+export const {
+  toggleShowNavbar,
+  setIsPageLoading,
+  setScrollable,
+  setIsImgLoading,
+} = generalSlice.actions;
 export default generalSlice.reducer;

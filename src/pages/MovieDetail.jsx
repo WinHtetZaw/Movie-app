@@ -29,7 +29,7 @@ const MovieDetail = () => {
           className=" min-h-screen max-h-full bg-fixed bg-cover bg-center bg-no-repeat"
         >
           <button onClick={()=>navigate(-1)} className=" absolute top-5 left-5">
-            <MdArrowBackIos className=" text-3xl"/>
+            <MdArrowBackIos className=" text-3xl text-[#fffde4]"/>
           </button>
           <div className=" min-h-screen pt-[10vh] pb-16 flex flex-col md:flex-row  bg-opacity-80  bg-[#25262b] ">
             {/* left  */}

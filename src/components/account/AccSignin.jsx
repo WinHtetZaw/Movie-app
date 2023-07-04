@@ -42,7 +42,7 @@ const AccSignin = () => {
           className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center"
           style={{
             backgroundImage:
-              "url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80)",
+              "url(https://images.pexels.com/photos/2781760/pexels-photo-2781760.jpeg?auto=compress&cs=tinysrgb&w=400)",
           }}
         >
           <div className="absolute bg-black opacity-60 inset-0 z-0" />
@@ -98,7 +98,7 @@ const AccSignin = () => {
             className="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center"
             style={{
               backgroundImage:
-                "url(https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80)",
+                "url(https://images.pexels.com/photos/2781760/pexels-photo-2781760.jpeg?auto=compress&cs=tinysrgb&w=400)",
             }}
           >
             <div className="absolute bg-black opacity-60 inset-0 z-0" />
@@ -149,7 +149,7 @@ const AccSignin = () => {
                 />
                 {errors.password && errors.password.type === "required" && (
                   <span className=" text-red-600">
-                    The passwoed field is required.
+                    The password field is required.
                   </span>
                 )}
                 {errors.password && errors.password.type === "minLength" && (
@@ -159,12 +159,12 @@ const AccSignin = () => {
                 )}
               </div>
 
-              {/* forgot passoword  */}
+              {/* go to register  */}
               <div className="text-left my-5 text-slate-100">
-                <p>{`Don't`} have an account?</p>
+                <p className="text-gray-400 hover:text-gray-100">{`Don't`} have an account?</p>
                 <Link to={"/sign-up"}>
-                  <span className=" text-sm hover:underline hover:text-gray-100">
-                    Go to sign-up
+                  <span className=" text-sm text-gray-400 hover:underline hover:text-gray-100">
+                    Go to register
                   </span>
                 </Link>
               </div>
@@ -173,7 +173,7 @@ const AccSignin = () => {
               <div className="px-4 pb-2 pt-4">
                 <button
                   type="submit"
-                  className="uppercase block w-full p-4 text-lg rounded-full bg-cyan-500 hover:bg-cyan-600 focus:outline-none"
+                  className="uppercase block w-full p-3 text-lg rounded-full bg-dark-5 focus:outline-none"
                 >
                   sign in
                 </button>
