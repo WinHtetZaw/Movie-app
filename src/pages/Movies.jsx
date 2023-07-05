@@ -60,13 +60,10 @@ const Movies = () => {
 
   // * looping movie lists
   const looping = (genreNum == 0 ? popularMovieLists : filter)?.map(
-    (popularMovieList) => (
-      <MovieCard
-        {...popularMovieList}
-        key={popularMovieList.id}
-        isLoading={isLoading}
-        isMovie={true}
-      />
+    (popularMovieList, index) => (
+      <div key={index}>
+        <MovieCard {...popularMovieList} isLoading={isLoading} isMovie={true} />
+       </div>
     )
   );
 
@@ -194,31 +191,31 @@ const Movies = () => {
           </div>
 
           <div className=" flex gap-5 my-10 justify-evenly items-center min-[400px]:justify-end">
-             {/* start  */}
-             <StartBtn
-                pageNum={pageNum.current}
-                handlePaginationBtnClick={handlePaginationBtnClick}
-              />
+            {/* start  */}
+            <StartBtn
+              pageNum={pageNum.current}
+              handlePaginationBtnClick={handlePaginationBtnClick}
+            />
 
-              {/* previous  */}
-              <PrevBtn
-                pageNum={pageNum.current}
-                handlePaginationBtnClick={handlePaginationBtnClick}
-              />
+            {/* previous  */}
+            <PrevBtn
+              pageNum={pageNum.current}
+              handlePaginationBtnClick={handlePaginationBtnClick}
+            />
 
-              {/* next  */}
-              <NextBtn
-                totalPages={totalPages}
-                pageNum={pageNum.current}
-                handlePaginationBtnClick={handlePaginationBtnClick}
-              />
+            {/* next  */}
+            <NextBtn
+              totalPages={totalPages}
+              pageNum={pageNum.current}
+              handlePaginationBtnClick={handlePaginationBtnClick}
+            />
 
-              {/* end  */}
-              <EndBtn
-                totalPages={totalPages}
-                pageNum={pageNum.current}
-                handlePaginationBtnClick={handlePaginationBtnClick}
-              />
+            {/* end  */}
+            <EndBtn
+              totalPages={totalPages}
+              pageNum={pageNum.current}
+              handlePaginationBtnClick={handlePaginationBtnClick}
+            />
           </div>
         </div>
       )}

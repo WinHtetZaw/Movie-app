@@ -181,7 +181,7 @@ const TrendingAtHome = () => {
           className={` transition-all duration-300 filter bg-no-repeat bg-cover bg-center`}
         >
           {/* md:px-7 py-10 mb-16 */}
-          <div className=" bg-black bg-opacity-40 md:px-7 py-10">
+          <div className=" bg-black bg-opacity-40 px-3 md:px-7 py-10">
             <div>
               <div className=" flex gap-2 sm:gap-5 items-center font-semibold mb-5">
                 <h1 className=" font-serif text-lg sm:text-xl whitespace-nowrap">

@@ -126,7 +126,7 @@ const MovieCard = (props) => {
         initial={{ scaleX: 0.4, opacity: 0 }}
         animate={{ scaleX: 1, opacity: 1 }}
         transition={{ duration: 0.7 }}
-        className={`p-7 ${!poster_path && "hidden"} `}
+        className={`p-7 w-full h-full ${!poster_path && "hidden"} `}
       >
         {/* <Link to={`/${isMovie ? "movie" : "tv"}/detail/${id}`}> */}
         <div

@@ -50,12 +50,10 @@ const TvSeries = () => {
     );
   }
   const looping = (genreNum == 0 ? popularTvSeriesLists : filterByGenre)?.map(
-    (popularTvSeriesList) => (
-      <MovieCard
-        key={popularTvSeriesList.id}
-        {...popularTvSeriesList}
-        isLoading={isLoading}
-      />
+    (popularTvSeriesList, index) => (
+      <div key={index}>
+        <MovieCard {...popularTvSeriesList} isLoading={isLoading} />
+      </div>
     )
   );
 
@@ -119,8 +117,8 @@ const TvSeries = () => {
           {/* pagination  */}
           <div className=" flex sm:justify-between gap-5 py-5 sm:py-7 flex-col-reverse sm:flex-row">
             <div className=" flex gap-5 justify-evenly items-center min-[400px]:justify-start">
-               {/* start  */}
-               <StartBtn
+              {/* start  */}
+              <StartBtn
                 pageNum={pageNum.current}
                 handlePaginationBtnClick={handlePaginationBtnClick}
               />
@@ -182,31 +180,31 @@ const TvSeries = () => {
           </div>
 
           <div className=" flex gap-5 my-10 justify-evenly items-center min-[400px]:justify-end">
-             {/* start  */}
-             <StartBtn
-                pageNum={pageNum.current}
-                handlePaginationBtnClick={handlePaginationBtnClick}
-              />
+            {/* start  */}
+            <StartBtn
+              pageNum={pageNum.current}
+              handlePaginationBtnClick={handlePaginationBtnClick}
+            />
 
-              {/* previous  */}
-              <PrevBtn
-                pageNum={pageNum.current}
-                handlePaginationBtnClick={handlePaginationBtnClick}
-              />
+            {/* previous  */}
+            <PrevBtn
+              pageNum={pageNum.current}
+              handlePaginationBtnClick={handlePaginationBtnClick}
+            />
 
-              {/* next  */}
-              <NextBtn
-                totalPages={totalPages}
-                pageNum={pageNum.current}
-                handlePaginationBtnClick={handlePaginationBtnClick}
-              />
+            {/* next  */}
+            <NextBtn
+              totalPages={totalPages}
+              pageNum={pageNum.current}
+              handlePaginationBtnClick={handlePaginationBtnClick}
+            />
 
-              {/* end  */}
-              <EndBtn
-                totalPages={totalPages}
-                pageNum={pageNum.current}
-                handlePaginationBtnClick={handlePaginationBtnClick}
-              />
+            {/* end  */}
+            <EndBtn
+              totalPages={totalPages}
+              pageNum={pageNum.current}
+              handlePaginationBtnClick={handlePaginationBtnClick}
+            />
           </div>
         </div>
       )}
