@@ -18,7 +18,7 @@ const TvSeries = () => {
   const location = useLocation();
   const pageNum = useRef(1);
 
-   // * get data globally
+  // * get data globally
   const { activeGenreIds } = useSelector((state) => state.genreSlice);
 
   // * if click Movie to set page number 1
@@ -47,16 +47,21 @@ const TvSeries = () => {
   let filterLists;
   if (activeGenreIds.length > 0) {
     filterLists = popularTvSeriesLists?.filter((popularTvSeriesList) =>
-      popularTvSeriesList.genre_ids.toString().includes(activeGenreIds.toString())
+      popularTvSeriesList.genre_ids
+        .toString()
+        .includes(activeGenreIds.toString())
     );
   }
-  const looping = ( filterLists?.length > 0 ? filterLists : popularTvSeriesLists)?.map(
-    (popularTvSeriesList, index) => (
-      <div key={index} className={`${!popularTvSeriesList.poster_path && "hidden"}`}>
-        <MovieCard {...popularTvSeriesList} isLoading={isLoading} />
-      </div>
-    )
-  );
+  const looping = (
+    filterLists?.length > 0 ? filterLists : popularTvSeriesLists
+  )?.map((popularTvSeriesList, index) => (
+    <div
+      key={index}
+      className={`${!popularTvSeriesList.poster_path && "hidden"}`}
+    >
+      <MovieCard {...popularTvSeriesList} isLoading={isLoading} />
+    </div>
+  ));
 
   // * handle functions
   const handlePaginationBtnClick = (type) => {
@@ -170,10 +175,12 @@ const TvSeries = () => {
 
           {/* tv series lists show  */}
           {filterLists?.length == 0 && activeGenreIds?.length > 0 ? (
-            <div className=" flex flex-col gap-5 py-5 items-center h-[50vh] text-xl font-1 font-semibold text-slate-200">
-              <h3>No match movie found in this page.</h3>
-              <h3>Go to another page or remove some genres.</h3>
-              <OrangeBtn text={"Remove all genres"}/>
+            <div className=" tracking-wider flex flex-col gap-3 py-5 items-center h-[50vh] text-lg font-1 text-slate-200">
+              <h3>No movie found</h3>
+              <p>Go to another page</p>
+              <p>OR</p>
+              <p>Remove some genres</p>
+              <OrangeBtn />
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">

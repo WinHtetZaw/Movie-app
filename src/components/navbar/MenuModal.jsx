@@ -45,6 +45,12 @@ const MenuModal = ({
     dispatch(isOpenSidebar(false));
     setIsMenuOpen(false);
   };
+
+  const handleLinkClick = (e) => {
+    e.stopPropagation();
+    dispatch(isOpenSidebar(false));
+    setIsMenuOpen(false);
+  };
   return (
     <div className=" flex mt-20 h-screen items-center flex-col">
       {/* right bar  */}
@@ -55,7 +61,9 @@ const MenuModal = ({
         // onMouseEnter={() => setIsProfileModelOpen(true)}
         onMouseLeave={handleMouseLeave}
         onMouseOver={() => setIsProfileModelOpen(true)}
-        onClick={(e)=>{e.stopPropagation()}}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
         className={` relative w-16 p-2 ${
           !isShrink ? "text-[#2f274d]" : "text-[#005C97]"
         }  border border-white border-opacity-40 rounded-full mb-5`}
@@ -65,16 +73,16 @@ const MenuModal = ({
 
         {/* profile dropdown area  */}
         <AnimatePresence>
-        {isProfileModelOpen && (
-          <motion.ul
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{opacity:0}}
-          transition={{ duration: 0.3 }}
-            className={`font-1 absolute bg-glass-1 -right-[3.6rem] z-10 py-3 px-2 mt-5 w-44 text-slate-700 origin-top-right rounded-md shadow-lg ring-1 ring-[#fffde4] ring-opacity-50  focus:outline-none`}
-          >
-            <span className="triangle absolute -top-[14.5px] left-[5rem]"></span>
-            {/* <svg
+          {isProfileModelOpen && (
+            <motion.ul
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className={`font-1 absolute bg-glass-1 -right-[3.6rem] z-10 py-3 px-2 mt-5 w-44 text-slate-700 origin-top-right rounded-md shadow-lg ring-1 ring-[#fffde4] ring-opacity-50  focus:outline-none`}
+            >
+              <span className="triangle absolute -top-[14.5px] left-[5rem]"></span>
+              {/* <svg
               onClick={handleProfileClick}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -89,30 +97,30 @@ const MenuModal = ({
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg> */}
-            <Link to={"/favorite"}>
-              <li
-                onClick={handleCloseBurgerMenu}
-                className=" select-none cursor-pointer py-2 px-3 border-b border-gray-400 last:border-none"
-              >
-                Favorite
+              <Link to={"/favorite"}>
+                <li
+                  onClick={handleCloseBurgerMenu}
+                  className=" select-none cursor-pointer py-2 px-3 border-b border-gray-400 last:border-none"
+                >
+                  Favorite
+                </li>
+              </Link>
+              <li className="select-none cursor-pointer w-full py-2 px-3 border-b border-gray-400 last:border-none">
+                {useInfo?.success ? (
+                  <span onClick={handleLogoutClick}>Log out</span>
+                ) : (
+                  <Link to={"/sign-in"}>
+                    <span
+                      onClick={handleCloseBurgerMenu}
+                      className="w-full block"
+                    >
+                      Sing in
+                    </span>
+                  </Link>
+                )}
               </li>
-            </Link>
-            <li className="select-none cursor-pointer w-full py-2 px-3 border-b border-gray-400 last:border-none">
-              {useInfo?.success ? (
-                <span onClick={handleLogoutClick}>Log out</span>
-              ) : (
-                <Link to={"/sign-in"}>
-                  <span
-                    onClick={handleCloseBurgerMenu}
-                    className="w-full block"
-                  >
-                    Sing in
-                  </span>
-                </Link>
-              )}
-            </li>
-          </motion.ul>
-        )}
+            </motion.ul>
+          )}
         </AnimatePresence>
       </motion.div>
 
@@ -125,10 +133,7 @@ const MenuModal = ({
         <Link to={"/"}>
           <motion.h3
             variants={childVariant}
-            onClick={() => {
-              dispatch(isOpenSidebar(false));
-              setIsMenuOpen(false);
-            }}
+            onClick={(e) => handleLinkClick(e)}
             className=" py-5 px-4 w-[10rem] text-center rounded-md text-lg font-semibold"
           >
             Home
@@ -152,7 +157,10 @@ const MenuModal = ({
             Movies
           </motion.h3>
         </NavLink> */}
-        <motion.span variants={childVariant}>
+        <motion.span
+          variants={childVariant}
+          onClick={(e) => handleLinkClick(e)}
+        >
           <MovieModal />
         </motion.span>
 
@@ -173,7 +181,10 @@ const MenuModal = ({
             Tv series
           </motion.h3>
         </NavLink> */}
-        <motion.span variants={childVariant}>
+        <motion.span
+          variants={childVariant}
+          onClick={(e) => handleLinkClick(e)}
+        >
           <TvModal />
         </motion.span>
 

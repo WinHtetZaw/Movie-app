@@ -11,14 +11,14 @@ import EndBtn from "../components/pagination.jsx/EndBtn";
 import OrangeBtn from "../components/buttons/OrangeBtn";
 
 const TvTopRated = () => {
-     // * hooks
+  // * hooks
   const [searchParams, setSearchParams] = useSearchParams();
   const [input, setInput] = useState(0);
   const [inputError, setInputError] = useState("");
   const location = useLocation();
   const pageNum = useRef(1);
 
-   // * get data globally
+  // * get data globally
   const { activeGenreIds } = useSelector((state) => state.genreSlice);
 
   // * if click Movie to set page number 1
@@ -47,16 +47,21 @@ const TvTopRated = () => {
   let filterLists;
   if (activeGenreIds.length > 0) {
     filterLists = topRagedTvSeriesLists?.filter((topRatedTvSeriesList) =>
-      topRatedTvSeriesList.genre_ids.toString().includes(activeGenreIds.toString())
+      topRatedTvSeriesList.genre_ids
+        .toString()
+        .includes(activeGenreIds.toString())
     );
   }
-  const looping = ( filterLists?.length > 0 ? filterLists : topRagedTvSeriesLists)?.map(
-    (topRatedTvSeriesList, index) => (
-      <div key={index} className={`${!topRatedTvSeriesList.poster_path && "hidden"}`}>
-        <MovieCard {...topRatedTvSeriesList} isLoading={isLoading} />
-      </div>
-    )
-  );
+  const looping = (
+    filterLists?.length > 0 ? filterLists : topRagedTvSeriesLists
+  )?.map((topRatedTvSeriesList, index) => (
+    <div
+      key={index}
+      className={`${!topRatedTvSeriesList.poster_path && "hidden"}`}
+    >
+      <MovieCard {...topRatedTvSeriesList} isLoading={isLoading} />
+    </div>
+  ));
 
   // * handle functions
   const handlePaginationBtnClick = (type) => {
@@ -103,13 +108,86 @@ const TvTopRated = () => {
   };
   return (
     <>
-    {isLoading || !topRagedTvSeriesLists ? (
-      <PageLoading />
-    ) : (
-      <div className="px-3 sm:px-5 pt-10 mt-[80px] min-[1281px]:px-0">
-        {/* pagination  */}
-        <div className=" flex sm:justify-between gap-5 py-5 sm:py-7 flex-col-reverse sm:flex-row">
-          <div className=" flex gap-5 justify-evenly items-center min-[400px]:justify-start">
+      {isLoading || !topRagedTvSeriesLists ? (
+        <PageLoading />
+      ) : (
+        <div className="px-3 sm:px-5 pt-10 mt-[80px] min-[1281px]:px-0">
+          {/* pagination  */}
+          <div className=" flex sm:justify-between gap-5 py-5 sm:py-7 flex-col-reverse sm:flex-row">
+            <div className=" flex gap-5 justify-evenly items-center min-[400px]:justify-start">
+              {/* start  */}
+              <StartBtn
+                pageNum={pageNum.current}
+                handlePaginationBtnClick={handlePaginationBtnClick}
+              />
+
+              {/* previous  */}
+              <PrevBtn
+                pageNum={pageNum.current}
+                handlePaginationBtnClick={handlePaginationBtnClick}
+              />
+
+              {/* next  */}
+              <NextBtn
+                totalPages={totalPages}
+                pageNum={pageNum.current}
+                handlePaginationBtnClick={handlePaginationBtnClick}
+              />
+
+              {/* end  */}
+              <EndBtn
+                totalPages={totalPages}
+                pageNum={pageNum.current}
+                handlePaginationBtnClick={handlePaginationBtnClick}
+              />
+            </div>
+
+            <div className="text-slate-200 flex items-center justify-between">
+              <div className=" flex items-center">
+                <h1 className=" mr-3">page : </h1>
+                <form
+                  onSubmit={handleFormSubmit}
+                  className="border-b-2 border-[#fffde4] overflow-hidden bg-[#25262b]  w-20  flex items-center rounded-sm"
+                >
+                  <input
+                    onChange={handleInputOnChange}
+                    className=" w-full outline-none bg-transparent p-2"
+                    type="number"
+                    maxLength={3}
+                    placeholder="0"
+                  />
+                  <button
+                    disabled={input === 0}
+                    type="submit"
+                    className="p-2 bg-gray-600 disabled:opacity-50"
+                  >
+                    Go
+                  </button>
+                </form>
+                {/* <p>{inputError && inputError}</p> */}
+              </div>
+              <div className="whitespace-nowrap w-[4rem] sm:w-[7rem] py-3 mr-5 text-center sm:text-end">
+                {pageNum.current} \ {totalPages}
+              </div>
+            </div>
+          </div>
+
+          {/* tv series lists show  */}
+          {filterLists?.length == 0 && activeGenreIds?.length > 0 ? (
+            <div className=" tracking-wider flex flex-col gap-3 py-5 items-center h-[50vh] text-lg font-1 text-slate-200">
+              <h3>No movie found</h3>
+              <p>Go to another page</p>
+              <p>OR</p>
+              <p>Remove some genres</p>
+              <OrangeBtn />
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">
+              {looping}
+            </div>
+          )}
+
+          <div className=" flex gap-5 my-10 justify-evenly items-center min-[400px]:justify-end">
             {/* start  */}
             <StartBtn
               pageNum={pageNum.current}
@@ -136,81 +214,10 @@ const TvTopRated = () => {
               handlePaginationBtnClick={handlePaginationBtnClick}
             />
           </div>
-
-          <div className="text-slate-200 flex items-center justify-between">
-            <div className=" flex items-center">
-              <h1 className=" mr-3">page : </h1>
-              <form
-                onSubmit={handleFormSubmit}
-                className="border-b-2 border-[#fffde4] overflow-hidden bg-[#25262b]  w-20  flex items-center rounded-sm"
-              >
-                <input
-                  onChange={handleInputOnChange}
-                  className=" w-full outline-none bg-transparent p-2"
-                  type="number"
-                  maxLength={3}
-                  placeholder="0"
-                />
-                <button
-                  disabled={input === 0}
-                  type="submit"
-                  className="p-2 bg-gray-600 disabled:opacity-50"
-                >
-                  Go
-                </button>
-              </form>
-              {/* <p>{inputError && inputError}</p> */}
-            </div>
-            <div className="whitespace-nowrap w-[4rem] sm:w-[7rem] py-3 mr-5 text-center sm:text-end">
-              {pageNum.current} \ {totalPages}
-            </div>
-          </div>
         </div>
+      )}
+    </>
+  );
+};
 
-        {/* tv series lists show  */}
-        {filterLists?.length == 0 && activeGenreIds?.length > 0 ? (
-          <div className=" flex flex-col gap-5 py-5 items-center h-[50vh] text-xl font-1 font-semibold text-slate-200">
-            <h3>No match movie found in this page.</h3>
-            <h3>Go to another page or remove some genres.</h3>
-            <OrangeBtn/>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">
-            {looping}
-          </div>
-        )}
-
-        <div className=" flex gap-5 my-10 justify-evenly items-center min-[400px]:justify-end">
-          {/* start  */}
-          <StartBtn
-            pageNum={pageNum.current}
-            handlePaginationBtnClick={handlePaginationBtnClick}
-          />
-
-          {/* previous  */}
-          <PrevBtn
-            pageNum={pageNum.current}
-            handlePaginationBtnClick={handlePaginationBtnClick}
-          />
-
-          {/* next  */}
-          <NextBtn
-            totalPages={totalPages}
-            pageNum={pageNum.current}
-            handlePaginationBtnClick={handlePaginationBtnClick}
-          />
-
-          {/* end  */}
-          <EndBtn
-            totalPages={totalPages}
-            pageNum={pageNum.current}
-            handlePaginationBtnClick={handlePaginationBtnClick}
-          />
-        </div>
-      </div>
-    )}
-  </>
-  )
-}
-
-export default TvTopRated
+export default TvTopRated;

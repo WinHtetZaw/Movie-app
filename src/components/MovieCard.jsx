@@ -21,7 +21,7 @@ const MovieCard = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // * get data from props
-  const { title, poster_path, name, id, release_date, vote_average, isMovie } =
+  const { title, poster_path, name, id, release_date, vote_average, isMovie ,first_air_date} =
     props;
 
   useEffect(() => {
@@ -55,72 +55,8 @@ const MovieCard = (props) => {
     setIsFavorite(false);
     toast.success("Remove from favorite.");
   };
-  // console.log("img loading",isImgLoading)
+
   return (
-    // <Link to={`/${isMovie ? "movie" : "tv"}/detail/${id}`}>
-    //   <div className="  group flex items-center justify-center">
-    //     <div className=" relative bg-[#25262b] min-w-[6rem] max-w-[230px] border border-[#fffde4] hover:card-shadow transition duration-300 rounded-lg overflow-hidden">
-
-    //       {/* card image */}
-    //       <div className=" aspect-[199/298]">
-    //         <img
-    //           className=" w-full h-full object-cover"
-    //           src={
-    //             poster_path
-    //               ? `https://image.tmdb.org/t/p/w500${poster_path}`
-    //               : `https://getuikit.com/v2/docs/images/placeholder_600x400.svg`
-    //           }
-    //           alt=""
-    //         />
-    //       </div>
-
-    //       <div className=" relative text-[#fffde4] px-2 pt-2 min-h-[8rem] ">
-    //         {/* volt process circle  */}
-    //         <div className=" absolute -top-6 left-3 w-[50px] h-[50px] bg-[#1a1b1e] rounded-full">
-    //           <RingProgress
-    //             rootColor="#1a1b1e"
-    //             size={50}
-    //             thickness={4}
-    //             roundCaps
-    //             sections={[{ value: percentage, color: "#0084C7" }]}
-    //             label={
-    //               <div className=" text-sky-600 text-sm text-center">
-    //                 {percentage}%
-    //               </div>
-    //             }
-    //           />
-    //         </div>
-
-    //         {/* title  */}
-    //         <h3 className=" mb-3 pt-7 line-clamp-2 w-full text-slate-200">
-    //           {title ?? name}
-    //         </h3>
-
-    //         {/* date  */}
-    //         <p className=" text-sm text-white opacity-60">{release_date}</p>
-
-    //         {/* <div className=" invisible group-hover:visible flex flex-col gap-3  ml-auto mr-5  text-lg">
-    //         <div className="">
-    //           {isFavorite ? (
-    //             <div className=" bg-[#fffde4] bg-opacity-[0.15] hover:bg-opacity-25 p-2 rounded-full">
-    //               <BsHeartFill className=" cursor-pointer text-red-400" />
-    //             </div>
-    //           ) : (
-    //             <div className=" bg-[#fffde4] bg-opacity-[0.15] hover:bg-opacity-25 p-2 rounded-full">
-    //               <BsHeart className=" cursor-pointer" />
-    //             </div>
-    //           )}
-    //         </div>
-    //         <Link to={`detail/${id}`}>
-    //           <div className=" mt-4 bg-[#fffde4] bg-opacity-[0.15] hover:bg-opacity-25 p-2 rounded-full">
-    //             <BsExclamationCircle className=" cursor-pointer" />
-    //           </div>
-    //         </Link>
-    //       </div> */}
-    //       </div>
-    //     </div>
-    //   </div>
-    // </Link>
     <>
       <motion.div
       key={props.id}
@@ -157,7 +93,7 @@ const MovieCard = (props) => {
             </h3>
             {/* date  */}
             <p className=" py-1 xs:py-2 text-[9px] xs:text-base w-full">
-              {release_date}
+              {release_date ?? first_air_date}
             </p>
 
             <button
@@ -167,16 +103,16 @@ const MovieCard = (props) => {
               {isFavorite || sameId ? (
                 <AiFillHeart
                   onClick={remove}
-                  className=" text-red-500 sm:text-3xl"
+                  className=" text-red-500 text-lg sm:text-3xl"
                 />
               ) : (
-                <AiOutlineHeart onClick={add} className=" sm:text-3xl" />
+                <AiOutlineHeart onClick={add} className=" text-lg sm:text-3xl" />
               )}
             </button>
 
             <div className=" flex items-center md:items-start lg:items-center md:flex-col lg:flex-row gap-3">
               {/* volt progress  */}
-              <div className=" py-5 md:pb-0 md:pt-5 lg:py-5 hidden sm:block">
+              <div className=" py-5 md:pb-0 md:pt-5 lg:py-5 ">
                 <RingProgress
                   rootColor="transparent"
                   size={50}

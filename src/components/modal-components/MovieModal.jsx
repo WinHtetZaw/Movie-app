@@ -38,7 +38,7 @@ const MovieModal = () => {
             </li>
           </Link>
           <Link to={"/movie/now-playing"}>
-            <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3">
+            <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400">
               Now Playing
             </li>
           </Link>
@@ -48,7 +48,7 @@ const MovieModal = () => {
             </li>
           </Link>
           <Link to={"movie/top-rated"}>
-            <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400">
+            <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3">
               Top Rated
             </li>
           </Link>

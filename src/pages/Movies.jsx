@@ -187,9 +187,11 @@ const Movies = () => {
 
           {/* movie lists show  */}
           {filterLists?.length == 0 && activeGenreIds?.length > 0 ? (
-            <div className=" flex flex-col gap-5 py-5 items-center h-[50vh] text-xl font-1 font-semibold text-slate-200">
-              <h3>No match movie found in this page.</h3>
-              <h3>Go to another page or remove some genres.</h3>
+            <div className=" tracking-wider flex flex-col gap-3 py-5 items-center h-[50vh] text-lg font-1 text-slate-200">
+              <h3>No movie found</h3>
+              <p>Go to another page</p>
+              <p>OR</p>
+              <p>Remove some genres</p>
               <OrangeBtn/>
             </div>
           ) : (
