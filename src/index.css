@@ -4,12 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* #25262b */
-/* #fffde4 */
+/* #25262b dark soft*/
+/* #fffde4 yellow */
+/* #1a2238 dark blue  */
+/* #ff6a3d orange  */
+/* #533439 brown use in border orange  */
+/* #3da2f1 blue  */
 
 html,
 body {
-  background-color: #33353b;
+  background-color: #1a2238;
   /* font-family: "Patua One", cursive; */
   letter-spacing: 1px;
   /* overflow-x: hidden; */
@@ -582,7 +586,7 @@ input[type="number"] {
     border: 1px solid rgba(255, 255, 255, 0.46);
   }
   .bg-glass-2 {
-    background: rgba(255, 255, 255, 0.40);
+    background: rgba(255, 255, 255, 0.4);
     /* border-radius: 16px; */
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(20px);
@@ -594,10 +598,24 @@ input[type="number"] {
     height: 0px;
     border-style: solid;
     border-width: 0 8px 14px 8px;
-    border-color: transparent transparent rgba(255, 255, 255, 0.40) transparent;
+    border-color: transparent transparent rgba(255, 255, 255, 0.4) transparent;
     transform: rotate(0deg);
- }
+  }
+}
 
+@layer components {
+  .bdr-orange {
+    @apply border-[#ff6a3d];
+  }
+  .bdr-brown {
+    @apply border-[#533439]
+  }
+  .text-orange {
+    @apply text-[#ff6a3d];
+  }
+  .bg-orange {
+    @apply bg-[#ff6a3d]
+  }
 }
 .splide__pagination {
   bottom: -1.5rem;
@@ -618,12 +636,6 @@ input[type="number"] {
   width: 100%;
   height: 100%;
 }
-
-/* @layer components {
-  .tag {
-    @apply before:block before:absolute before:-inset-1 before:-skew-x-[7deg] before:bg-[#25262b] relative inline-block;
-  }
-} */
 
 /* Sweep To Left */
 .hvr-sweep-to-left {

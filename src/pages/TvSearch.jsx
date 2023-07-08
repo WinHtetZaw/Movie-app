@@ -1,14 +1,14 @@
 import  { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { useSearchMovieQuery } from "../redux/services/movieListApi";
 import MovieCard from "../components/MovieCard";
 import StartBtn from "../components/pagination.jsx/StartBtn";
 import PrevBtn from "../components/pagination.jsx/PrevBtn";
 import NextBtn from "../components/pagination.jsx/NextBtn";
 import EndBtn from "../components/pagination.jsx/EndBtn";
+import { useSearchTvQuery } from "../redux/services/tvSeriesApi";
 
-const SearchPage = () => {
-  // * hooks
+const TvSearch = () => {
+     // * hooks
   const [searchParams, setSearchParams] = useSearchParams();
   const [input, setInput] = useState(0);
   const navigate = useNavigate();
@@ -19,11 +19,11 @@ const SearchPage = () => {
 
   // localStorage.getItem("searchInput") && searchQuery( localStorage.getItem("searchInput"))
 
-  const { data, isLoading, isSuccess } = useSearchMovieQuery({
+  const { data, isLoading, isSuccess } = useSearchTvQuery({
     query: searchQuery,
     page: pageNum.current,
   });
-  isSuccess && console.log(data);
+//   isSuccess && console.log(data);
 
   // if (!searchParams.get("query")) {
   //   return navigate({
@@ -102,7 +102,7 @@ const SearchPage = () => {
   };
 
   return (
-    <div className=" px-3 sm:px-5 min-[1281px]:px-0">
+    <div className=" px-3 sm:px-5 pt-10 mt-[80px] min-[1281px]:px-0">
       {/* pagination  */}
       <div className=" flex sm:justify-between gap-5 py-5 sm:py-7 flex-col-reverse sm:flex-row">
         <div className=" flex gap-3 justify-evenly items-center min-[400px]:justify-start">
@@ -196,7 +196,7 @@ const SearchPage = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SearchPage;
+export default TvSearch

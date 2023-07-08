@@ -20,20 +20,38 @@ import AccSignin from "./components/account/AccSignin";
 import { Toaster } from "react-hot-toast";
 import Favorite from "./pages/Favorite";
 import RouteGuard from "./components/RouteGuard";
+import NowPlayingMovies from "./pages/NowPlayingMovies";
+import UpcomingMovies from "./pages/UpcomingMovies";
+import TopRatedMovies from "./pages/TopRatedMovies";
+import MovieSearch from "./pages/MovieSearch";
+import TvSearch from "./pages/TvSearch";
+import TvOnTheAir from "./pages/TvOnTheAir";
+import TvAiringToday from "./pages/TvAiringToday";
+import TvTopRated from "./pages/TvTopRated";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />} errorElement={<NotFound />}>
-      
       <Route index element={<Dashboard />} />
+
       <Route path="tv" element={<TvLayout />}>
-        <Route index element={<TvSeries />} />
+        <Route path="popular" element={<TvSeries />} />
+        <Route path="airing-today" element={<TvAiringToday />} />
+        <Route path="on-the-air" element={<TvOnTheAir />} />
+        <Route path="top-rated" element={<TvTopRated />} />
         <Route path="detail/:id" element={<TvDetail />} />
+        <Route path="search" element={<TvSearch />} />
       </Route>
+
       <Route path="movie" element={<MovieLayout />}>
-        <Route index element={<Movies />} />
+        <Route path="popular" element={<Movies />} />
+        <Route path="now-playing" element={<NowPlayingMovies />} />
+        <Route path="upcoming" element={<UpcomingMovies />} />
+        <Route path="top-rated" element={<TopRatedMovies />} />
+        <Route path="search" element={<MovieSearch />} />
+        <Route path="detail/:id" element={<MovieDetail />} />
       </Route>
-      <Route path="movie/detail/:id" element={<MovieDetail />} />
+
       <Route path="search" element={<SearchLayout />}>
         <Route index element={<SearchPage />} />
         <Route path="movie" />

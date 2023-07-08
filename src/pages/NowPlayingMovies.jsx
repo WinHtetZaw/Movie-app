@@ -1,17 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { useGetPopularMoviesQuery } from "../redux/services/movieListApi";
-import MovieCard from "../components/MovieCard";
-import { useSelector } from "react-redux";
 import { useLocation, useSearchParams } from "react-router-dom";
+import { useGetNowPlayingMoviesQuery } from "../redux/services/movieListApi";
+import MovieCard from "../components/MovieCard";
 import PageLoading from "../components/PageLoading";
-import { motion } from "framer-motion";
-import PrevBtn from "../components/pagination.jsx/PrevBtn";
 import StartBtn from "../components/pagination.jsx/StartBtn";
+import PrevBtn from "../components/pagination.jsx/PrevBtn";
 import NextBtn from "../components/pagination.jsx/NextBtn";
 import EndBtn from "../components/pagination.jsx/EndBtn";
+import { useSelector } from "react-redux";
 import OrangeBtn from "../components/buttons/OrangeBtn";
 
-const Movies = () => {
+const NowPlayingMovies = () => {
   // * hooks
   const [searchParams, setSearchParams] = useSearchParams();
   const [input, setInput] = useState(0);
@@ -22,8 +21,6 @@ const Movies = () => {
   // * get data globally
   const { activeGenreIds } = useSelector((state) => state.genreSlice);
 
-  activeGenreIds.length > 0 && console.log(activeGenreIds);
-
   // * if click Movie to set page number 1
   if (location?.state?.page) {
     pageNum.current = location?.state?.page;
@@ -31,7 +28,7 @@ const Movies = () => {
   }
 
   // * data fetching
-  const { data, isLoading, isSuccess } = useGetPopularMoviesQuery(
+  const { data, isLoading, isSuccess } = useGetNowPlayingMoviesQuery(
     pageNum.current
   );
   // data && console.log(data);
@@ -41,28 +38,35 @@ const Movies = () => {
   }, []);
 
   // * variables define
-  const popularMovieLists = data?.results;
-  // isSuccess && console.log(popularMovieLists);
+  const lists = data?.results;
+  // isSuccess && console.log(lists);
 
-  const totalPages = 500;
+  const totalPages = data?.total_pages;
   const currentPage = pageNum.current;
 
   // * looping movie lists by genre
   let filterLists;
   if (activeGenreIds.length > 0) {
-    filterLists = popularMovieLists?.filter((popularMovieList) =>
-      popularMovieList.genre_ids.toString().includes(activeGenreIds.toString())
+    filterLists = lists?.filter((list) =>
+      list.genre_ids
+        .toString()
+        .includes(activeGenreIds.toString())
     );
   }
 
-  filterLists?.length > 0 && console.log("filter list -----", filterLists);
-
   // * looping movie lists
   const looping = (
-    filterLists?.length > 0 ? filterLists : popularMovieLists
-  )?.map((popularMovieList, index) => (
-    <div key={index} className={`${!popularMovieList.poster_path && "hidden"}`}>
-      <MovieCard {...popularMovieList} isLoading={isLoading} isMovie={true} />
+    filterLists?.length > 0 ? filterLists : lists
+  )?.map((list, index) => (
+    <div
+      key={index}
+      className={`${!list.poster_path && "hidden"}`}
+    >
+      <MovieCard
+        {...list}
+        isLoading={isLoading}
+        isMovie={true}
+      />
     </div>
   ));
 
@@ -115,14 +119,12 @@ const Movies = () => {
     setSearchParams({ page: pageNum.current });
     console.dir(e.target[0].value);
   };
-
   return (
     <>
-      {isLoading || !popularMovieLists ? (
+      {isLoading || !lists ? (
         <PageLoading />
       ) : (
         <div className="px-3 sm:px-5 pt-10 mt-[80px] min-[1281px]:px-0">
-
           {/* pagination  */}
           <div className=" flex sm:justify-between gap-5 py-5 sm:py-7 flex-col-reverse sm:flex-row">
             <div className=" flex gap-5 justify-evenly items-center min-[400px]:justify-start">
@@ -190,7 +192,7 @@ const Movies = () => {
             <div className=" flex flex-col gap-5 py-5 items-center h-[50vh] text-xl font-1 font-semibold text-slate-200">
               <h3>No match movie found in this page.</h3>
               <h3>Go to another page or remove some genres.</h3>
-              <OrangeBtn/>
+              <OrangeBtn />
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">
@@ -231,4 +233,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export default NowPlayingMovies;

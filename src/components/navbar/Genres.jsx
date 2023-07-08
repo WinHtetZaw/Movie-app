@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useGetGenresQuery } from "../../redux/services/movieListApi";
+import { useGetMovieGenresQuery } from "../../redux/services/movieListApi";
 import {
   Button,
   Group,
@@ -16,7 +16,7 @@ const Genres = () => {
 
   // * hooks
   const [activeGenre, setActiveGenre] = useState(0);
-  const { data } = useGetGenresQuery();
+  const { data } = useGetMovieGenresQuery();
   const genres = data?.genres;
   const dispatch = useDispatch();
 

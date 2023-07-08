@@ -30,12 +30,12 @@ const TrendingAtHome = () => {
   // * get  trending movie lists from data fetching
   const trendingMovieLists = trendingMovieListsData?.results;
   // trendingMovieLists &&
-  //   console.log("trendingMovieLists - ", trendingMovieLists);
+  //   console.log("trendingMovieLists --- ", trendingMovieLists);
 
   // * get trending tv-series lists from data fetching
   const trendingTvSeriesLists = trendingTvSeriesListsData?.results;
   // trendingTvSeriesLists &&
-  //   console.log("trendingTvSeriesLists - ", trendingTvSeriesLists);
+  //   console.log("trendingTvSeriesLists --- ", trendingTvSeriesLists);
 
   useEffect(() => {
     const handleResize = () => {
@@ -226,7 +226,7 @@ const TrendingAtHome = () => {
                         }}
                         className={` absolute bg-glass-1 left-0 z-10 mt-2 w-56 origin-top-right rounded shadow-lg ring-1 ring-[#fffde4] ring-opacity-50 focus:outline-none`}
                       >
-                        <span className="triangle absolute -top-[14.5px] left-[5.3rem]"></span>
+                        <span className="triangle absolute -top-[14.5px] left-[5.35rem]"></span>
                         <div className="px-2 py-3  text-slate-700">
                           <svg
                             onClick={() => {
@@ -256,7 +256,7 @@ const TrendingAtHome = () => {
                           <button
                             value={"tv"}
                             onClick={(e) => handleTypeClick(e.target.value)}
-                            className="hover:bg-gray-100 hover:rounded hover:bg-opacity-40 transition duration-300 py-3 px-2 block w-full text-left cursor-pointer border-b border-gray-400 last:border-none"
+                            className="hover:bg-gray-100 hover:rounded  transition duration-300 py-3 px-2 block w-full text-left cursor-pointer border-b border-gray-400 last:border-none"
                           >
                             Tv series
                           </button>
@@ -328,7 +328,7 @@ const TrendingAtHome = () => {
                             onClick={(e) =>
                               handleChoseTimeClick(e.target.value)
                             }
-                            className=" hover:bg-gray-100 hover:rounded hover:bg-opacity-40 transition duration-300 py-3 px-2 block w-full text-left cursor-pointer border-b border-gray-400 last:border-none"
+                            className="hover:bg-black hover:bg-opacity-[0.15] rounded transition duration-300 py-3 px-2 block w-full text-left cursor-pointer border-b border-gray-400 last:border-none"
                           >
                             Today
                           </button>
@@ -337,7 +337,7 @@ const TrendingAtHome = () => {
                             onClick={(e) =>
                               handleChoseTimeClick(e.target.value)
                             }
-                            className="hover:bg-gray-100 hover:rounded hover:bg-opacity-40 transition duration-300 py-3 px-2 block w-full text-left cursor-pointer border-b border-gray-400 last:border-none"
+                            className="hover:bg-black hover:bg-opacity-[0.15] rounded transition duration-300 py-3 px-2 block w-full text-left cursor-pointer border-b border-gray-400 last:border-none"
                           >
                             This week
                           </button>

@@ -7,8 +7,9 @@ import PrevBtn from "../components/pagination.jsx/PrevBtn";
 import NextBtn from "../components/pagination.jsx/NextBtn";
 import EndBtn from "../components/pagination.jsx/EndBtn";
 
-const SearchPage = () => {
-  // * hooks
+
+const MovieSearch = () => {
+      // * hooks
   const [searchParams, setSearchParams] = useSearchParams();
   const [input, setInput] = useState(0);
   const navigate = useNavigate();
@@ -100,9 +101,8 @@ const SearchPage = () => {
     }
     setSearchParams({ page: pageNum.current });
   };
-
   return (
-    <div className=" px-3 sm:px-5 min-[1281px]:px-0">
+    <div className=" px-3 sm:px-5 pt-10 mt-[80px] min-[1281px]:px-0">
       {/* pagination  */}
       <div className=" flex sm:justify-between gap-5 py-5 sm:py-7 flex-col-reverse sm:flex-row">
         <div className=" flex gap-3 justify-evenly items-center min-[400px]:justify-start">
@@ -196,7 +196,7 @@ const SearchPage = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SearchPage;
+export default MovieSearch

@@ -8,6 +8,7 @@ import StartBtn from "../components/pagination.jsx/StartBtn";
 import PrevBtn from "../components/pagination.jsx/PrevBtn";
 import NextBtn from "../components/pagination.jsx/NextBtn";
 import EndBtn from "../components/pagination.jsx/EndBtn";
+import OrangeBtn from "../components/buttons/OrangeBtn";
 
 const TvSeries = () => {
   // * hooks
@@ -16,6 +17,9 @@ const TvSeries = () => {
   const [inputError, setInputError] = useState("");
   const location = useLocation();
   const pageNum = useRef(1);
+
+   // * get data globally
+  const { activeGenreIds } = useSelector((state) => state.genreSlice);
 
   // * if click Movie to set page number 1
   if (location?.state?.page) {
@@ -32,9 +36,6 @@ const TvSeries = () => {
     setSearchParams({ page: pageNum.current });
   }, []);
 
-  // get data globally
-  const { genreNum } = useSelector((state) => state.genreSlice);
-
   // * variables define
   const popularTvSeriesLists = data?.results;
   // isSuccess && console.log(popularTvSeriesLists);
@@ -43,26 +44,19 @@ const TvSeries = () => {
   const currentPage = pageNum.current;
 
   // looping tv-seres lists by genre
-  let filterByGenre;
-  if (genreNum != 0) {
-    filterByGenre = popularTvSeriesLists?.filter((popularTvSeriesList) =>
-      popularTvSeriesList.genre_ids.includes(genreNum)
+  let filterLists;
+  if (activeGenreIds.length > 0) {
+    filterLists = popularTvSeriesLists?.filter((popularTvSeriesList) =>
+      popularTvSeriesList.genre_ids.toString().includes(activeGenreIds.toString())
     );
   }
-  const looping = (genreNum == 0 ? popularTvSeriesLists : filterByGenre)?.map(
+  const looping = ( filterLists?.length > 0 ? filterLists : popularTvSeriesLists)?.map(
     (popularTvSeriesList, index) => (
-      <div key={index}>
+      <div key={index} className={`${!popularTvSeriesList.poster_path && "hidden"}`}>
         <MovieCard {...popularTvSeriesList} isLoading={isLoading} />
       </div>
     )
   );
-
-  // looping tv-seres lists
-  // const looping = (genreNum == 0 ? popularTvSeriesLists : filterByGenre)?.map(
-  //   (popularTvSeriesList) => (
-  //     <MovieCard key={popularTvSeriesList.id} {...popularTvSeriesList} />
-  //   )
-  // );
 
   // * handle functions
   const handlePaginationBtnClick = (type) => {
@@ -113,7 +107,7 @@ const TvSeries = () => {
       {isLoading || !popularTvSeriesLists ? (
         <PageLoading />
       ) : (
-        <div className="px-3 sm:px-5 min-[1281px]:px-0">
+        <div className="px-3 sm:px-5 pt-10 mt-[80px] min-[1281px]:px-0">
           {/* pagination  */}
           <div className=" flex sm:justify-between gap-5 py-5 sm:py-7 flex-col-reverse sm:flex-row">
             <div className=" flex gap-5 justify-evenly items-center min-[400px]:justify-start">
@@ -175,9 +169,17 @@ const TvSeries = () => {
           </div>
 
           {/* tv series lists show  */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">
-            {looping}
-          </div>
+          {filterLists?.length == 0 && activeGenreIds?.length > 0 ? (
+            <div className=" flex flex-col gap-5 py-5 items-center h-[50vh] text-xl font-1 font-semibold text-slate-200">
+              <h3>No match movie found in this page.</h3>
+              <h3>Go to another page or remove some genres.</h3>
+              <OrangeBtn text={"Remove all genres"}/>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">
+              {looping}
+            </div>
+          )}
 
           <div className=" flex gap-5 my-10 justify-evenly items-center min-[400px]:justify-end">
             {/* start  */}

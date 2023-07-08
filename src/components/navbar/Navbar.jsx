@@ -1,18 +1,16 @@
 import { useRef, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import Genres from "./Genres";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isOpenSidebar } from "../../redux/features/sidebarSlice";
 import InputSearch from "./InputSearch";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  setScrollable,
-  toggleShowNavbar,
-} from "../../redux/features/generalSlice";
+import { toggleShowNavbar } from "../../redux/features/generalSlice";
 import { BsPersonCircle } from "react-icons/bs";
 import { toast } from "react-hot-toast";
 import MenuModal from "./MenuModal";
+import MovieModal from "../modal-components/MovieModal";
+import TvModal from "../modal-components/TvModal";
 
 const Navbar = () => {
   // * hooks
@@ -93,7 +91,7 @@ const Navbar = () => {
   const handleMouseLeave = () => {
     setTimeout(() => {
       setIsProfileModelOpen(false);
-    }, 2000);
+    }, 500);
   };
 
   // console.log("location -----", location.pathname);
@@ -154,17 +152,29 @@ const Navbar = () => {
                     }}
                     className=" absolute top-0 h-screen w-full bg-black bg-opacity-80"
                   >
-                    <MenuModal setIsMenuOpen={setIsMenuOpen} isProfileModelOpen={isProfileModelOpen} useInfo={useInfo} handleLogoutClick={handleLogoutClick} isShrink={isShrink} handleProfileClick={handleProfileClick} handleMouseLeave={handleMouseLeave} setIsProfileModelOpen={setIsProfileModelOpen}/>
+                    <MenuModal
+                      setIsMenuOpen={setIsMenuOpen}
+                      isProfileModelOpen={isProfileModelOpen}
+                      useInfo={useInfo}
+                      handleLogoutClick={handleLogoutClick}
+                      isShrink={isShrink}
+                      handleProfileClick={handleProfileClick}
+                      handleMouseLeave={handleMouseLeave}
+                      setIsProfileModelOpen={setIsProfileModelOpen}
+                    />
                   </div>
                 )}
 
                 {/* menus & search */}
                 <div className=" flex items-center gap-8">
-                  <InputSearch />
+                  <span className=" mr-16">
+                    <InputSearch placeholderText={"Type to search"} />
+                  </span>
                   <div
-                    className={` hidden md:flex items-center gap-5 md:mr-5`}
+                    className={` hidden h-14 md:flex items-center gap-5 md:mr-5`}
                   >
-                    <div className=" flex flex-row gap-5">
+                    <div className=" flex flex-row items-center gap-5 h-full">
+                      {/* go to home  */}
                       <NavLink to={"/"}>
                         <h3
                           onClick={() => {
@@ -177,24 +187,26 @@ const Navbar = () => {
                         </h3>
                       </NavLink>
 
-                      <NavLink
+                      {/* movies */}
+                      {/* <NavLink
                         to={{
                           pathname: "/movie",
                           state: { page: 1 },
                         }}
+                      > */}
+                      <h3
+                        onClick={() => {
+                          dispatch(isOpenSidebar(false));
+                          setIsMenuOpen(false);
+                        }}
+                        className=" relative transition duration-300"
                       >
-                        <h3
-                          onClick={() => {
-                            dispatch(isOpenSidebar(false));
-                            setIsMenuOpen(false);
-                          }}
-                          className=" text-lg font-semibold transition duration-300"
-                        >
-                          Movies
-                        </h3>
-                      </NavLink>
+                        <MovieModal />
+                      </h3>
+                      {/* </NavLink> */}
 
-                      <NavLink
+                      {/* tv series  */}
+                      {/* <NavLink
                         to={{
                           pathname: "/tv",
                           state: { page: 1 },
@@ -209,57 +221,51 @@ const Navbar = () => {
                         >
                           Tv series
                         </h3>
-                      </NavLink>
-
+                      </NavLink> */}
+                      <TvModal />
                       {/* <Genres /> */}
                     </div>
+
                     {/* profile  */}
                     <div
                       // onMouseEnter={() => setIsProfileModelOpen(true)}
                       onMouseLeave={handleMouseLeave}
-                          onMouseOver={() => setIsProfileModelOpen(true)}
-                      onClick={handleProfileClick}
-                      className={` relative w-16 p-2 ${!isShrink ? "text-[#2f274d]" : "text-[#005C97]"}  border border-white border-opacity-40 rounded-full mr-5`}
+                      onMouseOver={() => setIsProfileModelOpen(true)}
+                      // onClick={handleProfileClick}
+                      className={` relative w-16 p-2 ${
+                        !isShrink ? "text-[#2f274d]" : "text-[#005C97]"
+                      }  border border-white border-opacity-40 rounded-full mr-5`}
                     >
                       {/* profile icon  */}
                       <BsPersonCircle className=" w-full h-full shadow-1 rounded-full" />
 
                       {/* profile dropdown area  */}
-                      <ul
-                        className={`${
-                          isProfileModelOpen ? "block" : "hidden"
-                        } font-1 absolute bg-glass-1 right-0 z-10 py-3 px-2 mt-2 w-44 text-slate-700 origin-top-right rounded-md shadow-lg ring-1 ring-[#fffde4] ring-opacity-50  focus:outline-none`}
-                      >
-                        <svg
-                          onClick={handleProfileClick}
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-6 h-6 absolute top-2 right-2 active:scale-90 text-slate-200 bg-gray-800 hover:bg-gray-700 rounded-full"
+                      <AnimatePresence>
+                      {isProfileModelOpen && (
+                        <motion.ul
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                          exit={{ opacity: 0 }}
+                          className={` font-1 absolute bg-glass-1 right-0 z-10 py-3 px-2 mt-2 w-44 text-slate-700 origin-top-right rounded-md shadow-lg ring-1 ring-[#fffde4] ring-opacity-50  focus:outline-none`}
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                        <Link to={"/favorite"}>
-                          <li className=" select-none cursor-pointer py-2 px-3 border-b border-gray-400 last:border-none">
-                            Favorite
+                          <Link to={"/favorite"}>
+                            <li className=" select-none cursor-pointer py-2 px-3 border-b border-gray-400 last:border-none">
+                              Favorite
+                            </li>
+                          </Link>
+                          <li className="select-none cursor-pointer w-full py-2 px-3 border-b border-gray-400 last:border-none">
+                            {useInfo?.success ? (
+                              <span onClick={handleLogoutClick}>Log out</span>
+                            ) : (
+                              <Link to={"/sign-in"}>
+                                <span className="w-full block">Sing in</span>
+                              </Link>
+                            )}
                           </li>
-                        </Link>
-                        <li className="select-none cursor-pointer w-full py-2 px-3 border-b border-gray-400 last:border-none">
-                          {useInfo?.success ? (
-                            <span onClick={handleLogoutClick}>Log out</span>
-                          ) : (
-                            <Link to={"/sign-in"}>
-                              <span className="w-full block">Sing in</span>
-                            </Link>
-                          )}
-                        </li>
-                      </ul>
+                        </motion.ul>
+                      )}
+                      </AnimatePresence>
                     </div>
                   </div>
                 </div>

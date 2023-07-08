@@ -97,7 +97,7 @@ const PopularAtHome = () => {
             `https://image.tmdb.org/t/p/original/${popularTvSeriesList.backdrop_path}`
           );
         }}
-        className=" min-w-[200px] my-yellow"
+        className=" font-1 min-w-[200px] my-yellow"
         key={index}
       >
         <motion.img
@@ -117,7 +117,7 @@ const PopularAtHome = () => {
           {popularTvSeriesList.name}
         </motion.h2>
         <motion.p variants={textVariant} className=" text-slate-400">
-          {popularTvSeriesList.release_date}
+          {popularTvSeriesList.release_date ?? popularTvSeriesList.first_air_date}
         </motion.p>
       </div>
     )

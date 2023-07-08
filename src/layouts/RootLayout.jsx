@@ -5,19 +5,19 @@ import Footer from "../components/footer/Footer";
 
 const RootLayout = () => {
   const { openSidebar } = useSelector((state) => state.sidebarSlice);
-  const {scrollable} = useSelector(state => state.generalSlice)
+  const { scrollable } = useSelector((state) => state.generalSlice);
   const { isPageLoading } = useSelector((state) => state.generalSlice);
 
   return (
     <div
-      className={`relative max-w-[1280px] mx-auto bg-dark-1 ${
-        (openSidebar || !scrollable) &&  " h-screen overflow-hidden" 
+      className={`relative max-w-[1280px] mx-auto ${
+        (openSidebar || !scrollable) && " h-screen overflow-hidden"
       }`}
     >
       <nav>
         <Navbar />
       </nav>
-      <main className="mt-[80px] min-h-screen bg-transparent">
+      <main className=" min-h-[80vh] bg-transparent">
         <Outlet />
       </main>
       <footer>

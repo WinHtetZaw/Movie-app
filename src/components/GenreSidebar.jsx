@@ -1,0 +1,126 @@
+import { useState } from "react";
+import { FaArrowAltCircleRight } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { isOpenSidebar } from "../redux/features/sidebarSlice";
+import { useGetMovieGenresQuery } from "../redux/services/movieListApi";
+import OrangeBtn from "./buttons/OrangeBtn";
+import { addGenreId } from "../redux/features/genreSlice";
+import InputSearch from "./navbar/InputSearch";
+import { RxCrossCircled } from "react-icons/rx";
+import { useGetTvGenresQuery } from "../redux/services/tvSeriesApi";
+import { useLocation } from "react-router-dom";
+
+const GenreSidebar = () => {
+  // * hooks
+  const [isOpen, setIsOpen] = useState(false);
+  const [isActive, setIsActive] = useState([]);
+  const { data: movieGenreData } = useGetMovieGenresQuery();
+  const { data: tvGenreData } = useGetTvGenresQuery();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const { activeGenreIds } = useSelector((state) => state.genreSlice);
+  // activeGenreIds.length > 0 && console.log(activeGenreIds);
+
+  // * variables
+  let genres;
+  if (location.pathname.includes("tv")) {
+    genres = tvGenreData?.genres;
+  } else {
+    genres = movieGenreData?.genres;
+  }
+
+  const isDetail = location.pathname.includes("detail");
+  // console.log(isDetail)
+  // genres && console.log(data);
+
+  // * handles
+  const handleGenreSidebarClick = () => {
+    setIsOpen(true);
+    dispatch(isOpenSidebar(true));
+  };
+
+  const handleGenreClick = (num) => {
+    dispatch(addGenreId(num));
+  };
+
+  const handleCloseClick = () => {
+    setIsOpen(false);
+    dispatch(isOpenSidebar(false));
+  };
+
+  return (
+    <>
+      <div
+        // style={isDetail && { display: "hidden" }}
+        onClick={handleGenreSidebarClick}
+        className={`${isDetail ? "hidden" : "block"} z-40 active:scale-90 fixed top-[100px] left-5 opacity-50 hover:opacity-80 border border-[#fffde4] rounded-full p-3 w-fit`}
+      >
+        <FaArrowAltCircleRight className=" text-[#fffde4]" />
+      </div>
+
+      {/* genre bar modal  */}
+      {isOpen && (
+        <section className=" ">
+          <div
+            onClick={handleCloseClick}
+            className=" bg-black bg-opacity-40 z-10 fixed w-full h-full "
+          ></div>
+          <div className=" fixed overflow-y-scroll z-50 left-0 top-0 pt-[120px] h-screen sm:w-[200px] md:w-[300px] w-[70vw] bg-[#25262b]">
+            {/* close btn  */}
+            <svg
+              onClick={handleCloseClick}
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-8 h-8 absolute top-[90px] right-3 active:scale-90 text-[#fffde4] rounded-full"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+
+            <div className=" pb-5">
+              <InputSearch placeholderText={"Search Movies"} />
+            </div>
+
+            {/* content  */}
+            <div className=" border-t-2 border-opacity-30 pt-10 mt-5 border-white text-2xl mb-5 text-center font-serif font-bold text-gray-300">
+              <h3>Genres</h3>
+            </div>
+            <RxCrossCircled
+              onClick={() => handleGenreClick(0)}
+              className=" mb-3 ml-2 active:scale-90 text-2xl text-[#3da2f1]"
+            />
+
+            <ul className=" text-slate-200 flex flex-wrap gap-3 text-sm px-2 border-b-2 border-white border-opacity-50 pb-10">
+              {/* <li
+                onClick={() => handleGenreClick(0)}
+                className=" border w-fit transition duration-300 rounded-full px-2 py-1 select-none cursor-pointer"
+              >
+                Show All
+              </li> */}
+              {genres?.map((genre, index) => (
+                <li
+                  onClick={() => handleGenreClick(genre.id)}
+                  className={` ${
+                    activeGenreIds.includes(genre.id) &&
+                    "border-2 border-[#3da2f1]"
+                  } active:scale-90 border w-fit transition duration-300 rounded-full px-2 py-1 select-none cursor-pointer`}
+                  key={index}
+                >
+                  #{genre.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+    </>
+  );
+};
+
+export default GenreSidebar;
