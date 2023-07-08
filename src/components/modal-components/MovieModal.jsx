@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const MovieModal = () => {
+const MovieModal = ({handleLinkClick}) => {
   // * hooks
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -33,22 +33,22 @@ const MovieModal = () => {
           className={` font-1 origin-top absolute bg-glass-1 -right-[4rem]  z-10 py-3 px-2 mt-2 w-44 text-slate-800 rounded-md shadow-lg ring-1 ring-[#fffde4] ring-opacity-50  focus:outline-none`}
         >
           <Link to={"/movie/popular"}>
-            <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400">
+            <li onClick={handleLinkClick} className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400">
               Popular
             </li>
           </Link>
           <Link to={"/movie/now-playing"}>
-            <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400">
+            <li onClick={handleLinkClick} className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400">
               Now Playing
             </li>
           </Link>
           <Link to={"/movie/upcoming"}>
-            <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400">
+            <li onClick={handleLinkClick} className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400">
               Up Coming
             </li>
           </Link>
           <Link to={"movie/top-rated"}>
-            <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3">
+            <li onClick={handleLinkClick} className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3">
               Top Rated
             </li>
           </Link>

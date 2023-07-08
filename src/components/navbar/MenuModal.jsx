@@ -47,7 +47,7 @@ const MenuModal = ({
   };
 
   const handleLinkClick = (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     dispatch(isOpenSidebar(false));
     setIsMenuOpen(false);
   };
@@ -133,7 +133,7 @@ const MenuModal = ({
         <Link to={"/"}>
           <motion.h3
             variants={childVariant}
-            onClick={(e) => handleLinkClick(e)}
+            onClick={() => handleLinkClick()}
             className=" py-5 px-4 w-[10rem] text-center rounded-md text-lg font-semibold"
           >
             Home
@@ -159,9 +159,11 @@ const MenuModal = ({
         </NavLink> */}
         <motion.span
           variants={childVariant}
-          onClick={(e) => handleLinkClick(e)}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
         >
-          <MovieModal />
+          <MovieModal handleLinkClick={handleLinkClick}/>
         </motion.span>
 
         {/* <NavLink
@@ -183,9 +185,11 @@ const MenuModal = ({
         </NavLink> */}
         <motion.span
           variants={childVariant}
-          onClick={(e) => handleLinkClick(e)}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
         >
-          <TvModal />
+          <TvModal handleLinkClick={handleLinkClick}/>
         </motion.span>
 
         {/* <Genres /> */}

@@ -8,7 +8,7 @@ const TvDetail = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetTvDetailQuery(id);
   const navigate = useNavigate();
-  console.log("movie detail ----", data);
+  // console.log("movie detail ----", data);
 
   // * variables define
   const percentage = data?.vote_average.toFixed(1) * 10;
@@ -47,6 +47,34 @@ const TvDetail = () => {
                   {data?.name}
                 </h1>
 
+                 {/* genre tags  */}
+              <div className=" flex flex-wrap items-center gap-2 py-2">
+                {data?.genres?.map((genre) => (
+                  <div
+                    className="hvr-radial-in text-sm flex items-center justify-center py-1 px-2 min-w-[6rem] rounded-sm bg-gradient-to-r from-[#005C97] to-[#1CB5E0] text-slate-800"
+                    key={genre.id}
+                  >
+                    #{genre.name}
+                  </div>
+                ))}
+              </div>
+
+                {/* volt  */}
+                <div className=" my-2 w-[50px] h-[50px] bg-[#1a1b1e] rounded-full">
+                <RingProgress
+                  rootColor="#1a1b1e"
+                  size={50}
+                  thickness={4}
+                  roundCaps
+                  sections={[{ value: percentage, color: "#0084C7" }]}
+                  label={
+                    <div className=" text-sky-600 text-sm text-center">
+                      {percentage}%
+                    </div>
+                  }
+                />
+              </div>
+
                 <div className=" ">
                   <span className="opacity-90 ">{data?.status}</span>
                   <span className="opacity-90 uppercase">
@@ -61,32 +89,8 @@ const TvDetail = () => {
               <div className=" font-sans italic text-slate-200 text-sm py-2">
                 {data?.tagline}
               </div>
-              {/* genre tags  */}
-              <div className=" flex flex-wrap items-center gap-2 py-2">
-                {data?.genres?.map((genre) => (
-                  <div
-                    className="hvr-radial-in text-sm flex items-center justify-center py-1 px-2 min-w-[6rem] rounded-sm bg-gradient-to-r from-[#005C97] to-[#1CB5E0] text-slate-800"
-                    key={genre.id}
-                  >
-                    #{genre.name}
-                  </div>
-                ))}
-              </div>
-              {/* volt  */}
-              <div className=" my-2 w-[50px] h-[50px] bg-[#1a1b1e] rounded-full">
-                <RingProgress
-                  rootColor="#1a1b1e"
-                  size={50}
-                  thickness={4}
-                  roundCaps
-                  sections={[{ value: percentage, color: "#0084C7" }]}
-                  label={
-                    <div className=" text-sky-600 text-sm text-center">
-                      {percentage}%
-                    </div>
-                  }
-                />
-              </div>
+             
+            
               {/* Overview */}
               <div
                 className={` ${
