@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, redirect, useNavigate } from "react-router-dom";
@@ -15,26 +15,26 @@ const AccSignin = () => {
   const onSubmit = (data) => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-    // if(!userInfo) {
-    //   toast.error("Didn't Log in!")
+    // console.log("Sign-up data -----", data);
+    // console.log("User Info from sign-in -----", userInfo);
 
-    // }
-
-    console.log("Sign-up data -----", data);
-    console.log("User Info from sign-in -----", userInfo);
-
-    if (userInfo && data.email === userInfo.email && data.password === userInfo.password) {
+    if (
+      userInfo &&
+      data.email === userInfo.email &&
+      data.password === userInfo.password
+    ) {
       userInfo.success = true;
-      localStorage.setItem("userInfo",JSON.stringify(userInfo))
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
       console.log("successfully login");
-      toast.success('Successfully Log in!')
+      toast.success("Successfully Log in!");
       navigate("/");
     } else {
       console.log("error -- ", errors);
       setLoginErr("Something wrong.");
-      toast.error("Didn't Log in!")
+      toast.error("Didn't Log in!");
     }
   };
+
   return (
     <>
       <section className="min-h-screen flex items-stretch text-white ">
@@ -161,7 +161,9 @@ const AccSignin = () => {
 
               {/* go to register  */}
               <div className="text-left my-5 text-slate-100">
-                <p className="text-gray-400 hover:text-gray-100">{`Don't`} have an account?</p>
+                <p className="text-gray-400 hover:text-gray-100">
+                  {`Don't`} have an account?
+                </p>
                 <Link to={"/sign-up"}>
                   <span className=" text-sm text-gray-400 hover:underline hover:text-gray-100">
                     Go to register

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetTrendingMoviesQuery } from "../../redux/services/movieListApi";
 import { useGetTrendingTvSeriesQuery } from "../../redux/services/tvSeriesApi";
 import SliderCarousel from "../SliderCarousel";
@@ -78,7 +78,7 @@ const TrendingAtHome = () => {
 
   const choiceVariant = {
     hidden: { scaleY: 0 },
-    show: { scaleY: 1, transition: { duration: 0.3, ease: "easeIn" } },
+    show: { scaleY: 1, transition: { duration: 0.2, ease: "easeIn" } },
   };
 
   // * looping movie lists
@@ -222,7 +222,7 @@ const TrendingAtHome = () => {
                         variants={choiceVariant}
                         exit={{
                           scaleY: 0,
-                          transition: { duration: 0.3, ease: "easeIn" },
+                          transition: { duration: 0.2, ease: "easeIn" },
                         }}
                         className={` absolute bg-glass-1 left-0 z-10 mt-2 w-56 origin-top-right rounded shadow-lg ring-1 ring-[#fffde4] ring-opacity-50 focus:outline-none`}
                       >
@@ -249,14 +249,14 @@ const TrendingAtHome = () => {
                           <button
                             value={"movie"}
                             onClick={(e) => handleTypeClick(e.target.value)}
-                            className="hover:bg-gray-100 hover:rounded hover:bg-opacity-40 transition duration-300 py-3 px-2 block w-full text-left cursor-pointer border-b border-gray-400 last:border-none"
+                            className="hover:bg-black hover:bg-opacity-[0.15] hover:rounded transition duration-300 py-3 px-2 block w-full text-left cursor-pointer border-b border-gray-400 last:border-none"
                           >
                             Movie
                           </button>
                           <button
                             value={"tv"}
                             onClick={(e) => handleTypeClick(e.target.value)}
-                            className="hover:bg-gray-100 hover:rounded  transition duration-300 py-3 px-2 block w-full text-left cursor-pointer border-b border-gray-400 last:border-none"
+                            className="hover:bg-black hover:bg-opacity-[0.15] hover:rounded transition duration-300 py-3 px-2 block w-full text-left cursor-pointer border-b border-gray-400 last:border-none"
                           >
                             Tv series
                           </button>
@@ -300,9 +300,9 @@ const TrendingAtHome = () => {
                         variants={choiceVariant}
                         exit={{
                           scaleY: 0,
-                          transition: { duration: 0.3, ease: "easeIn" },
+                          transition: { duration: 0.2, ease: "easeIn" },
                         }}
-                        className={` absolute right-0 z-10 mt-2 w-56 bg-glass-1 text-slate-700 origin-top-right rounded bg-white shadow-lg ring-1 ring-[#fffde4] ring-opacity-50 focus:outline-none`}
+                        className={` absolute right-0 z-10 mt-2 w-56 bg-glass-1 text-slate-800 origin-top-right rounded shadow-lg ring-1 ring-[#fffde4] ring-opacity-50 focus:outline-none`}
                       >
                         <div className="px-2 py-3  ">
                           <svg

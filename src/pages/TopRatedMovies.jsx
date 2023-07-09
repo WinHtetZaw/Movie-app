@@ -45,7 +45,7 @@ const TopRatedMovies = () => {
   const lists = data?.results;
   // isSuccess && console.log(lists);
 
-  const totalPages = data?.total_pages;
+  const totalPages = 500;
   const currentPage = pageNum.current;
 
   // * looping movie lists by genre

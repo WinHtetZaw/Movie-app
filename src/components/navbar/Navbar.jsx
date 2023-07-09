@@ -18,10 +18,8 @@ const Navbar = () => {
   const [isShrink, setIsShrink] = useState(false);
   const [isProfileModelOpen, setIsProfileModelOpen] = useState(false);
   const [useInfo, setUserInfo] = useState(null);
-  // const userInfoRef = useRef(null);
   const navigate = useNavigate();
 
-  // const [showNavbar, setShowNavbar] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const location = useLocation();
 
@@ -31,7 +29,6 @@ const Navbar = () => {
   const { showNavbar } = useSelector((state) => state.generalSlice);
   const dispatch = useDispatch();
 
-  // useInfo && console.log("useInfo ---", useInfo);
 
   // * useEffects
   useEffect(() => {
@@ -89,12 +86,14 @@ const Navbar = () => {
   };
 
   const handleMouseLeave = () => {
-    setTimeout(() => {
+    // setTimeout(() => {
       setIsProfileModelOpen(false);
-    }, 500);
+    // }, 300);
   };
 
   // console.log("location -----", location.pathname);
+  // useInfo && console.log("useInfo ---", useInfo);
+
 
   return (
     <>
@@ -165,17 +164,19 @@ const Navbar = () => {
                   </div>
                 )}
 
-                {/* menus & search */}
                 <div className=" flex items-center gap-8">
+
+                  {/* search  */}
                   <span className=" mr-16">
                     <InputSearch placeholderText={"Type to search"} />
                   </span>
+
+                  {/* menu links  */}
                   <div
                     className={` hidden h-14 md:flex items-center gap-5 md:mr-5`}
                   >
                     <div className=" flex flex-row items-center gap-5 h-full">
-                      {/* go to home  */}
-                      <NavLink to={"/"}>
+                      <Link to={"/"}>
                         <h3
                           onClick={() => {
                             dispatch(isOpenSidebar(false));
@@ -185,15 +186,8 @@ const Navbar = () => {
                         >
                           Home
                         </h3>
-                      </NavLink>
+                      </Link>
 
-                      {/* movies */}
-                      {/* <NavLink
-                        to={{
-                          pathname: "/movie",
-                          state: { page: 1 },
-                        }}
-                      > */}
                       <h3
                         onClick={() => {
                           dispatch(isOpenSidebar(false));
@@ -203,35 +197,14 @@ const Navbar = () => {
                       >
                         <MovieModal />
                       </h3>
-                      {/* </NavLink> */}
 
-                      {/* tv series  */}
-                      {/* <NavLink
-                        to={{
-                          pathname: "/tv",
-                          state: { page: 1 },
-                        }}
-                      >
-                        <h3
-                          onClick={() => {
-                            dispatch(isOpenSidebar(false));
-                            setIsMenuOpen(false);
-                          }}
-                          className=" text-lg font-semibold transition duration-300"
-                        >
-                          Tv series
-                        </h3>
-                      </NavLink> */}
                       <TvModal />
-                      {/* <Genres /> */}
                     </div>
 
                     {/* profile  */}
                     <div
-                      // onMouseEnter={() => setIsProfileModelOpen(true)}
                       onMouseLeave={handleMouseLeave}
                       onMouseOver={() => setIsProfileModelOpen(true)}
-                      // onClick={handleProfileClick}
                       className={` relative w-16 p-2 ${
                         !isShrink ? "text-[#2f274d]" : "text-[#005C97]"
                       }  border border-white border-opacity-40 rounded-full mr-5`}
@@ -250,11 +223,11 @@ const Navbar = () => {
                           className={` font-1 absolute bg-glass-1 right-0 z-10 py-3 px-2 mt-2 w-44 text-slate-700 origin-top-right rounded-md shadow-lg ring-1 ring-[#fffde4] ring-opacity-50  focus:outline-none`}
                         >
                           <Link to={"/favorite"}>
-                            <li className=" select-none cursor-pointer py-2 px-3 border-b border-gray-400 last:border-none">
+                            <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400 last:border-none">
                               Favorite
                             </li>
                           </Link>
-                          <li className="select-none cursor-pointer w-full py-2 px-3 border-b border-gray-400 last:border-none">
+                          <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer w-full py-2 px-3 border-b border-gray-400 last:border-none">
                             {useInfo?.success ? (
                               <span onClick={handleLogoutClick}>Log out</span>
                             ) : (
@@ -275,104 +248,6 @@ const Navbar = () => {
         )}
       </AnimatePresence>
     </>
-    // <div className=" font-sans w-full justify-between flex items-center z-50 h-full text-slate-200">
-    //   {/* logo  */}
-    //   <Link to={"/"}>
-    //     <h3 className=" ml-5 text-lg sm:text-2xl flex flex-col items-center justify-center text-slate-200 font-semibold font-serif">
-    //       <span>Movie</span>
-    //       <span>App</span>
-    //     </h3>
-    //   </Link>
-
-    //   {/* burger menu  */}
-    //   <div className="absolute z-[1000] top-0 right-0 h-[80px] flex items-center justify-center mr-5">
-    //     <button
-    //       onClick={() => {
-    //         dispatch(isOpenSidebar(!openSidebar));
-    //         setIsMenuOpen(!isMenuOpen);
-    //       }}
-    //       className={`menu ${
-    //         isMenuOpen && "opened"
-    //       }  w-9 h-9 ml-auto sm:hidden`}
-    //     >
-    //       <svg className=" w-full h-full" viewBox="0 0 100 100">
-    //         <path
-    //           className="line line1"
-    //           d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"
-    //         />
-    //         <path className="line line2" d="M 20,50 H 80" />
-    //         <path
-    //           className="line line3"
-    //           d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"
-    //         />
-    //       </svg>
-    //     </button>
-    //   </div>
-    //   {isMenuOpen && (
-    //     <div
-    //       onClick={() => {
-    //         dispatch(isOpenSidebar(!openSidebar));
-    //         setIsMenuOpen(!isMenuOpen);
-    //       }}
-    //       className=" absolute top-0 h-screen w-full bg-black opacity-50"
-    //     ></div>
-    //   )}
-
-    //   {/* menus & search */}
-    //   <div className=" flex gap-8">
-    //     <InputSearch />
-    //     <div
-    //       className={` ${
-    //         isShrink &&
-    //         isMenuOpen &&
-    //         " absolute top-0 right-0 pt-20 bg-dark-3 h-screen overflow-hidden w-[70vw] flex flex-col gap-5"
-    //       } ${!isMenuOpen && "hidden"} sm:flex items-center gap-5 sm:mr-5`}
-    //     >
-    //       <NavLink to={"/"}>
-    //         <h3
-    //           onClick={() => {
-    //             dispatch(isOpenSidebar(false));
-    //             setIsMenuOpen(false);
-    //           }}
-    //           className=" text-lg font-semibold transition duration-300"
-    //         >
-    //           Home
-    //         </h3>
-    //       </NavLink>
-
-    //       <NavLink
-    //         to={{
-    //           pathname: "/movie",
-    //           state: { page: 1 },
-    //         }}
-    //       >
-    //         <h3
-    //           onClick={() => {
-    //             dispatch(isOpenSidebar(false));
-    //             setIsMenuOpen(false);
-    //           }}
-    //           className=" text-lg font-semibold transition duration-300"
-    //         >
-    //           Movies
-    //         </h3>
-    //       </NavLink>
-
-    //       <NavLink to={"/tv"}>
-    //         <h3
-    //           onClick={() => {
-    //             dispatch(isOpenSidebar(false));
-    //             setIsMenuOpen(false);
-    //           }}
-    //           className=" text-lg font-semibold transition duration-300"
-    //         >
-    //           Tv series
-    //         </h3>
-    //       </NavLink>
-
-    //       <Genres />
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 

@@ -122,7 +122,6 @@ const Movies = () => {
         <PageLoading />
       ) : (
         <div className="px-3 sm:px-5 pt-10 mt-[80px] min-[1281px]:px-0">
-
           {/* pagination  */}
           <div className=" flex sm:justify-between gap-5 py-5 sm:py-7 flex-col-reverse sm:flex-row">
             <div className=" flex gap-5 justify-evenly items-center min-[400px]:justify-start">
@@ -192,7 +191,7 @@ const Movies = () => {
               <p>Go to another page</p>
               <p>OR</p>
               <p>Remove some genres</p>
-              <OrangeBtn/>
+              <OrangeBtn />
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">

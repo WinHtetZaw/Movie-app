@@ -111,7 +111,7 @@ const GenreSidebar = () => {
                 className=" mb-3 ml-2 active:scale-90 text-2xl text-[#3da2f1]"
               />
 
-              <ul className=" text-slate-200 flex flex-wrap gap-3 text-sm px-2 border-b-2 border-white border-opacity-50 pb-10">
+              <ul className=" text-slate-200 flex flex-wrap gap-3 text-sm px-2 pb-10">
                 {/* <li
                 onClick={() => handleGenreClick(0)}
                 className=" border w-fit transition duration-300 rounded-full px-2 py-1 select-none cursor-pointer"

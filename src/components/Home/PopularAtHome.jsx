@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetPopularMoviesQuery } from "../../redux/services/movieListApi";
 import { useGetPopularTvSeriesQuery } from "../../redux/services/tvSeriesApi";
 import SliderCarousel from "../SliderCarousel";
-import PageLoading from "../PageLoading";
 import "@lottiefiles/lottie-player";
 import { motion } from "framer-motion";
 
@@ -179,17 +178,10 @@ const PopularAtHome = () => {
                   ></span>
                   <span className="w-full h-full text-center">Tv series</span>
                 </button>
-                {/* <div className="flex gap-3 items-center bg-blue-600 w-[7rem] px-3 py-2 ">
-            <span className=" w-4 h-4 rounded-full bg-red-500"></span>
-            <span className=" text-white">Click</span>
-          </div> */}
               </div>
             </div>
             {windowWidth > 640 ? (
               <div className=" popularAtHome overflow-x-scroll flex gap-7 pb-5">
-                {/* {isMovie
-                  ? popularMovieListsLooping
-                  : popularTvSeriesListsLooping} */}
                 {isMovie && popularMovieListsLooping}
                 {!isMovie && popularTvSeriesListsLooping}
               </div>

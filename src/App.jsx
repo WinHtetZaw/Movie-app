@@ -3,6 +3,7 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
+  useLocation,
 } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
 import Dashboard from "./pages/Dashboard";
@@ -19,7 +20,6 @@ import AccSignup from "./components/account/AccSignup";
 import AccSignin from "./components/account/AccSignin";
 import { Toaster } from "react-hot-toast";
 import Favorite from "./pages/Favorite";
-import RouteGuard from "./components/RouteGuard";
 import NowPlayingMovies from "./pages/NowPlayingMovies";
 import UpcomingMovies from "./pages/UpcomingMovies";
 import TopRatedMovies from "./pages/TopRatedMovies";

@@ -1,8 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
 import { BsPersonCircle } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { isOpenSidebar } from "../../redux/features/sidebarSlice";
 import TvModal from "../modal-components/TvModal";
 import MovieModal from "../modal-components/MovieModal";
@@ -10,7 +9,6 @@ import MovieModal from "../modal-components/MovieModal";
 const MenuModal = ({
   setIsProfileModelOpen,
   handleMouseLeave,
-  handleProfileClick,
   isShrink,
   isProfileModelOpen,
   useInfo,
@@ -58,7 +56,6 @@ const MenuModal = ({
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.5 }}
-        // onMouseEnter={() => setIsProfileModelOpen(true)}
         onMouseLeave={handleMouseLeave}
         onMouseOver={() => setIsProfileModelOpen(true)}
         onClick={(e) => {
@@ -66,7 +63,7 @@ const MenuModal = ({
         }}
         className={` relative w-16 p-2 ${
           !isShrink ? "text-[#2f274d]" : "text-[#005C97]"
-        }  border border-white border-opacity-40 rounded-full mb-5`}
+        }  border border-white border-opacity-40 cursor-pointer rounded-full mb-5`}
       >
         {/* profile icon  */}
         <BsPersonCircle className=" w-full h-full shadow-1 rounded-full" />
@@ -79,9 +76,9 @@ const MenuModal = ({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className={`font-1 absolute bg-glass-1 -right-[3.6rem] z-10 py-3 px-2 mt-5 w-44 text-slate-700 origin-top-right rounded-md shadow-lg ring-1 ring-[#fffde4] ring-opacity-50  focus:outline-none`}
+              className={`font-1 absolute bg-glass-1 -right-[3.6rem] z-10 py-3 px-2 mt-2 w-44 text-slate-700 origin-top-right rounded-md shadow-lg ring-1 ring-[#fffde4] ring-opacity-50  focus:outline-none`}
             >
-              <span className="triangle absolute -top-[14.5px] left-[5rem]"></span>
+              {/* <span className="triangle absolute -top-[14.5px] left-[5rem]"></span> */}
               {/* <svg
               onClick={handleProfileClick}
               xmlns="http://www.w3.org/2000/svg"
@@ -100,12 +97,12 @@ const MenuModal = ({
               <Link to={"/favorite"}>
                 <li
                   onClick={handleCloseBurgerMenu}
-                  className=" select-none cursor-pointer py-2 px-3 border-b border-gray-400 last:border-none"
+                  className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400 last:border-none"
                 >
                   Favorite
                 </li>
               </Link>
-              <li className="select-none cursor-pointer w-full py-2 px-3 border-b border-gray-400 last:border-none">
+              <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer w-full py-2 px-3 border-b border-gray-400 last:border-none">
                 {useInfo?.success ? (
                   <span onClick={handleLogoutClick}>Log out</span>
                 ) : (
@@ -140,59 +137,23 @@ const MenuModal = ({
           </motion.h3>
         </Link>
 
-        {/* <NavLink
-          to={{
-            pathname: "/movie",
-            state: { page: 1 },
-          }}
-        >
-          <motion.h3
-            variants={childVariant}
-            onClick={() => {
-              dispatch(isOpenSidebar(false));
-              setIsMenuOpen(false);
-            }}
-            className=" py-2 px-4 w-[10rem] text-center rounded-md text-lg font-semibold transition duration-300"
-          >
-            Movies
-          </motion.h3>
-        </NavLink> */}
         <motion.span
           variants={childVariant}
           onClick={(e) => {
             e.stopPropagation();
           }}
         >
-          <MovieModal handleLinkClick={handleLinkClick}/>
+          <MovieModal handleLinkClick={handleLinkClick} />
         </motion.span>
 
-        {/* <NavLink
-          to={{
-            pathname: "/tv",
-            state: { page: 1 },
-          }}
-        >
-          <motion.h3
-            variants={childVariant}
-            onClick={() => {
-              dispatch(isOpenSidebar(false));
-              setIsMenuOpen(false);
-            }}
-            className=" py-2 px-4 w-[10rem] text-center rounded-md text-lg font-semibold transition duration-300"
-          >
-            Tv series
-          </motion.h3>
-        </NavLink> */}
         <motion.span
           variants={childVariant}
           onClick={(e) => {
             e.stopPropagation();
           }}
         >
-          <TvModal handleLinkClick={handleLinkClick}/>
+          <TvModal handleLinkClick={handleLinkClick} />
         </motion.span>
-
-        {/* <Genres /> */}
       </motion.div>
     </div>
   );
