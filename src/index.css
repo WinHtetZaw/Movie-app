@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Patua+One);
+@import url("https://fonts.googleapis.com/css?family=Patua+One");
+@import url("https://fonts.googleapis.com/css2?family=Barriecito&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -10,6 +11,7 @@
 /* #ff6a3d orange  */
 /* #533439 brown use in border orange  */
 /* #3da2f1 blue  */
+/* #34495e dark soft-2 */
 
 html,
 body {
@@ -18,28 +20,10 @@ body {
   letter-spacing: 1px;
   /* overflow-x: hidden; */
   min-height: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+  /* width: 100vw; */
   padding: 0;
-}
-
-.mantine-pagination-item {
-  color: red; /* Replace with your desired text color */
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #f5f5f5;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #555;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -54,17 +38,25 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.active {
-  color: red;
-  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228dff,
-    0 0 35px #228dff, 0 0 40px #228dff;
-}
-
 @layer utilities {
   .font-1 {
     font-family: "Patua One", cursive;
   }
+  .font-2 {
+    font-family: "Barriecito", cursive;
+  }
+  .text-gradient-1 {
+    background: #2B80FF;
+background: -webkit-linear-gradient(to right, #2B80FF 0%, #FF2BB8 100%);
+background: -moz-linear-gradient(to right, #2B80FF 0%, #FF2BB8 100%);
+background: linear-gradient(to right, #2B80FF 0%, #FF2BB8 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 
+  }
+  .skeleton {
+    @apply bg-[#a4a7ab] animate-pulse;
+  }
   .bg-dark-1 {
     background-image: linear-gradient(
         116deg,
@@ -442,7 +434,7 @@ input[type="number"] {
       rgba(255, 255, 255, 0.32) 0px 2px 16px 0px;
   }
 
-  .popularAtHome::-webkit-scrollbar {
+  /* .popularAtHome::-webkit-scrollbar {
     width: 7px;
     height: 7px;
   }
@@ -458,7 +450,7 @@ input[type="number"] {
   }
   .popularAtHome::-webkit-scrollbar-thumb:hover {
     background-color: #888;
-  }
+  } */
 
   .menu {
     background-color: transparent;
@@ -604,17 +596,36 @@ input[type="number"] {
 }
 
 @layer components {
+  .click-animation {
+    @apply active:scale-95 transition duration-200;
+  }
   .bdr-orange {
     @apply border-[#ff6a3d];
   }
   .bdr-brown {
-    @apply border-[#533439]
+    @apply border-[#533439];
+  }
+  .btn-1 {
+    @apply py-1 px-3 border w-[7rem] border-[#cccccc] text-[#cccccc] select-none cursor-pointer;
   }
   .text-orange {
     @apply text-[#ff6a3d];
   }
   .bg-orange {
-    @apply bg-[#ff6a3d]
+    @apply bg-[#ff6a3d];
+  }
+  .bg-gradient {
+    /* @apply bg-gradient-to-br from-[#0f0f0f] to-[#303030]; */
+    @apply bg-[#34495e];
+  }
+  .paginate-btn {
+    @apply overflow-hidden relative justify-center w-10 h-8 active:scale-90 bg-transparent disabled:opacity-50 flex items-center border-b-2 border-slate-50 text-slate-50 py-2 cursor-pointer transition duration-300;
+  }
+  .bg-img {
+    @apply bg-[url(https://images.pexels.com/photos/2781760/pexels-photo-2781760.jpeg?auto=compress&cs=tinysrgb&w=400)] bg-no-repeat bg-cover bg-opacity-50;
+  }
+  .grid-1 {
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-10;
   }
 }
 .splide__pagination {
@@ -635,6 +646,24 @@ input[type="number"] {
 .splide__track {
   width: 100%;
   height: 100%;
+}
+
+/* splide__arrow splide__arrow--prev */
+.splide__arrow {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  height: 50px;
+  width: 25px;
+}
+.splide__arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.splide__arrow svg {
+  fill: #cccccc;
+}
+
+.splide__arrow--prev {
 }
 
 /* Sweep To Left */

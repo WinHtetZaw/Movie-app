@@ -29,7 +29,7 @@ const MovieModal = ({ handleLinkClick }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className={` font-1 origin-top absolute bg-glass-1 -right-[4rem]  z-10 py-3 px-2 mt-2 w-44 text-slate-800 rounded-md shadow-lg ring-1 ring-[#fffde4] ring-opacity-50  focus:outline-none`}
+            className={` font-1 origin-top absolute bg-glass-1 -right-[4rem]  z-10 py-3 px-2 mt-2 w-44 text-slate-800 rounded-md shadow-lg ring-1 ring-[#cccccc] ring-opacity-50  focus:outline-none`}
           >
             <Link to={"/movie/popular"}>
               <li

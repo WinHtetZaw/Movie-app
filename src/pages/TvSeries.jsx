@@ -9,6 +9,7 @@ import PrevBtn from "../components/pagination.jsx/PrevBtn";
 import NextBtn from "../components/pagination.jsx/NextBtn";
 import EndBtn from "../components/pagination.jsx/EndBtn";
 import OrangeBtn from "../components/buttons/OrangeBtn";
+import NotMatch from "../components/NotMatch";
 
 const TvSeries = () => {
   // * hooks
@@ -176,14 +177,10 @@ const TvSeries = () => {
           {/* tv series lists show  */}
           {filterLists?.length == 0 && activeGenreIds?.length > 0 ? (
             <div className=" tracking-wider flex flex-col gap-3 py-5 items-center h-[50vh] text-lg font-1 text-slate-200">
-              <h3>No movie found</h3>
-              <p>Go to another page</p>
-              <p>OR</p>
-              <p>Remove some genres</p>
-              <OrangeBtn />
+              <NotMatch/>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">
+            <div className="grid-1">
               {looping}
             </div>
           )}

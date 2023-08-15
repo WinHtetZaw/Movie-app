@@ -2,12 +2,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useGetMovieDetailQuery } from "../redux/services/movieListApi";
 import { RingProgress } from "@mantine/core";
 import PageLoading from "../components/PageLoading";
-import {MdArrowBackIos} from "react-icons/md"
+import { MdArrowBackIos } from "react-icons/md";
+import BackBtn from "../components/BackBtn";
 
 const MovieDetail = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetMovieDetailQuery(id);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   // console.log(data);
 
   // * variables define
@@ -24,12 +25,10 @@ const MovieDetail = () => {
               `url(https://image.tmdb.org/t/p/original${data?.backdrop_path})` ??
               `url(https://getuikit.com/v2/docs/images/placeholder_600x400.svg)`,
           }}
-        className=" min-h-screen max-h-full bg-fixed bg-cover bg-center bg-no-repeat"
+          className=" min-h-screen max-h-full bg-fixed bg-cover bg-center bg-no-repeat"
         >
-          <button onClick={()=>navigate(-1)} className=" absolute top-[100px] left-5">
-            <MdArrowBackIos className=" text-3xl text-[#fffde4]"/>
-          </button>
-          <div className=" min-h-screen pt-[120px] md:pt-[160px] pb-16 flex flex-col md:flex-row  bg-opacity-80  bg-[#25262b] ">
+          <BackBtn />
+          <div className=" min-h-screen pt-[150px] md:pt-[160px] pb-16 flex flex-col md:flex-row  bg-opacity-80  bg-[#25262b] ">
             {/* left  */}
             <div className=" w-[200px] md:w-4/12 rounded-lg overflow-hidden p-5">
               <img
@@ -93,7 +92,6 @@ const MovieDetail = () => {
               </div>
             </div>
           </div>
-          
         </div>
       )}
     </>

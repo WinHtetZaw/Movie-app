@@ -56,9 +56,9 @@ const GenreSidebar = () => {
         onClick={handleGenreSidebarClick}
         className={`${
           isDetail ? "hidden" : "block"
-        } z-40 active:scale-90 fixed top-[100px] left-5 opacity-50 hover:opacity-80 border border-[#fffde4] rounded-full p-3 w-fit`}
+        } z-40 active:scale-90 fixed top-[100px] left-5 opacity-50 hover:opacity-80 border border-[#ccc] rounded-full p-3 w-fit`}
       >
-        <FaArrowAltCircleRight className=" text-[#fffde4]" />
+        <FaArrowAltCircleRight className=" text-[#ccc]" />
       </div>
 
       <AnimatePresence>
@@ -79,7 +79,7 @@ const GenreSidebar = () => {
                 x: "-100vw",
                 transition: { duration: 0.4, ease: "easeIn" },
               }}
-              className=" fixed overflow-y-scroll z-50 left-0 top-0 pt-[120px] h-screen sm:w-[200px] md:w-[300px] w-[70vw] bg-[#25262b]"
+              className="text-[#ccc] fixed overflow-y-scroll scroll-hidden z-50 left-0 top-0 bg-opacity-90 backdrop-blur-sm pt-[120px] h-screen sm:w-[200px] md:w-[300px] w-[70vw] bg-[#25262b]"
             >
               {/* close btn  */}
               <svg
@@ -106,18 +106,18 @@ const GenreSidebar = () => {
               <div className=" border-t-2 border-opacity-30 pt-10 mt-5 border-white text-2xl mb-5 text-center font-serif font-bold text-gray-300">
                 <h3>Genres</h3>
               </div>
-              <RxCrossCircled
+              {/* <RxCrossCircled
                 onClick={() => handleGenreClick(0)}
-                className=" mb-3 ml-2 active:scale-90 text-2xl text-[#3da2f1]"
-              />
+                className=" mb-3 ml-2 active:scale-90 text-2xl text-[#ccc]"
+              /> */}
 
-              <ul className=" text-slate-200 flex flex-wrap gap-3 text-sm px-2 pb-10">
-                {/* <li
+              {/* <div
                 onClick={() => handleGenreClick(0)}
-                className=" border w-fit transition duration-300 rounded-full px-2 py-1 select-none cursor-pointer"
+                className="text-sm mb-3 mx-2 border w-fit transition duration-300 rounded-full px-2 py-1 select-none cursor-pointer"
               >
-                Show All
-              </li> */}
+                Clear Filters
+              </div> */}
+              <ul className=" flex flex-wrap gap-3 text-sm px-2 pb-10">
                 {genres?.map((genre, index) => (
                   <li
                     onClick={() => handleGenreClick(genre.id)}

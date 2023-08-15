@@ -28,40 +28,43 @@ import TvSearch from "./pages/TvSearch";
 import TvOnTheAir from "./pages/TvOnTheAir";
 import TvAiringToday from "./pages/TvAiringToday";
 import TvTopRated from "./pages/TvTopRated";
+import "./App.css"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<RootLayout />} errorElement={<NotFound />}>
-      <Route index element={<Dashboard />} />
+    <>
+      <Route path="/" element={<RootLayout />} errorElement={<NotFound />}>
+        <Route index element={<Dashboard />} />
 
-      <Route path="tv" element={<TvLayout />}>
-        <Route path="popular" element={<TvSeries />} />
-        <Route path="airing-today" element={<TvAiringToday />} />
-        <Route path="on-the-air" element={<TvOnTheAir />} />
-        <Route path="top-rated" element={<TvTopRated />} />
-        <Route path="detail/:id" element={<TvDetail />} />
-        <Route path="search" element={<TvSearch />} />
+        <Route path="tv" element={<TvLayout />}>
+          <Route path="popular" element={<TvSeries />} />
+          <Route path="airing-today" element={<TvAiringToday />} />
+          <Route path="on-the-air" element={<TvOnTheAir />} />
+          <Route path="top-rated" element={<TvTopRated />} />
+          <Route path="detail/:id" element={<TvDetail />} />
+          <Route path="search" element={<TvSearch />} />
+        </Route>
+
+        <Route path="movie" element={<MovieLayout />}>
+          <Route path="popular" element={<Movies />} />
+          <Route path="now-playing" element={<NowPlayingMovies />} />
+          <Route path="upcoming" element={<UpcomingMovies />} />
+          <Route path="top-rated" element={<TopRatedMovies />} />
+          <Route path="search" element={<MovieSearch />} />
+          <Route path="detail/:id" element={<MovieDetail />} />
+        </Route>
+
+        <Route path="search" element={<SearchLayout />}>
+          <Route index element={<SearchPage />} />
+          <Route path="movie" />
+          <Route path="tv" />
+        </Route>
+
+        <Route path="favorite" element={<Favorite />} />
       </Route>
-
-      <Route path="movie" element={<MovieLayout />}>
-        <Route path="popular" element={<Movies />} />
-        <Route path="now-playing" element={<NowPlayingMovies />} />
-        <Route path="upcoming" element={<UpcomingMovies />} />
-        <Route path="top-rated" element={<TopRatedMovies />} />
-        <Route path="search" element={<MovieSearch />} />
-        <Route path="detail/:id" element={<MovieDetail />} />
-      </Route>
-
-      <Route path="search" element={<SearchLayout />}>
-        <Route index element={<SearchPage />} />
-        <Route path="movie" />
-        <Route path="tv" />
-      </Route>
-
-      <Route path="sign-up" element={<AccSignup />} />
-      <Route path="sign-in" element={<AccSignin />} />
-      <Route path="favorite" element={<Favorite />} />
-    </Route>
+      <Route path="/sign-up" element={<AccSignup />} />
+      <Route path="/sign-in" element={<AccSignin />} />
+    </>
   )
 );
 

@@ -1,14 +1,13 @@
 import { useGetTvDetailQuery } from "../redux/services/tvSeriesApi";
 import { RingProgress } from "@mantine/core";
 import PageLoading from "../components/PageLoading";
-import { MdArrowBackIos } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
+import BackBtn from "../components/BackBtn";
 
 const TvDetail = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetTvDetailQuery(id);
   const navigate = useNavigate();
-  // console.log("movie detail ----", data);
 
   // * variables define
   const percentage = data?.vote_average.toFixed(1) * 10;
@@ -25,12 +24,7 @@ const TvDetail = () => {
           }}
           className=" min-h-screen max-h-full bg-fixed bg-cover bg-center bg-no-repeat"
         >
-          <button
-            onClick={() => navigate(-1)}
-            className=" absolute top-[100px] left-5"
-          >
-            <MdArrowBackIos className=" text-3xl text-[#fffde4]" />
-          </button>
+          <BackBtn />
           <div className=" min-h-screen pt-[120px] md:pt-[160px] pb-16 flex flex-col md:flex-row  bg-opacity-80  bg-[#25262b] ">
             {/* left  */}
             <div className=" w-[200px] md:w-4/12 rounded-lg overflow-hidden p-5">
@@ -47,33 +41,33 @@ const TvDetail = () => {
                   {data?.name}
                 </h1>
 
-                 {/* genre tags  */}
-              <div className=" flex flex-wrap items-center gap-2 py-2">
-                {data?.genres?.map((genre) => (
-                  <div
-                    className="hvr-radial-in text-sm flex items-center justify-center py-1 px-2 min-w-[6rem] rounded-sm bg-gradient-to-r from-[#005C97] to-[#1CB5E0] text-slate-800"
-                    key={genre.id}
-                  >
-                    #{genre.name}
-                  </div>
-                ))}
-              </div>
+                {/* genre tags  */}
+                <div className=" flex flex-wrap items-center gap-2 py-2">
+                  {data?.genres?.map((genre) => (
+                    <div
+                      className="hvr-radial-in text-sm flex items-center justify-center py-1 px-2 min-w-[6rem] rounded-sm bg-gradient-to-r from-[#005C97] to-[#1CB5E0] text-slate-800"
+                      key={genre.id}
+                    >
+                      #{genre.name}
+                    </div>
+                  ))}
+                </div>
 
                 {/* volt  */}
                 <div className=" my-2 w-[50px] h-[50px] bg-[#1a1b1e] rounded-full">
-                <RingProgress
-                  rootColor="#1a1b1e"
-                  size={50}
-                  thickness={4}
-                  roundCaps
-                  sections={[{ value: percentage, color: "#0084C7" }]}
-                  label={
-                    <div className=" text-sky-600 text-sm text-center">
-                      {percentage}%
-                    </div>
-                  }
-                />
-              </div>
+                  <RingProgress
+                    rootColor="#1a1b1e"
+                    size={50}
+                    thickness={4}
+                    roundCaps
+                    sections={[{ value: percentage, color: "#0084C7" }]}
+                    label={
+                      <div className=" text-sky-600 text-sm text-center">
+                        {percentage}%
+                      </div>
+                    }
+                  />
+                </div>
 
                 <div className=" ">
                   <span className="opacity-90 ">{data?.status}</span>
@@ -89,8 +83,7 @@ const TvDetail = () => {
               <div className=" font-sans italic text-slate-200 text-sm py-2">
                 {data?.tagline}
               </div>
-             
-            
+
               {/* Overview */}
               <div
                 className={` ${

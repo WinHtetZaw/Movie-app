@@ -164,7 +164,7 @@ const TvSearch = () => {
       </div>
 
       {/*  lists show  */}
-      <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-3 gap-y-5 min-[500px]:gap-y-10 sm:gap-7">
+      <div className="grid-1">
         {looping}
       </div>
 

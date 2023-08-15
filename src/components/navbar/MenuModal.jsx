@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { BsPersonCircle } from "react-icons/bs";
+import { BsPerson } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { isOpenSidebar } from "../../redux/features/sidebarSlice";
@@ -63,10 +63,10 @@ const MenuModal = ({
         }}
         className={` relative w-16 p-2 ${
           !isShrink ? "text-[#2f274d]" : "text-[#005C97]"
-        }  border border-white border-opacity-40 cursor-pointer rounded-full mb-5`}
+        }  w-10 p-3 border border-[#cccccc] rounded-full cursor-pointer mb-5`}
       >
         {/* profile icon  */}
-        <BsPersonCircle className=" w-full h-full shadow-1 rounded-full" />
+        <BsPerson className=" w-full h-full text-[#cccccc] shadow-1 rounded-full" />
 
         {/* profile dropdown area  */}
         <AnimatePresence>
@@ -127,7 +127,7 @@ const MenuModal = ({
         animate="show"
         className=" flex items-center justify-center flex-col text-slate-200"
       >
-        <Link to={"/"}>
+        {/* <Link to={"/"}>
           <motion.h3
             variants={childVariant}
             onClick={() => handleLinkClick()}
@@ -135,7 +135,7 @@ const MenuModal = ({
           >
             Home
           </motion.h3>
-        </Link>
+        </Link> */}
 
         <motion.span
           variants={childVariant}

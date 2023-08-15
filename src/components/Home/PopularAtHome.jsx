@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { useGetPopularMoviesQuery } from "../../redux/services/movieListApi";
 import { useGetPopularTvSeriesQuery } from "../../redux/services/tvSeriesApi";
 import SliderCarousel from "../SliderCarousel";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import "@lottiefiles/lottie-player";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import HomeSlide from "./HomeSlide";
+import HomeLoading from "./HomeLoading";
 
 const PopularAtHome = () => {
   // * data fetching
@@ -12,8 +15,10 @@ const PopularAtHome = () => {
 
   // * hooks
   const [isMovie, setIsMovie] = useState(true);
+  const [isOpened, setIsOpened] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [imgUrl, setImgUrl] = useState("");
+  const [hoverObj, setHoverObj] = useState({});
 
   // * get  popular movie lists from data fetching
   const popularMovieLists = popularMovieListsData?.results;
@@ -50,6 +55,11 @@ const PopularAtHome = () => {
   const textVariant = {
     hidden: { y: 10 },
     show: { y: 0, transition: { duration: 0.5 } },
+  };
+
+  const choiceVariant = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { duration: 0.2, ease: "easeIn" } },
   };
 
   // * looping movie lists
@@ -116,7 +126,8 @@ const PopularAtHome = () => {
           {popularTvSeriesList.name}
         </motion.h2>
         <motion.p variants={textVariant} className=" text-slate-400">
-          {popularTvSeriesList.release_date ?? popularTvSeriesList.first_air_date}
+          {popularTvSeriesList.release_date ??
+            popularTvSeriesList.first_air_date}
         </motion.p>
       </div>
     )
@@ -125,14 +136,8 @@ const PopularAtHome = () => {
   return (
     <>
       {isLoading || !popularMovieLists ? (
-        <div className=" w-[100px] md:w-[150px] mx-auto">
-          <lottie-player
-            autoplay
-            loop
-            mode="normal"
-            src="https://assets3.lottiefiles.com/packages/lf20_a2chheio.json"
-            style={{ width: "100%" }}
-          ></lottie-player>
+        <div className="mt-[80px] p-5 w-full">
+          <HomeLoading />
         </div>
       ) : (
         <motion.div
@@ -147,54 +152,71 @@ const PopularAtHome = () => {
                     "linear-gradient(\n        116deg,\n        rgba(232, 232, 232, 0.03) 0%,\n        rgba(232, 232, 232, 0.03) 10%,\n        rgba(14, 14, 14, 0.03) 10%,\n        rgba(14, 14, 14, 0.03) 66%,\n        rgba(232, 232, 232, 0.03) 66%,\n        rgba(232, 232, 232, 0.03) 72%,\n        rgba(44, 44, 44, 0.03) 72%,\n        rgba(44, 44, 44, 0.03) 81%,\n        rgba(51, 51, 51, 0.03) 81%,\n        rgba(51, 51, 51, 0.03) 100%\n      ),\n      linear-gradient(\n        109deg,\n        rgba(155, 155, 155, 0.03) 0%,\n        rgba(155, 155, 155, 0.03) 23%,\n        rgba(30, 30, 30, 0.03) 23%,\n        rgba(30, 30, 30, 0.03) 63%,\n        rgba(124, 124, 124, 0.03) 63%,\n        rgba(124, 124, 124, 0.03) 73%,\n        rgba(195, 195, 195, 0.03) 73%,\n        rgba(195, 195, 195, 0.03) 84%,\n        rgba(187, 187, 187, 0.03) 84%,\n        rgba(187, 187, 187, 0.03) 100%\n      ),\n      linear-gradient(\n        79deg,\n        rgba(254, 254, 254, 0.03) 0%,\n        rgba(254, 254, 254, 0.03) 27%,\n        rgba(180, 180, 180, 0.03) 27%,\n        rgba(180, 180, 180, 0.03) 33%,\n        rgba(167, 167, 167, 0.03) 33%,\n        rgba(167, 167, 167, 0.03) 34%,\n        rgba(68, 68, 68, 0.03) 34%,\n        rgba(68, 68, 68, 0.03) 63%,\n        rgba(171, 171, 171, 0.03) 63%,\n        rgba(171, 171, 171, 0.03) 100%\n      ),\n      linear-gradient(\n        109deg,\n        rgba(71, 71, 71, 0.03) 0%,\n        rgba(71, 71, 71, 0.03) 3%,\n        rgba(97, 97, 97, 0.03) 3%,\n        rgba(97, 97, 97, 0.03) 40%,\n        rgba(40, 40, 40, 0.03) 40%,\n        rgba(40, 40, 40, 0.03) 55%,\n        rgba(5, 5, 5, 0.03) 55%,\n        rgba(5, 5, 5, 0.03) 73%,\n        rgba(242, 242, 242, 0.03) 73%,\n        rgba(242, 242, 242, 0.03) 100%\n      ),\n      linear-gradient(\n        271deg,\n        rgba(70, 70, 70, 0.03) 0%,\n        rgba(70, 70, 70, 0.03) 11%,\n        rgba(178, 178, 178, 0.03) 11%,\n        rgba(178, 178, 178, 0.03) 23%,\n        rgba(28, 28, 28, 0.03) 23%,\n        rgba(28, 28, 28, 0.03) 72%,\n        rgba(152, 152, 152, 0.03) 72%,\n        rgba(152, 152, 152, 0.03) 86%,\n        rgba(43, 43, 43, 0.03) 86%,\n        rgba(43, 43, 43, 0.03) 100%\n      ),\n      linear-gradient(90deg, rgb(27, 27, 27), rgb(1, 1, 1))",
                 }
           }
-          className={` transition-all duration-300 filter bg-no-repeat bg-cover bg-center`}
+          className={`relative min-h-[110vh] transition-all duration-300 filter bg-no-repeat bg-cover bg-center`}
         >
-          <div className=" bg-black bg-opacity-40 px-3 md:px-7 py-10">
-            <div>
-              <div className=" flex gap-2 sm:gap-5 items-center text-xl font-semibold mb-5">
-                <h2 className=" font-serif text-lg sm:text-xl whitespace-nowrap">
-                  Popular :{" "}
-                </h2>
-                <button
-                  onClick={() => setIsMovie(true)}
-                  className={`hvr-radial-in active:scale-90 font-sans text-gray-800 relative w-[7rem] flex items-center  py-2 text-sm rounded cursor-pointer transition duration-300 `}
-                >
-                  <span
-                    className={`${
-                      !isMovie ? " opacity-0" : "opacity-100"
-                    } w-3 h-3 bg-[#E0AB18] rounded-full transition duration-300 absolute top-0 bottom-0 my-auto left-3`}
-                  ></span>
-                  <span className=" w-full h-full text-center">Movie</span>
-                </button>
+          <div className=" min-h-[110vh] h-full pt-[80px] flex flex-col justify-between bg-black bg-opacity-40 text-[#cccccc] px-3 md:px-7 py-10">
+            <HomeSlide hoverObj={hoverObj} />
 
+            <section>
+              <div className=" flex gap-2 items-center mb-5">
+                <h2>Popular :</h2>
+
+                {/* movie or tv option   */}
                 <button
-                  onClick={() => setIsMovie(false)}
-                  className={`hvr-radial-in active:scale-90 font-sans text-gray-800 relative w-[8rem]  py-2 text-sm rounded cursor-pointer transition duration-300 `}
+                  className="relative w-fit h-[40px]"
+                  onMouseOver={() => setIsOpened(true)}
+                  onMouseLeave={() => setIsOpened(false)}
                 >
-                  <span
-                    className={`${
-                      isMovie ? " opacity-0" : "opacity-100"
-                    } w-3 h-3 bg-[#E0AB18] rounded-full transition duration-300 absolute top-0 bottom-0 my-auto left-3`}
-                  ></span>
-                  <span className="w-full h-full text-center">Tv series</span>
+                  <div className="flex items-center gap-1 w-[7rem]">
+                    <span className=" select-none cursor-pointer">
+                      {isMovie ? "Movie" : "Tv Series"}
+                    </span>
+                    <MdOutlineKeyboardArrowDown
+                      className={`${
+                        isOpened && "-rotate-180"
+                      } text-xl transition duration-150 mt-1`}
+                    />
+                  </div>
+                  {/* drop area  */}
+                  <AnimatePresence>
+                    {isOpened && (
+                      <motion.div
+                        variants={choiceVariant}
+                        exit={{
+                          opacity: 0,
+                          transition: { duration: 0.2, ease: "easeOut" },
+                        }}
+                        className="font-1 origin-top absolute bg-glass-1 -right-[4rem]  z-10 py-3 px-2 mt-2 w-44 text-slate-800 rounded shadow-lg ring-1 ring-[#cccccc] ring-opacity-50  focus:outline-none"
+                      >
+                        <p
+                          onClick={() => setIsMovie(true)}
+                          className="hover:bg-black text-start hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400"
+                        >
+                          Movie
+                        </p>
+                        <p
+                          onClick={() => setIsMovie(false)}
+                          className="hover:bg-black text-start hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3"
+                        >
+                          Tv series
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </button>
               </div>
-            </div>
-            {windowWidth > 640 ? (
-              <div className=" popularAtHome overflow-x-scroll flex gap-7 pb-5">
-                {isMovie && popularMovieListsLooping}
-                {!isMovie && popularTvSeriesListsLooping}
-              </div>
-            ) : (
+
+              {/* slider  */}
               <div>
                 <SliderCarousel
+                  setHoverObj={setHoverObj}
                   setImgUrl={setImgUrl}
                   movieLists={popularMovieLists}
                   tvSeriesLists={popularTvSeriesLists}
                   isMovie={isMovie}
                 />
               </div>
-            )}
+            </section>
           </div>
         </motion.div>
       )}

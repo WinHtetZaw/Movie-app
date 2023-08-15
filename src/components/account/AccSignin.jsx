@@ -37,12 +37,12 @@ const AccSignin = () => {
 
   return (
     <>
-      <section className="min-h-screen flex items-stretch text-white ">
+      <section className="min-h-screen relative flex items-stretch text-white ">
         <div
           className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center"
           style={{
             backgroundImage:
-              "url(https://images.pexels.com/photos/2781760/pexels-photo-2781760.jpeg?auto=compress&cs=tinysrgb&w=400)",
+              "url(https://images.unsplash.com/photo-1616469829941-c7200edec809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Njh8fG1vdmllc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60)",
           }}
         >
           <div className="absolute bg-black opacity-60 inset-0 z-0" />
@@ -98,7 +98,7 @@ const AccSignin = () => {
             className="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center"
             style={{
               backgroundImage:
-                "url(https://images.pexels.com/photos/2781760/pexels-photo-2781760.jpeg?auto=compress&cs=tinysrgb&w=400)",
+                "url(https://images.unsplash.com/photo-1616469829941-c7200edec809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Njh8fG1vdmllc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60)",
             }}
           >
             <div className="absolute bg-black opacity-60 inset-0 z-0" />
@@ -175,7 +175,7 @@ const AccSignin = () => {
               <div className="px-4 pb-2 pt-4">
                 <button
                   type="submit"
-                  className="uppercase block w-full p-3 text-lg rounded-full bg-dark-5 focus:outline-none"
+                  className="uppercase block py-2 px-4 w-[150px] mx-auto click-animation opacity-70 hover:opacity-100 rounded-full border-[1.5px] bg-opacity-70 focus:outline-none"
                 >
                   sign in
                 </button>

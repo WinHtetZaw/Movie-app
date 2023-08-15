@@ -23,12 +23,12 @@ const AccSignup = () => {
   };
   return (
     <>
-      <section className="min-h-screen flex items-stretch text-white ">
+      <section className="min-h-screen relative flex items-stretch text-white ">
         <div
-          className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center"
+          className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover bg-center relative items-center"
           style={{
             backgroundImage:
-              "url(https://images.pexels.com/photos/2781760/pexels-photo-2781760.jpeg?auto=compress&cs=tinysrgb&w=400)",
+              "url(https://images.unsplash.com/photo-1616469829941-c7200edec809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Njh8fG1vdmllc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60)",
           }}
         >
           <div className="absolute bg-black opacity-60 inset-0 z-0" />
@@ -77,14 +77,14 @@ const AccSignup = () => {
           </div>
         </div>
         <div
-          className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0"
+          className="lg:w-1/2 h-full w-full flex items-center justify-center text-center md:px-16 px-0 z-0"
           style={{ backgroundColor: "#161616" }}
         >
           <div
-            className="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center"
+            className="absolute lg:hidden h-full z-10 inset-0 bg-gray-500 bg-no-repeat bg-center bg-cover items-center"
             style={{
               backgroundImage:
-                "url(https://images.pexels.com/photos/2781760/pexels-photo-2781760.jpeg?auto=compress&cs=tinysrgb&w=400)",
+                "url(https://images.unsplash.com/photo-1616469829941-c7200edec809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Njh8fG1vdmllc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60)",
             }}
           >
             <div className="absolute bg-black opacity-60 inset-0 z-0" />
@@ -139,7 +139,7 @@ const AccSignup = () => {
                 )}
               </div>
 
-              {/* passwordd  */}
+              {/* password  */}
               <div className="pb-2 pt-4 text-start">
                 <input
                   {...register("password", { required: true, minLength: 6 })}
@@ -159,7 +159,7 @@ const AccSignup = () => {
                 )}
               </div>
 
-              {/* password comfirm  */}
+              {/* password confirm  */}
               <div className="pb-2 pt-4 text-start">
                 <input
                   {...register("confirmPassword", {
@@ -184,7 +184,7 @@ const AccSignup = () => {
                   )}
               </div>
 
-              <div className=" text-start ">
+              <div className=" text-start mb-3">
                 <p className="text-gray-400 hover:text-gray-100 w-fit">
                   Already have an account?
                 </p>
@@ -196,7 +196,7 @@ const AccSignup = () => {
               </div>
 
               {/* have an acc  */}
-              <p className="text-gray-400 hover:underline hover:text-gray-100 w-fit ml-auto">
+              <p className="text-gray-400 hover:underline hover:text-gray-100 w-fit ml-auto mb-3">
                 Forgot your password?
               </p>
 
@@ -204,7 +204,7 @@ const AccSignup = () => {
               <div className="px-4 pb-2 pt-4">
                 <button
                   type="submit"
-                  className="uppercase block w-full p-3 text-lg rounded-full bg-dark-5 bg-opacity-70 hover:bg-opacity-100 focus:outline-none"
+                  className="uppercase block py-2 px-4 w-[150px] mx-auto click-animation opacity-70 hover:opacity-100 rounded-full border-[1.5px] bg-opacity-70 focus:outline-none"
                 >
                   sign up
                 </button>

@@ -6,7 +6,7 @@ import { isOpenSidebar } from "../../redux/features/sidebarSlice";
 import InputSearch from "./InputSearch";
 import { AnimatePresence, motion } from "framer-motion";
 import { toggleShowNavbar } from "../../redux/features/generalSlice";
-import { BsPersonCircle } from "react-icons/bs";
+import { BsPerson } from "react-icons/bs";
 import { toast } from "react-hot-toast";
 import MenuModal from "./MenuModal";
 import MovieModal from "../modal-components/MovieModal";
@@ -28,7 +28,6 @@ const Navbar = () => {
   const { openSidebar } = useSelector((state) => state.sidebarSlice);
   const { showNavbar } = useSelector((state) => state.generalSlice);
   const dispatch = useDispatch();
-
 
   // * useEffects
   useEffect(() => {
@@ -86,14 +85,8 @@ const Navbar = () => {
   };
 
   const handleMouseLeave = () => {
-    // setTimeout(() => {
-      setIsProfileModelOpen(false);
-    // }, 300);
+    setIsProfileModelOpen(false);
   };
-
-  // console.log("location -----", location.pathname);
-  // useInfo && console.log("useInfo ---", useInfo);
-
 
   return (
     <>
@@ -107,14 +100,19 @@ const Navbar = () => {
               transition: { duration: 0.4, delay: 0.2, ease: "easeIn" },
             }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className=" bg-dark-5 z-[1000] h-[80px] fixed top-0 max-w-[1280px] w-full mx-auto"
+            className={`${
+              location.pathname === "/"
+                ? "bg-opacity-50 backdrop-blur-sm bg-black"
+                : "bg-gradient"
+            }  z-[1000] h-[80px] fixed top-0 max-w-[1280px] w-full mx-auto`}
           >
-            <div className=" font-sans w-full flex items-center z-50 h-full text-slate-200">
+            <div className=" font-sans w-full flex items-center z-50 h-full text-[#ccc]">
               {/* logo  */}
               <Link to={"/"}>
-                <h3 className=" ml-5 text-lg sm:text-2xl flex flex-col items-center justify-center text-slate-200 font-semibold font-serif">
-                  <span>Movie</span>
-                  <span>App</span>
+                <h3 className=" ml-5 text-lg sm:text-2xl flex items-center justify-center font-semibold font-serif">
+                  {/* <span>M</span>
+                  <span>A</span> */}
+                  <span className=" text-neon text-rose-500 uppercase font-2">movie</span>
                 </h3>
               </Link>
 
@@ -165,7 +163,6 @@ const Navbar = () => {
                 )}
 
                 <div className=" flex items-center gap-8">
-
                   {/* search  */}
                   <span className=" mr-16">
                     <InputSearch placeholderText={"Type to search"} />
@@ -176,18 +173,6 @@ const Navbar = () => {
                     className={` hidden h-14 md:flex items-center gap-5 md:mr-5`}
                   >
                     <div className=" flex flex-row items-center gap-5 h-full">
-                      <Link to={"/"}>
-                        <h3
-                          onClick={() => {
-                            dispatch(isOpenSidebar(false));
-                            setIsMenuOpen(false);
-                          }}
-                          className=" text-lg font-semibold transition duration-300"
-                        >
-                          Home
-                        </h3>
-                      </Link>
-
                       <h3
                         onClick={() => {
                           dispatch(isOpenSidebar(false));
@@ -205,39 +190,37 @@ const Navbar = () => {
                     <div
                       onMouseLeave={handleMouseLeave}
                       onMouseOver={() => setIsProfileModelOpen(true)}
-                      className={` relative w-16 p-2 ${
-                        !isShrink ? "text-[#2f274d]" : "text-[#005C97]"
-                      }  border border-white border-opacity-40 rounded-full mr-5`}
+                      className={` relative w-12 p-2 border border-[#cccccc] rounded-full mr-5`}
                     >
                       {/* profile icon  */}
-                      <BsPersonCircle className=" w-full h-full shadow-1 rounded-full" />
+                      <BsPerson className=" w-full h-full text-[#cccccc] shadow-1 rounded-full" />
 
                       {/* profile dropdown area  */}
                       <AnimatePresence>
-                      {isProfileModelOpen && (
-                        <motion.ul
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0.3 }}
-                          exit={{ opacity: 0 }}
-                          className={` font-1 absolute bg-glass-1 right-0 z-10 py-3 px-2 mt-2 w-44 text-slate-700 origin-top-right rounded-md shadow-lg ring-1 ring-[#fffde4] ring-opacity-50  focus:outline-none`}
-                        >
-                          <Link to={"/favorite"}>
-                            <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400 last:border-none">
-                              Favorite
+                        {isProfileModelOpen && (
+                          <motion.ul
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.3 }}
+                            exit={{ opacity: 0 }}
+                            className={` font-1 absolute bg-glass-1 right-0 z-10 py-3 px-2 mt-2 w-44 text-slate-700 origin-top-right rounded-md shadow-lg ring-1 ring-[#fffde4] ring-opacity-50  focus:outline-none`}
+                          >
+                            <Link to={"/favorite"}>
+                              <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400 last:border-none">
+                                Favorite
+                              </li>
+                            </Link>
+                            <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer w-full py-2 px-3 border-b border-gray-400 last:border-none">
+                              {useInfo?.success ? (
+                                <span onClick={handleLogoutClick}>Log out</span>
+                              ) : (
+                                <Link to={"/sign-in"}>
+                                  <span className="w-full block">Sing in</span>
+                                </Link>
+                              )}
                             </li>
-                          </Link>
-                          <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer w-full py-2 px-3 border-b border-gray-400 last:border-none">
-                            {useInfo?.success ? (
-                              <span onClick={handleLogoutClick}>Log out</span>
-                            ) : (
-                              <Link to={"/sign-in"}>
-                                <span className="w-full block">Sing in</span>
-                              </Link>
-                            )}
-                          </li>
-                        </motion.ul>
-                      )}
+                          </motion.ul>
+                        )}
                       </AnimatePresence>
                     </div>
                   </div>
