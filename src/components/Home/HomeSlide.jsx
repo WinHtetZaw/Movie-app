@@ -3,26 +3,26 @@ import { FaShare } from "react-icons/fa";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 
-const HomeSlide = ({ hoverObj }) => {
+const HomeSlide = ({ activeItem }) => {
   const navigate = useNavigate();
-  const isObjEmpty = Object.keys(hoverObj).length;
+  const isObjEmpty = Object.keys(activeItem).length;
   return (
     <>
       {isObjEmpty ? (
         <section>
           <h2 className="my-5 text-2xl font-bold">
-            {hoverObj.title ?? hoverObj.name}
+            {activeItem.title ?? activeItem.name}
           </h2>
 
           {/* rating  */}
           <div className="mb-2 flex items-center gap-1">
             <AiTwotoneStar className=" text-yellow-500" />
-            <p>{hoverObj.vote_average} / 10</p>
+            <p>{activeItem.vote_average} / 10</p>
           </div>
 
           {/* overview  */}
           <p className="mb-2 min-h-[80px] italic text-opacity-90 line-clamp-3">
-            {hoverObj.overview}
+            {activeItem.overview}
           </p>
 
           <div className="flex items-center gap-3 mb-5">

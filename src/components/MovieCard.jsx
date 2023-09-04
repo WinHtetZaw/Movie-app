@@ -75,7 +75,7 @@ const MovieCard = (props) => {
       >
         {/* <Link to={`/${isMovie ? "movie" : "tv"}/detail/${id}`}> */}
         <div
-          className="card"
+          className="card min-h-[100px] lg:min-h-[180px] aspect-[2/3]"
           onClick={(e) => {
             navigate(`/${isMovie ? "movie" : "tv"}/detail/${id}`);
           }}
@@ -94,13 +94,13 @@ const MovieCard = (props) => {
               alt=""
             />
           </div>
-          <div className="details w-full h-full text-[#cccccc] p-[6px] xs:p-[10px] md:p-[20px]">
+          <div className="details overflow-hidden w-full h-full text-[#cccccc] p-[6px] xs:p-[10px] md:p-[20px]">
             {/* title  */}
             <h3 className=" truncate py-1 xs:py-2 text-sm lg:text-xl xs:text-base w-[85%]">
               {title ?? name}
             </h3>
             {/* date  */}
-            <p className=" py-1 xs:py-2 text-sm xs:text-base w-full">
+            <p className=" whitespace-nowrap py-1 xs:py-2 text-sm xs:text-base w-full">
               {release_date ?? first_air_date}
             </p>
 
@@ -118,7 +118,7 @@ const MovieCard = (props) => {
               )}
             </button>
 
-            <div className=" flex items-center md:items-start lg:items-center md:flex-col lg:flex-row gap-3">
+            <div className=" flex overflow-hidden items-start flex-col gap-3">
               {/* volt progress  */}
               <div className=" py-5 md:pb-0 md:pt-5 lg:py-5 hidden xs:block">
                 <RingProgress

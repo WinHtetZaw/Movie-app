@@ -5,7 +5,7 @@ const MovieLayout = () => {
 
 
   return (
-    <div className=" min-h-screen max-w-[1280px] overflow-x-hidden">
+    <div className="relative min-h-screen max-w-[1280px] overflow-x-hidden">
       <GenreSidebar />
       <Outlet />
     </div>

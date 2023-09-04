@@ -102,7 +102,7 @@ const TvSearch = () => {
   };
 
   return (
-    <div className=" px-3 sm:px-5 pt-10 mt-[80px] min-[1281px]:px-0">
+    <div className="relative min-h-screen px-3 sm:px-5 pt-10 pb-20 mt-[80px] min-[1281px]:px-0">
       {/* pagination  */}
       <div className=" flex sm:justify-between gap-5 py-5 sm:py-7 flex-col-reverse sm:flex-row">
         <div className=" flex gap-3 justify-evenly items-center min-[400px]:justify-start">
@@ -168,7 +168,7 @@ const TvSearch = () => {
         {looping}
       </div>
 
-      <div className=" flex gap-5 my-10 justify-evenly items-center min-[400px]:justify-end">
+      <div className="absolute bottom-0 right-5 z-0 flex gap-5 my-10 justify-evenly items-center min-[400px]:justify-end">
         {/* start  */}
         <StartBtn
           pageNum={pageNum.current}

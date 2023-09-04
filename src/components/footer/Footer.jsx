@@ -14,7 +14,7 @@ const Footer = () => {
     return <></>;
   }
   return (
-    <div className=" flex items-center py-10 gap-5 flex-col w-full bg-[#34495e] text-white">
+    <div className=" flex items-center py-10 gap-5 flex-col w-full bg-[#25262b] text-white">
       <ul className=" flex gap-5 flex-wrap text-2xl">
         <li className=" hover:scale-110 text-slate-300 hover:text-white active:scale-90 cursor-pointer transition-all duration-300 ">
           <CiFacebook />
@@ -38,17 +38,18 @@ const Footer = () => {
             Home
           </li>
         </Link>
-        <li className=" select-none cursor-pointer text-slate-300 hover:text-white tracking-wider">
-          About
-        </li>
-        <li className=" select-none cursor-pointer text-slate-300 hover:text-white tracking-wider">
-          Service
-        </li>
+        <Link to={"/movie/popular"}>
+          <li className=" select-none cursor-pointer text-slate-300 hover:text-white tracking-wider">
+            Movie
+          </li>
+        </Link>
+        <Link to={"/tv/popular"}>
+          <li className=" select-none cursor-pointer text-slate-300 hover:text-white tracking-wider">
+            Tv-Series
+          </li>
+        </Link>
         <li className=" select-none cursor-pointer text-slate-300 hover:text-white tracking-wider">
           Help
-        </li>
-        <li className=" select-none cursor-pointer text-slate-300 hover:text-white tracking-wider">
-          Contact
         </li>
       </ul>
       <p className=" flex items-center text-sm sm:text-base">

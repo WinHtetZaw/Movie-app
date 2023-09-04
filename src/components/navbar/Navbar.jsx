@@ -103,7 +103,7 @@ const Navbar = () => {
             className={`${
               location.pathname === "/"
                 ? "bg-opacity-50 backdrop-blur-sm bg-black"
-                : "bg-gradient"
+                : "bg-[#25262b]"
             }  z-[1000] h-[80px] fixed top-0 max-w-[1280px] w-full mx-auto`}
           >
             <div className=" font-sans w-full flex items-center z-50 h-full text-[#ccc]">

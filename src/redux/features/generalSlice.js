@@ -5,6 +5,7 @@ const initialState = {
   showNavbar: true,
   scrollable: true,
   isImgLoading: true,
+  activeUrl: "",
 };
 
 export const generalSlice = createSlice({
@@ -23,6 +24,9 @@ export const generalSlice = createSlice({
     setIsImgLoading: (state, { payload }) => {
       state.isImgLoading = payload;
     },
+    setActiveUrl: (state, { payload }) => {
+      state.activeUrl = payload;
+    },
   },
 });
 
@@ -31,5 +35,6 @@ export const {
   setIsPageLoading,
   setScrollable,
   setIsImgLoading,
+  setActiveUrl,
 } = generalSlice.actions;
 export default generalSlice.reducer;

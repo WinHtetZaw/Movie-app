@@ -102,7 +102,7 @@ const SearchPage = () => {
   };
 
   return (
-    <div className=" px-3 sm:px-5 min-[1281px]:px-0">
+    <div className="relative min-h-screen px-3 sm:px-5 min-[1281px]:px-0">
       {/* pagination  */}
       <div className=" flex sm:justify-between gap-5 py-5 sm:py-7 flex-col-reverse sm:flex-row">
         <div className=" flex gap-3 justify-evenly items-center min-[400px]:justify-start">
@@ -168,7 +168,7 @@ const SearchPage = () => {
         {looping}
       </div>
 
-      <div className=" flex gap-5 my-10 justify-evenly items-center min-[400px]:justify-end">
+      <div className="absolute bottom-0 z-0 flex gap-5 my-10 justify-evenly items-center min-[400px]:justify-end">
         {/* start  */}
         <StartBtn
           pageNum={pageNum.current}

@@ -27,7 +27,9 @@ const MovieDetail = () => {
           }}
           className=" min-h-screen max-h-full bg-fixed bg-cover bg-center bg-no-repeat"
         >
-          <BackBtn />
+          <div className="absolute z-50 top-[100px] left-[20px]">
+            <BackBtn />
+          </div>
           <div className=" min-h-screen pt-[150px] md:pt-[160px] pb-16 flex flex-col md:flex-row  bg-opacity-80  bg-[#25262b] ">
             {/* left  */}
             <div className=" w-[200px] md:w-4/12 rounded-lg overflow-hidden p-5">

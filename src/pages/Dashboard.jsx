@@ -1,3 +1,4 @@
+import HomeFullSlide from "../components/Home/HomeFullSlide";
 import PopularAtHome from "../components/Home/PopularAtHome";
 import TrendingAtHome from "../components/Home/TrendingAtHome";
 
@@ -34,6 +35,9 @@ const Dashboard = () => {
         </div>
         <div className="">
           <TrendingAtHome />
+        </div> */}
+        {/* <div className="my-20">
+          <HomeFullSlide/>
         </div> */}
       </div>
     </>

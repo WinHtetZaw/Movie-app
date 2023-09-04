@@ -27,7 +27,7 @@ const Favorite = () => {
   return (
     <>
       <BackBtn />
-      {lists?.length == 0 ? (
+      {lists?.length == 0 || !lists ? (
         <div className=" w-full h-screen flex flex-col justify-center items-center">
           <div className=" w-[300px] font-1">
             <lottie-player

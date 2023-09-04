@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import BackBtn from "../BackBtn";
 
 const AccSignup = () => {
   const navigate = useNavigate();
@@ -24,6 +25,9 @@ const AccSignup = () => {
   return (
     <>
       <section className="min-h-screen relative flex items-stretch text-white ">
+        <div className="absolute z-50 top-[20px] left-[20px]">
+          <BackBtn />
+        </div>
         <div
           className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover bg-center relative items-center"
           style={{
@@ -146,6 +150,7 @@ const AccSignup = () => {
                   className="block w-full p-4 text-lg rounded-sm bg-black"
                   type="password"
                   placeholder="Password"
+                  autoComplete="off"
                 />
                 {errors.password && errors.password.type === "required" && (
                   <span className=" text-red-600">
@@ -168,6 +173,7 @@ const AccSignup = () => {
                   })}
                   className="block w-full p-4 text-lg rounded-sm bg-black"
                   type="password"
+                  autoComplete="off"
                   placeholder="Confirm Password"
                 />
                 {errors.confirmPassword &&

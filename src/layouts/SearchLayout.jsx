@@ -3,7 +3,7 @@ import GenreSidebar from "../components/GenreSidebar";
 
 const SearchLayout = () => {
   return (
-    <div className=" min-h-screen">
+    <div className="relative min-h-screen">
       <GenreSidebar/>
       <Outlet />
     </div>

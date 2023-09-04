@@ -56,7 +56,7 @@ const GenreSidebar = () => {
         onClick={handleGenreSidebarClick}
         className={`${
           isDetail ? "hidden" : "block"
-        } z-40 active:scale-90 fixed top-[100px] left-5 opacity-50 hover:opacity-80 border border-[#ccc] rounded-full p-3 w-fit`}
+        } z-40 active:scale-90 fixed top-[100px] ml-5 opacity-50 hover:opacity-80 border border-[#ccc] rounded-full p-3 w-fit`}
       >
         <FaArrowAltCircleRight className=" text-[#ccc]" />
       </div>
@@ -98,12 +98,12 @@ const GenreSidebar = () => {
                 />
               </svg>
 
-              <div className=" pb-5">
+              {/* <div className=" pb-10 border-b-2 border-opacity-30">
                 <InputSearch placeholderText={"Search"} />
-              </div>
+              </div> */}
 
               {/* content  */}
-              <div className=" border-t-2 border-opacity-30 pt-10 mt-5 border-white text-2xl mb-5 text-center font-serif font-bold text-gray-300">
+              <div className=" mt-5 border-white text-2xl mb-5 text-center font-serif font-bold text-gray-300">
                 <h3>Genres</h3>
               </div>
               {/* <RxCrossCircled

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, redirect, useNavigate } from "react-router-dom";
+import BackBtn from "../BackBtn";
 
 const AccSignin = () => {
   const [loginErr, setLoginErr] = useState(null);
@@ -38,6 +39,9 @@ const AccSignin = () => {
   return (
     <>
       <section className="min-h-screen relative flex items-stretch text-white ">
+        <div className="absolute z-50 top-[20px] left-[20px]">
+          <BackBtn />
+        </div>
         <div
           className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center"
           style={{
