@@ -47,13 +47,12 @@ input[type="number"] {
     font-family: "Barriecito", cursive;
   }
   .text-gradient-1 {
-    background: #2B80FF;
-background: -webkit-linear-gradient(to right, #2B80FF 0%, #FF2BB8 100%);
-background: -moz-linear-gradient(to right, #2B80FF 0%, #FF2BB8 100%);
-background: linear-gradient(to right, #2B80FF 0%, #FF2BB8 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-
+    background: #2b80ff;
+    background: -webkit-linear-gradient(to right, #2b80ff 0%, #ff2bb8 100%);
+    background: -moz-linear-gradient(to right, #2b80ff 0%, #ff2bb8 100%);
+    background: linear-gradient(to right, #2b80ff 0%, #ff2bb8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   .skeleton {
     @apply bg-[#a4a7ab] animate-pulse;
@@ -664,7 +663,8 @@ background: linear-gradient(to right, #2B80FF 0%, #FF2BB8 100%);
   fill: #cccccc;
 }
 
-.splide__arrow--prev {
+.splide__arrow--prev,.splide__arrow--next {
+  top: 40%;
 }
 
 /* Sweep To Left */

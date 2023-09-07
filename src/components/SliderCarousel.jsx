@@ -30,7 +30,7 @@ const SliderCarousel = ({
         className=" relative"
         options={{
           autoplay: true,
-          interval: 2000,
+          interval: 3000,
           gap: 20,
           arrows: true,
           perPage: 6,
@@ -43,7 +43,7 @@ const SliderCarousel = ({
               perPage: 3,
             },
             640: {
-              perPage: 4,
+              perPage: 3,
             },
           },
         }}

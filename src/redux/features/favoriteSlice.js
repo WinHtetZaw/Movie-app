@@ -1,10 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isFavorite : false,
+  isFavorite: false,
   movieLists: [],
   tvLists: [],
 };
+
+let favoriteLists;
+if (localStorage.getItem("theMovieDb-fav")) {
+  favoriteLists = JSON.parse(localStorage.getItem("theMovieDb-fav"));
+  initialState.movieLists = favoriteLists;
+}
 
 export const favoriteSlice = createSlice({
   name: "favoriteSlice",

@@ -31,14 +31,23 @@ const MovieCard = (props) => {
     first_air_date,
   } = props;
 
-  useEffect(() => {
-    dispatch(setIsImgLoading(true));
-  }, []);
-
   // movieLists.length > 0 && console.log("favorite -----", movieLists);
   const movieLocalLists = JSON.parse(localStorage.getItem("theMovieDb-fav"));
 
   const sameId = movieLocalLists?.find((el) => el.id === id);
+
+  useEffect(() => {
+    dispatch(setIsImgLoading(true));
+  }, []);
+
+  useEffect(() => {
+    if (sameId) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  }, [setIsFavorite, sameId]);
+
   // console.log("same ----", sameId);
 
   // * variables define

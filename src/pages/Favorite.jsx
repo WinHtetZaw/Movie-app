@@ -5,12 +5,25 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import "@lottiefiles/lottie-player";
 import BackBtn from "../components/BackBtn";
+import "./favorite.css";
+import FavoriteCard from "../components/FavoriteCard";
 
 const Favorite = () => {
   const { movieLists } = useSelector((state) => state.favoriteSlice);
   const [lists, setLists] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
+
+  let favoriteLists;
+  if (localStorage.getItem("theMovieDb-fav")) {
+    favoriteLists = JSON.parse(localStorage.getItem("theMovieDb-fav"));
+  }
+
+  useEffect(() => {
+    if (lists) {
+      setIsFavorite(true);
+    }
+  }, [isFavorite, lists]);
 
   useEffect(() => {
     const movieLocalLists = JSON.parse(localStorage.getItem("theMovieDb-fav"));
@@ -20,13 +33,18 @@ const Favorite = () => {
   //   movieLocalLists.length > 0 && console.log("favorite -----", movieLocalLists);
 
   // * looping movie lists
-  const looping = lists?.map((el) => (
-    <MovieCard {...el} key={el.id} isLoading={false} isMovie={true} />
+  const looping = lists?.map((el, index) => (
+    // <MovieCard {...el} key={el.id} isLoading={false} isMovie={true} />
+    <div className=" w-[]" key={index}>
+      <FavoriteCard el={el} setIsFavorite={setIsFavorite} />
+    </div>
   ));
 
   return (
     <>
-      <BackBtn />
+      <div className="absolute z-50 top-[100px] left-[20px]">
+        <BackBtn />
+      </div>
       {lists?.length == 0 || !lists ? (
         <div className=" w-full h-screen flex flex-col justify-center items-center">
           <div className=" w-[300px] font-1">
@@ -53,7 +71,9 @@ const Favorite = () => {
         </div>
       ) : (
         <>
-          <div className="grid-1 pt-[200px] pb-10">{looping}</div>
+          <div className="flex flex-wrap justify-center pt-[200px] pb-10">
+            {looping}
+          </div>
         </>
       )}
     </>
