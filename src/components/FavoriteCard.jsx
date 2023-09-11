@@ -5,7 +5,7 @@ import { removeFromFavorite } from "../redux/features/favoriteSlice";
 import { toast } from "react-hot-toast";
 import { BsShareFill, BsFillChatSquareFill } from "react-icons/bs";
 
-const FavoriteCard = ({ el, setIsFavorite }) => {
+const FavoriteCard = ({ el }) => {
   const {
     title,
     poster_path,
@@ -26,18 +26,18 @@ const FavoriteCard = ({ el, setIsFavorite }) => {
     favoriteLists = JSON.parse(localStorage.getItem("theMovieDb-fav"));
   }
 
-  useEffect(() => {
-    if (favoriteLists) {
-      setIsFavorite(true);
-    }
-  }, [setIsFavorite, favoriteLists]);
+  // useEffect(() => {
+  //   if (favoriteLists) {
+  //     setIsFavorite(true);
+  //   }
+  // }, [setIsFavorite, favoriteLists]);
 
   const remove = (e) => {
     e.stopPropagation();
     dispatch(removeFromFavorite(el));
-    setIsFavorite(false);
-    window.location.reload();
-    // toast.success("Remove from favorite.");
+    // setIsFavorite(false);
+    // window.location.reload();
+    toast.success("Remove from favorite.");
   };
 
   return (
