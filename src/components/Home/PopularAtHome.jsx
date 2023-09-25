@@ -10,8 +10,16 @@ import HomeLoading from "./HomeLoading";
 
 const PopularAtHome = () => {
   // * data fetching
-  const { data: popularMovieListsData, isLoading } = useGetPopularMoviesQuery();
-  const { data: popularTvSeriesListsData } = useGetPopularTvSeriesQuery();
+  const {
+    data: popularMovieListsData,
+    isLoading,
+    status,
+  } = useGetPopularMoviesQuery();
+  const {
+    data: popularTvSeriesListsData,
+    isLoading: isLoadingTv,
+    status: statusTv,
+  } = useGetPopularTvSeriesQuery();
 
   // * hooks
   const [isMovie, setIsMovie] = useState(true);
@@ -20,7 +28,8 @@ const PopularAtHome = () => {
   // const [imgUrl, setImgUrl] = useState("");
   const [activeItem, setActiveItem] = useState([]);
 
-  // console.log(hoverObj);
+  // console.log("tv", statusTv);
+  // console.log("movie", status);
 
   // * get  popular movie lists from data fetching
   const popularMovieLists = popularMovieListsData?.results;
@@ -136,7 +145,10 @@ const PopularAtHome = () => {
 
   return (
     <>
-      {isLoading || !popularMovieLists ? (
+      {isLoading ||
+      isLoadingTv ||
+      status === "pending" ||
+      statusTv === "pending" ? (
         <div className="mt-[80px] p-5 w-full">
           <HomeLoading />
         </div>
