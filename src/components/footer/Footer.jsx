@@ -1,12 +1,12 @@
 import "@lottiefiles/lottie-player";
 import { Link, useLocation } from "react-router-dom";
+import { RiFacebookFill } from "react-icons/ri";
+import { FaTelegramPlane, FaLinkedinIn } from "react-icons/fa";
 import {
-  CiFacebook,
-  CiTwitter,
-  CiInstagram,
-  CiLinkedin,
-  CiMail,
-} from "react-icons/ci";
+  AiOutlineTwitter,
+  AiOutlineInstagram,
+  AiOutlineCopyright,
+} from "react-icons/ai";
 
 const Footer = () => {
   const location = useLocation();
@@ -16,20 +16,29 @@ const Footer = () => {
   return (
     <div className=" flex items-center py-10 gap-5 flex-col w-full bg-[#25262b] text-white">
       <ul className=" flex gap-5 flex-wrap text-2xl">
-        <li className=" hover:scale-110 text-slate-300 hover:text-white active:scale-90 cursor-pointer transition-all duration-300 ">
-          <CiFacebook />
+        <li className="logo-container group">
+          <span className="logo-border" />
+          <RiFacebookFill className="logo" />
         </li>
-        <li className=" hover:scale-110 text-slate-300 hover:text-white active:scale-90 cursor-pointer transition-all duration-300 ">
-          <CiTwitter />
+
+        <li className="logo-container group">
+          <span className="logo-border" />
+          <AiOutlineTwitter className="logo" />
         </li>
-        <li className=" hover:scale-110 text-slate-300 hover:text-white active:scale-90 cursor-pointer transition-all duration-300 ">
-          <CiInstagram />
+
+        <li className="logo-container group">
+          <span className="logo-border" />
+          <AiOutlineInstagram className="logo" />
         </li>
-        <li className=" hover:scale-110 text-slate-300 hover:text-white active:scale-90 cursor-pointer transition-all duration-300 ">
-          <CiLinkedin />
+
+        <li className="logo-container group">
+          <span className="logo-border" />
+          <FaTelegramPlane className="logo" />
         </li>
-        <li className=" hover:scale-110 text-slate-300 hover:text-white active:scale-90 cursor-pointer transition-all duration-300 ">
-          <CiMail />
+
+        <li className="logo-container group">
+          <span className="logo-border" />
+          <FaLinkedinIn className="logo" />
         </li>
       </ul>
       <ul className=" font-serif flex items-center gap-3 text-sm sm:text-base sm:gap-5">
@@ -53,8 +62,8 @@ const Footer = () => {
         </li>
       </ul>
       <p className=" flex items-center text-sm sm:text-base">
-        <span className=" text-2xl font-mono mr-2">&copy; </span>Win Htet Zaw |
-        All rights Reserved
+        <AiOutlineCopyright className="text-lg mr-1 mb-[1px]" />
+        Win Htet Zaw | All rights Reserved
       </p>
     </div>
   );

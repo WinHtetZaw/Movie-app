@@ -62,7 +62,7 @@ const MovieDetail = () => {
               <div className=" flex flex-wrap items-center gap-2 py-2">
                 {data?.genres?.map((genre) => (
                   <div
-                    className="hvr-radial-in text-sm flex items-center justify-center py-1 px-2 min-w-[6rem] rounded-sm bg-gradient-to-r from-[#005C97] to-[#1CB5E0] text-slate-800"
+                    className="text-sm flex items-center justify-center py-1 px-2 min-w-[6rem] rounded-sm bg-gradient-to-r from-[#005C97] to-[#1CB5E0] text-slate-200"
                     key={genre.id}
                   >
                     #{genre.name}

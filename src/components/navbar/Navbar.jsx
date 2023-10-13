@@ -12,7 +12,7 @@ import MenuModal from "./MenuModal";
 import MovieModal from "../modal-components/MovieModal";
 import TvModal from "../modal-components/TvModal";
 import LinkModal from "../modal-components/LinkModal";
-import { movieDataPathnames, tvDataPathnames } from "../../data/data";
+import { modalPopupVariant, movieDataPathnames, tvDataPathnames } from "../../data/data";
 
 const Navbar = () => {
   // * hooks
@@ -108,8 +108,6 @@ const Navbar = () => {
               {/* logo  */}
               <Link to={"/"}>
                 <h3 className=" ml-5 text-lg sm:text-2xl flex items-center justify-center font-semibold font-serif">
-                  {/* <span>M</span>
-                  <span>A</span> */}
                   <span className=" text-neon text-rose-500 uppercase font-2">
                     movie
                   </span>
@@ -143,13 +141,7 @@ const Navbar = () => {
                 </div>
                 <AnimatePresence>
                   {isMenuOpen && (
-                    <div
-                      // onClick={() => {
-                      //   dispatch(isOpenSidebar(!openSidebar));
-                      //   setIsMenuOpen(!isMenuOpen);
-                      // }}
-                      className=" absolute z-50 top-0 h-screen w-full bg-black bg-opacity-80"
-                    >
+                    <div className=" absolute z-50 top-0 h-screen w-full bg-black bg-opacity-80">
                       <MenuModal
                         setIsMenuOpen={setIsMenuOpen}
                         isProfileModelOpen={isProfileModelOpen}
@@ -174,17 +166,6 @@ const Navbar = () => {
                     className={` hidden h-14 md:flex items-center gap-5 md:mr-5`}
                   >
                     <div className=" flex flex-row items-center gap-5 h-full">
-                      {/* <h3
-                        onClick={() => {
-                          dispatch(isOpenSidebar(false));
-                          setIsMenuOpen(false);
-                        }}
-                        className=" relative  transition duration-300"
-                      ></h3> */}
-                      {/* <MovieModal />
-
-                      <TvModal /> */}
-
                       <LinkModal data={movieDataPathnames} />
 
                       <LinkModal data={tvDataPathnames} />
@@ -203,10 +184,9 @@ const Navbar = () => {
                       <AnimatePresence>
                         {isProfileModelOpen && (
                           <motion.ul
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.3 }}
-                            exit={{ opacity: 0 }}
+                            initial="hidden"
+                            animate="show"
+                            variants={modalPopupVariant}
                             className="modal-container right-0"
                           >
                             <Link to={"/favorite"}>

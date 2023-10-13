@@ -15,6 +15,7 @@
 /* #3da2f1 blue  */
 /* #34495e dark soft-2 */
 /* [#005C97] dark blue */
+/* bg-gradient-to-r from-[#005C97] to-[#1CB5E0] */
 
 html,
 body {
@@ -669,6 +670,15 @@ input[type="number"] {
   .burger-menu-item {
     @apply hover:bg-slate-400 hover:text-slate-800 py-2 px-3 rounded-md capitalize select-none cursor-pointer transition-all duration-200;
   }
+  .logo-container {
+    @apply relative flex items-center justify-center;
+  }
+  .logo-border {
+    @apply block w-[30px] aspect-square rounded-full border-[1px] group-hover:scale-[1.5] group-hover:border-opacity-0 border-slate-300 transition-all duration-300;
+  }
+  .logo {
+    @apply absolute text-[14px] group-hover:text-rose-600 group-hover:scale-[1.8] transition duration-300 ease-out;
+  }
 }
 .splide__pagination {
   bottom: -20px !important;
@@ -796,4 +806,98 @@ input[type="number"] {
 .hvr-sweep-to-right:hover:before {
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
+}
+
+/* Wobble Top */
+@-webkit-keyframes hvr-wobble-top {
+  16.65% {
+    -webkit-transform: skew(-12deg);
+    transform: skew(-12deg);
+  }
+  33.3% {
+    -webkit-transform: skew(10deg);
+    transform: skew(10deg);
+  }
+  49.95% {
+    -webkit-transform: skew(-6deg);
+    transform: skew(-6deg);
+  }
+  66.6% {
+    -webkit-transform: skew(4deg);
+    transform: skew(4deg);
+  }
+  83.25% {
+    -webkit-transform: skew(-2deg);
+    transform: skew(-2deg);
+  }
+  100% {
+    -webkit-transform: skew(0);
+    transform: skew(0);
+  }
+}
+@keyframes hvr-wobble-top {
+  16.65% {
+    -webkit-transform: skew(-12deg);
+    transform: skew(-12deg);
+  }
+  33.3% {
+    -webkit-transform: skew(10deg);
+    transform: skew(10deg);
+  }
+  49.95% {
+    -webkit-transform: skew(-6deg);
+    transform: skew(-6deg);
+  }
+  66.6% {
+    -webkit-transform: skew(4deg);
+    transform: skew(4deg);
+  }
+  83.25% {
+    -webkit-transform: skew(-2deg);
+    transform: skew(-2deg);
+  }
+  100% {
+    -webkit-transform: skew(0);
+    transform: skew(0);
+  }
+}
+.hvr-wobble-top {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+}
+.hvr-wobble-top:hover {
+  -webkit-animation-name: hvr-wobble-top;
+  animation-name: hvr-wobble-top;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
+
+@keyframes link-modal {
+  25% {
+    scale: 1.1;
+  }
+  50% {
+    scale: 1.05;
+  }
+  75% {
+    scale: 1.07;
+  }
+  100% {
+    scale: 1;
+  }
+}
+
+.link-modal {
+  animation-name: link-modal;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
 }

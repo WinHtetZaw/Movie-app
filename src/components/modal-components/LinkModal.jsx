@@ -1,9 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { stringToLink } from "../../data/share";
 import { useDispatch } from "react-redux";
 import { setActivePaginateNumber } from "../../redux/features/paginationSlice";
+import { modalPopupVariant } from "../../data/data";
 
 const LinkModal = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,10 +34,9 @@ const LinkModal = ({ data }) => {
         {isOpen && (
           <>
             <motion.ul
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              initial="hidden"
+              animate="show"
+              variants={modalPopupVariant}
               className="modal-container"
             >
               {data?.links.map((el, index) => {

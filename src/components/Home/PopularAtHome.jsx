@@ -7,6 +7,7 @@ import "@lottiefiles/lottie-player";
 import { AnimatePresence, motion } from "framer-motion";
 import HomeSlide from "./HomeSlide";
 import HomeLoading from "./HomeLoading";
+import { modalPopupVariant } from "../../data/data";
 
 const PopularAtHome = () => {
   // * data fetching
@@ -189,7 +190,9 @@ const PopularAtHome = () => {
                   <AnimatePresence>
                     {isOpened && (
                       <motion.div
-                        variants={choiceVariant}
+                        initial="hidden"
+                        animate="show"
+                        variants={modalPopupVariant}
                         exit={{
                           opacity: 0,
                           transition: { duration: 0.2, ease: "easeOut" },
