@@ -3,32 +3,37 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
-  useLocation,
 } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
-import Dashboard from "./pages/Dashboard";
 import NotFound from "./components/NotFound";
-import Movies from "./pages/Movies";
-import TvSeries from "./pages/TvSeries";
-import MovieDetail from "./pages/MovieDetail";
 import MovieLayout from "./layouts/MovieLayout";
 import TvLayout from "./layouts/TvLayout";
-import TvDetail from "./pages/TvDetail";
-import SearchLayout from "./layouts/SearchLayout";
-import SearchPage from "./pages/SearchPage";
-import AccSignup from "./components/account/AccSignup";
-import AccSignin from "./components/account/AccSignin";
 import { Toaster } from "react-hot-toast";
-import Favorite from "./pages/Favorite";
-import NowPlayingMovies from "./pages/NowPlayingMovies";
-import UpcomingMovies from "./pages/UpcomingMovies";
-import TopRatedMovies from "./pages/TopRatedMovies";
-import MovieSearch from "./pages/MovieSearch";
-import TvSearch from "./pages/TvSearch";
-import TvOnTheAir from "./pages/TvOnTheAir";
-import TvAiringToday from "./pages/TvAiringToday";
-import TvTopRated from "./pages/TvTopRated";
-import "./App.css"
+import "./App.css";
+import { Suspense, lazy } from "react";
+
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+
+// movies pages
+const Movies = lazy(() => import("./pages/Movies"));
+const NowPlayingMovies = lazy(() => import("./pages/NowPlayingMovies"));
+const UpcomingMovies = lazy(() => import("./pages/UpcomingMovies"));
+const TopRatedMovies = lazy(() => import("./pages/TopRatedMovies"));
+const MovieSearch = lazy(() => import("./pages/MovieSearch"));
+const MovieDetail = lazy(() => import("./pages/MovieDetail"));
+
+// tv pages
+const TvSeries = lazy(() => import("./pages/TvSeries"));
+const TvAiringToday = lazy(() => import("./pages/TvSeries"));
+const TvOnTheAir = lazy(() => import("./pages/TvOnTheAir"));
+const TvTopRated = lazy(() => import("./pages/TvTopRated"));
+const TvDetail = lazy(() => import("./pages/TvDetail"));
+const TvSearch = lazy(() => import("./pages/TvSearch"));
+
+const Favorite = lazy(() => import("./pages/Favorite"));
+
+const AccSignup = lazy(() => import("./components/account/AccSignup"));
+const AccSignin = lazy(() => import("./components/account/AccSignin"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -74,7 +79,9 @@ const App = () => {
       <div>
         <Toaster position="top-right" />
       </div>
-      <RouterProvider router={router} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <RouterProvider router={router} />
+      </Suspense>
     </>
   );
 };

@@ -85,7 +85,7 @@ const MovieDetail = () => {
                 />
               </div>
               {/* Overview */}
-              <div className=" font-1 py-2 tracking-[0.15rem]">
+              <div className=" py-2 tracking-[0.15rem]">
                 <h2 className=" text-lg font-semibold mb-3 tracking-[0.2rem]">
                   Overview
                 </h2>

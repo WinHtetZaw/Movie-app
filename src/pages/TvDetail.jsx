@@ -27,7 +27,7 @@ const TvDetail = () => {
           <div className="absolute z-50 top-[100px] left-[20px]">
             <BackBtn />
           </div>
-          <div className=" min-h-screen pt-[120px] md:pt-[160px] pb-16 flex flex-col md:flex-row  bg-opacity-80  bg-[#25262b] ">
+          <div className=" min-h-screen pt-[150px] md:pt-[160px] pb-16 flex flex-col md:flex-row  bg-opacity-80  bg-[#25262b] ">
             {/* left  */}
             <div className=" w-[200px] md:w-4/12 rounded-lg overflow-hidden p-5">
               <img

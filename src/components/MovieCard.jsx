@@ -14,12 +14,6 @@ import { motion } from "framer-motion";
 import { setIsImgLoading } from "../redux/features/generalSlice";
 
 const MovieCard = (props) => {
-  // * hooks
-  const [isFavorite, setIsFavorite] = useState(false);
-  // const { movieLists } = useSelector((state) => state.favoriteSlice);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  // * get data from props
   const {
     title,
     poster_path,
@@ -30,6 +24,11 @@ const MovieCard = (props) => {
     isMovie,
     first_air_date,
   } = props;
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  // const { movieLists } = useSelector((state) => state.favoriteSlice);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // movieLists.length > 0 && console.log("favorite -----", movieLists);
   const movieLocalLists = JSON.parse(localStorage.getItem("theMovieDb-fav"));
@@ -48,7 +47,21 @@ const MovieCard = (props) => {
     }
   }, [setIsFavorite, sameId]);
 
-  // console.log("same ----", sameId);
+  useEffect(() => {
+    const resize = () => {
+      if (window.innerWidth <= 400) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    return () => {
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
 
   // * variables define
   const percentage = vote_average.toFixed(1) * 10;
@@ -84,7 +97,7 @@ const MovieCard = (props) => {
       >
         {/* <Link to={`/${isMovie ? "movie" : "tv"}/detail/${id}`}> */}
         <div
-          className="card min-h-[100px] lg:min-h-[180px] aspect-[2/3]"
+          className="card"
           onClick={(e) => {
             navigate(`/${isMovie ? "movie" : "tv"}/detail/${id}`);
           }}
@@ -103,9 +116,9 @@ const MovieCard = (props) => {
               alt=""
             />
           </div>
-          <div className="details overflow-hidden w-full h-full text-[#cccccc] p-[6px] xs:p-[10px] md:p-[20px]">
+          <div className="details flex flex-col justify-between overflow-hidden w-full h-full text-[#ccc] p-[10px] xs:p-[20px]">
             {/* title  */}
-            <h3 className=" truncate py-1 xs:py-2 text-sm lg:text-xl xs:text-base w-[85%]">
+            <h3 className=" truncate py-1 sm:py-2 text-sm lg:text-xl xs:text-base w-[85%]">
               {title ?? name}
             </h3>
             {/* date  */}
@@ -113,10 +126,8 @@ const MovieCard = (props) => {
               {release_date ?? first_air_date}
             </p>
 
-            <button
-              // onClick={handleFavoriteClick}
-              className=" absolute top-2 right-2 flex gap-3 items-center"
-            >
+            {/* bookmark btn  */}
+            <button className=" absolute top-2 right-2 flex gap-3 items-center">
               {isFavorite || sameId ? (
                 <BsBookmarkX
                   onClick={remove}
@@ -127,31 +138,32 @@ const MovieCard = (props) => {
               )}
             </button>
 
-            <div className=" flex overflow-hidden items-start flex-col gap-3">
-              {/* volt progress  */}
-              <div className=" py-5 md:pb-0 md:pt-5 lg:py-5 hidden xs:block">
-                <RingProgress
-                  rootColor="transparent"
-                  size={50}
-                  thickness={2}
-                  roundCaps
-                  sections={
-                    percentage
-                      ? // ? [{ value: percentage, color: "rgb(31 41 55)" }]
-                        [{ value: percentage, color: "#cccccc" }]
-                      : [{ value: percentage, color: "transparent" }]
-                  }
-                  label={
-                    <div className=" text-[#cccccc] text-sm text-center">
-                      {percentage}%
-                    </div>
-                  }
-                />
-              </div>
-              <div className=" whitespace-nowrap w-fit text-sm xs:text-base py-[2px] xs:py-1 select-none cursor-pointer">
-                Go to detail !
-              </div>
+            {/* <div className=" flex overflow-hidden items-start flex-col gap-3"> */}
+            {/* volt progress  */}
+            {/* <div className=" py-2 sm:py-5 md:pb-0 md:pt-5 "> */}
+            <div className="py-2">
+              <RingProgress
+                rootColor="transparent"
+                size={isMobile ? 40 : 50}
+                thickness={2}
+                roundCaps
+                sections={
+                  percentage
+                    ? // ? [{ value: percentage, color: "rgb(31 41 55)" }]
+                      [{ value: percentage, color: "#ccc" }]
+                    : [{ value: percentage, color: "transparent" }]
+                }
+                label={
+                  <div className=" text-[#ccc] text-[12px] xs:text-sm text-center">
+                    {percentage}%
+                  </div>
+                }
+              />
             </div>
+            <div className=" whitespace-nowrap w-fit text-sm xs:text-base py-[2px] xs:py-1 select-none cursor-pointer">
+              Go to detail !
+            </div>
+            {/* </div> */}
           </div>
         </div>
         {/* </Link> */}

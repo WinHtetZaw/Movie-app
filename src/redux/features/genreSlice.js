@@ -18,20 +18,23 @@ export const genreSlice = createSlice({
         return;
       }
       const sameLists = state.activeGenreIds.filter((el) => el == payload);
+      
       if (sameLists.length > 0) {
         const prevLists = state.activeGenreIds.filter((el) => el != payload);
-        console.log(prevLists);
-        state.activeGenreIds = [...prevLists];
+        state.activeGenreIds = [...prevLists].sort((a, b) => a - b);
+
       } else {
-        state.activeGenreIds = [...state.activeGenreIds, payload];
+        state.activeGenreIds = [...state.activeGenreIds, payload].sort(
+          (a, b) => a - b
+        );
       }
     },
-    removeGenreId: (state, { payload }) => {
-      const prev = state.activeGenreIds.filter((el) => el.id != payload.id);
-      state.activeGenreIds = [...prev];
-    },
+    // removeGenreId: (state, { payload }) => {
+    //   const prev = state.activeGenreIds.filter((el) => el.id != payload.id);
+    //   state.activeGenreIds = [...prev];
+    // },
   },
 });
 
-export const { setNumber, addGenreId, removeGenreId } = genreSlice.actions;
+export const { setNumber, addGenreId } = genreSlice.actions;
 export default genreSlice.reducer;

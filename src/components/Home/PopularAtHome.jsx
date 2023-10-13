@@ -194,17 +194,17 @@ const PopularAtHome = () => {
                           opacity: 0,
                           transition: { duration: 0.2, ease: "easeOut" },
                         }}
-                        className="font-1 origin-top absolute bg-glass-1 -right-[4rem]  z-10 py-3 px-2 mt-2 w-44 text-slate-800 rounded shadow-lg ring-1 ring-[#cccccc] ring-opacity-50  focus:outline-none"
+                        className="modal-container"
                       >
                         <p
                           onClick={() => setIsMovie(true)}
-                          className="hover:bg-black text-start hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400"
+                          className="modal-item"
                         >
                           Movie
                         </p>
                         <p
                           onClick={() => setIsMovie(false)}
-                          className="hover:bg-black text-start hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3"
+                          className="modal-item"
                         >
                           Tv series
                         </p>

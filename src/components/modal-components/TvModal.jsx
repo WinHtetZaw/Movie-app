@@ -1,17 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const TvModal = ({ handleLinkClick }) => {
-  // * hooks
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
 
-  // handles
   const handleMouseLeave = () => {
-    // setTimeout(() => {
     setIsOpen(false);
-    // }, 300);
   };
   return (
     <div
@@ -19,9 +14,9 @@ const TvModal = ({ handleLinkClick }) => {
       onMouseLeave={handleMouseLeave}
       onMouseOver={() => setIsOpen(true)}
     >
-      <h1 className="text-lg font-semibold">Tv Series</h1>
+      <h1 className="text-lg font-4 font-[500]">Tv Series</h1>
 
-      {/* dropdown area  */}
+      {/* dropdown modal area */}
       <AnimatePresence>
         {isOpen && (
           <motion.ul
@@ -29,37 +24,25 @@ const TvModal = ({ handleLinkClick }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className={` font-1 origin-top absolute bg-glass-1 -right-[4rem]  z-10 py-3 px-2 mt-2 w-44 text-slate-800 rounded-md shadow-lg ring-1 ring-[#fffde4] ring-opacity-50  focus:outline-none`}
+            className="modal-container"
           >
             <Link to={"/tv/popular"}>
-              <li
-                onClick={handleLinkClick}
-                className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400"
-              >
+              <li onClick={handleLinkClick} className="modal-item">
                 Popular
               </li>
             </Link>
             <Link to={"/tv/airing-today"}>
-              <li
-                onClick={handleLinkClick}
-                className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400"
-              >
+              <li onClick={handleLinkClick} className="modal-item">
                 Airing Today
               </li>
             </Link>
             <Link to={"tv/on-the-air"}>
-              <li
-                onClick={handleLinkClick}
-                className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400"
-              >
+              <li onClick={handleLinkClick} className="modal-item">
                 On The Air
               </li>
             </Link>
             <Link to={"/tv/top-rated"}>
-              <li
-                onClick={handleLinkClick}
-                className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3"
-              >
+              <li onClick={handleLinkClick} className="modal-item">
                 Top Rated
               </li>
             </Link>

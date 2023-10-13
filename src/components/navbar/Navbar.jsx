@@ -11,6 +11,8 @@ import { toast } from "react-hot-toast";
 import MenuModal from "./MenuModal";
 import MovieModal from "../modal-components/MovieModal";
 import TvModal from "../modal-components/TvModal";
+import LinkModal from "../modal-components/LinkModal";
+import { movieDataPathnames, tvDataPathnames } from "../../data/data";
 
 const Navbar = () => {
   // * hooks
@@ -55,11 +57,7 @@ const Navbar = () => {
   useEffect(() => {
     // when scroll navbar show and hide
     const handleScroll = () => {
-      // if (location.pathname.includes("/movie/detail")) {
-      //   return;
-      // }
       const currentScrollPos = window.scrollY;
-      // console.log(currentScrollPos);
       const isScrollingUp = prevScrollPos > currentScrollPos;
       dispatch(toggleShowNavbar(isScrollingUp || currentScrollPos < 1));
       setPrevScrollPos(currentScrollPos);
@@ -102,7 +100,7 @@ const Navbar = () => {
             transition={{ duration: 0.4, ease: "easeOut" }}
             className={`${
               location.pathname === "/"
-                ? "bg-opacity-50 backdrop-blur-sm bg-black"
+                ? "bg-opacity-20  bg-black"
                 : "bg-[#25262b]"
             }  z-[1000] h-[80px] fixed top-0 max-w-[1280px] w-full mx-auto`}
           >
@@ -112,13 +110,15 @@ const Navbar = () => {
                 <h3 className=" ml-5 text-lg sm:text-2xl flex items-center justify-center font-semibold font-serif">
                   {/* <span>M</span>
                   <span>A</span> */}
-                  <span className=" text-neon text-rose-500 uppercase font-2">movie</span>
+                  <span className=" text-neon text-rose-500 uppercase font-2">
+                    movie
+                  </span>
                 </h3>
               </Link>
 
               <section className=" flex items-center w-full justify-end">
                 {/* burger menu  */}
-                <div className="absolute z-[1000] top-0 right-0 h-[80px] flex items-center justify-center mr-5">
+                <div className="absolute z-[100] top-0 right-0 h-[80px] flex items-center justify-center mr-5">
                   <button
                     onClick={() => {
                       dispatch(isOpenSidebar(!openSidebar));
@@ -141,27 +141,28 @@ const Navbar = () => {
                     </svg>
                   </button>
                 </div>
-                {isMenuOpen && (
-                  <div
-                    onClick={() => {
-                      dispatch(isOpenSidebar(!openSidebar));
-                      setIsMenuOpen(!isMenuOpen);
-                    }}
-                    className=" absolute top-0 h-screen w-full bg-black bg-opacity-80"
-                  >
-                    <MenuModal
-                      setIsMenuOpen={setIsMenuOpen}
-                      isProfileModelOpen={isProfileModelOpen}
-                      useInfo={useInfo}
-                      handleLogoutClick={handleLogoutClick}
-                      isShrink={isShrink}
-                      handleProfileClick={handleProfileClick}
-                      handleMouseLeave={handleMouseLeave}
-                      setIsProfileModelOpen={setIsProfileModelOpen}
-                    />
-                  </div>
-                )}
-
+                <AnimatePresence>
+                  {isMenuOpen && (
+                    <div
+                      // onClick={() => {
+                      //   dispatch(isOpenSidebar(!openSidebar));
+                      //   setIsMenuOpen(!isMenuOpen);
+                      // }}
+                      className=" absolute z-50 top-0 h-screen w-full bg-black bg-opacity-80"
+                    >
+                      <MenuModal
+                        setIsMenuOpen={setIsMenuOpen}
+                        isProfileModelOpen={isProfileModelOpen}
+                        useInfo={useInfo}
+                        handleLogoutClick={handleLogoutClick}
+                        isShrink={isShrink}
+                        handleProfileClick={handleProfileClick}
+                        handleMouseLeave={handleMouseLeave}
+                        setIsProfileModelOpen={setIsProfileModelOpen}
+                      />
+                    </div>
+                  )}
+                </AnimatePresence>
                 <div className=" flex items-center gap-8">
                   {/* search  */}
                   <span className=" mr-16">
@@ -173,17 +174,20 @@ const Navbar = () => {
                     className={` hidden h-14 md:flex items-center gap-5 md:mr-5`}
                   >
                     <div className=" flex flex-row items-center gap-5 h-full">
-                      <h3
+                      {/* <h3
                         onClick={() => {
                           dispatch(isOpenSidebar(false));
                           setIsMenuOpen(false);
                         }}
-                        className=" relative transition duration-300"
-                      >
-                        <MovieModal />
-                      </h3>
+                        className=" relative  transition duration-300"
+                      ></h3> */}
+                      {/* <MovieModal />
 
-                      <TvModal />
+                      <TvModal /> */}
+
+                      <LinkModal data={movieDataPathnames} />
+
+                      <LinkModal data={tvDataPathnames} />
                     </div>
 
                     {/* profile  */}
@@ -203,14 +207,12 @@ const Navbar = () => {
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.3 }}
                             exit={{ opacity: 0 }}
-                            className={` font-1 absolute bg-glass-1 right-0 z-10 py-3 px-2 mt-2 w-44 text-slate-700 origin-top-right rounded-md shadow-lg ring-1 ring-[#fffde4] ring-opacity-50  focus:outline-none`}
+                            className="modal-container right-0"
                           >
                             <Link to={"/favorite"}>
-                              <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer py-2 px-3 border-b border-gray-400 last:border-none">
-                                Favorite
-                              </li>
+                              <li className="modal-item">Favorite</li>
                             </Link>
-                            <li className="hover:bg-black hover:bg-opacity-[0.15] select-none cursor-pointer w-full py-2 px-3 border-b border-gray-400 last:border-none">
+                            <li className="modal-item">
                               {useInfo?.success ? (
                                 <span onClick={handleLogoutClick}>Log out</span>
                               ) : (

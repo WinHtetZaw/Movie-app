@@ -5,7 +5,7 @@ const BackBtn = () => {
   return (
     <button
       onClick={() => navigate(-1)}
-      className={` bg-white py-4 px-1 rounded active:scale-90 transition duration-200 bg-opacity-20 hover:bg-opacity-30`}
+      className="hover:bg-slate-300 bg-slate-400 text-black py-4 px-1 rounded active:scale-95 transition duration-200"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

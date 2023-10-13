@@ -1,9 +1,9 @@
 const StartBtn = ({ pageNum, handlePaginationBtnClick }) => {
   return (
     <button
-      disabled={pageNum === 1}
+      disabled={pageNum <= 1}
       onClick={() => handlePaginationBtnClick("start")}
-      className={`${pageNum !== 1 && "group"} paginate-btn`}
+      className={`${pageNum > 1 && "group"} paginate-btn`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

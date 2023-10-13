@@ -1,5 +1,7 @@
-@import url("https://fonts.googleapis.com/css?family=Patua+One");
+/* @import url("https://fonts.googleapis.com/css?family=Patua+One"); */
 @import url("https://fonts.googleapis.com/css2?family=Barriecito&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -12,19 +14,19 @@
 /* #533439 brown use in border orange  */
 /* #3da2f1 blue  */
 /* #34495e dark soft-2 */
+/* [#005C97] dark blue */
 
 html,
 body {
-  background-color: #1a2238;
-  /* font-family: "Patua One", cursive; */
+  /* background-color: #1a2238; */
+  background-color: black;
   letter-spacing: 1px;
-  /* overflow-x: hidden; */
   min-height: 100vh;
   max-width: 1280px;
   margin: 0 auto;
-  /* width: 100vw; */
   padding: 0;
   position: relative;
+  font-family: "Josefin Slab", serif;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -40,11 +42,17 @@ input[type="number"] {
 }
 
 @layer utilities {
-  .font-1 {
+  /* .font-1 {
     font-family: "Patua One", cursive;
-  }
+  } */
   .font-2 {
     font-family: "Barriecito", cursive;
+  }
+  .font-3 {
+    font-family: "Indie Flower", cursive;
+  }
+  .font-4 {
+    font-family: "Josefin Slab", serif;
   }
   .text-gradient-1 {
     background: #2b80ff;
@@ -380,6 +388,13 @@ input[type="number"] {
       ),
       linear-gradient(90deg, rgb(28, 20, 63), rgb(40, 160, 253));
   }
+  .bg-gradient-1 {
+    background: linear-gradient(
+      180.2deg,
+      rgb(30, 33, 48) 6.8%,
+      rgb(74, 98, 110) 131%
+    );
+  }
   .my-yellow {
     color: #fffde4;
   }
@@ -596,6 +611,18 @@ input[type="number"] {
 }
 
 @layer components {
+  .padding-x {
+    @apply px-3 sm:px-5;
+  }
+  .content-container {
+    @apply relative min-h-screen flex flex-col padding-x pt-5 sm:pt-10 pb-20 min-[1281px]:px-0;
+  }
+  .pagination-top {
+    @apply padding-x flex sm:justify-between gap-5 pb-5 sm:pb-10 flex-col-reverse sm:flex-row;
+  }
+  .pagination-bottom {
+    @apply mt-auto padding-x flex gap-5 pt-5 sm:pt-10 justify-evenly items-center min-[400px]:justify-end;
+  }
   .click-animation {
     @apply active:scale-95 transition duration-200;
   }
@@ -607,6 +634,9 @@ input[type="number"] {
   }
   .btn-1 {
     @apply py-1 px-3 border w-[7rem] border-[#cccccc] text-[#cccccc] select-none cursor-pointer;
+  }
+  .btn-3 {
+    @apply bg-slate-800 shadow-1 active:shadow-none hover:bg-slate-400 hover:text-black transition-all duration-200 text-[#eee] w-fit py-2 px-4 rounded-md mx-auto;
   }
   .text-orange {
     @apply text-[#ff6a3d];
@@ -627,10 +657,23 @@ input[type="number"] {
   .grid-1 {
     @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-10;
   }
+  .modal-container {
+    @apply font-3 origin-top absolute bg-slate-300 -right-[4rem]  z-10 py-3 px-2 mt-2 w-44 text-slate-800 rounded-md shadow-lg ring-1 ring-[#ccc] ring-opacity-50  focus:outline-none;
+  }
+  .modal-item {
+    @apply hover:bg-slate-900 rounded-md hover:bg-opacity-[0.5] hover:text-[#eee] select-none cursor-pointer py-1 px-3 last:border-none border-b border-gray-400 transition-all duration-100 capitalize;
+  }
+  .genre-tag-item {
+    @apply active:scale-95 border w-fit transition duration-300 rounded-md px-2 py-1 select-none cursor-pointer;
+  }
+  .burger-menu-item {
+    @apply hover:bg-slate-400 hover:text-slate-800 py-2 px-3 rounded-md capitalize select-none cursor-pointer transition-all duration-200;
+  }
 }
 .splide__pagination {
-  bottom: -1.5rem;
+  bottom: -20px !important;
 }
+
 .splide__pagination__page {
   background-color: #fffde4;
 }
@@ -655,15 +698,17 @@ input[type="number"] {
   height: 50px;
   width: 25px;
 }
-.splide__arrow:hover {
+
+/* .splide__arrow:hover {
   background: rgba(0, 0, 0, 0.7);
-}
+} */
 
 .splide__arrow svg {
   fill: #cccccc;
 }
 
-.splide__arrow--prev,.splide__arrow--next {
+.splide__arrow--prev,
+.splide__arrow--next {
   top: 40%;
 }
 

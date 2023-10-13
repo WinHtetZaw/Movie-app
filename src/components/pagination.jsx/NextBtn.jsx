@@ -2,9 +2,9 @@
 const NextBtn = ({ pageNum, handlePaginationBtnClick, totalPages }) => {
   return (
     <button
-      disabled={pageNum === totalPages}
+      disabled={pageNum >= totalPages}
       onClick={() => handlePaginationBtnClick("next")}
-      className={`${pageNum !== totalPages && "group"} paginate-btn`}
+      className={`${pageNum < totalPages && "group"} paginate-btn`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

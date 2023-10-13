@@ -16,8 +16,8 @@ const RootLayout = () => {
       }`}
     >
       {/* {location.pathname !== "/" && <Navbar />} */}
-      <Navbar/>
-      <main className=" min-h-[80vh] bg-transparent">
+      <Navbar />
+      <main className=" min-h-[80vh] bg-slate-900">
         <Outlet />
       </main>
       <Footer />

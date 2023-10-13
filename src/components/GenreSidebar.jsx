@@ -14,13 +14,11 @@ import { AnimatePresence, motion } from "framer-motion";
 const GenreSidebar = () => {
   // * hooks
   const [isOpen, setIsOpen] = useState(false);
-  const [isActive, setIsActive] = useState([]);
   const { data: movieGenreData } = useGetMovieGenresQuery();
   const { data: tvGenreData } = useGetTvGenresQuery();
   const dispatch = useDispatch();
   const location = useLocation();
   const { activeGenreIds } = useSelector((state) => state.genreSlice);
-  // activeGenreIds.length > 0 && console.log(activeGenreIds);
 
   // * variables
   let genres;
@@ -31,8 +29,6 @@ const GenreSidebar = () => {
   }
 
   const isDetail = location.pathname.includes("detail");
-  // console.log(isDetail)
-  // genres && console.log(data);
 
   // * handles
   const handleGenreSidebarClick = () => {
