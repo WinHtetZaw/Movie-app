@@ -881,23 +881,4 @@ input[type="number"] {
   animation-iteration-count: 1;
 }
 
-@keyframes link-modal {
-  25% {
-    scale: 1.1;
-  }
-  50% {
-    scale: 1.05;
-  }
-  75% {
-    scale: 1.07;
-  }
-  100% {
-    scale: 1;
-  }
-}
 
-.link-modal {
-  animation-name: link-modal;
-  animation-duration: 2s;
-  animation-timing-function: ease-in-out;
-}

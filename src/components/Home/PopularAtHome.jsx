@@ -150,7 +150,7 @@ const PopularAtHome = () => {
       isLoadingTv ||
       status === "pending" ||
       statusTv === "pending" ? (
-        <div className="mt-[80px] p-5 w-full">
+        <div className="min-h-screen pt-[80px] flex flex-col justify-between p-5 w-full">
           <HomeLoading />
         </div>
       ) : (
@@ -161,7 +161,7 @@ const PopularAtHome = () => {
           style={{ backgroundImage: `url(${activeItemImg})` }}
           className={`relative min-h-screen transition-all duration-300 filter bg-no-repeat bg-cover bg-center`}
         >
-          <div className=" min-h-screen h-full pt-[80px] flex flex-col justify-around bg-black bg-opacity-40 text-[#cccccc] px-3 md:px-7 py-10">
+          <div className=" min-h-screen h-full pt-[80px] flex flex-col justify-between bg-black bg-opacity-40 text-[#cccccc] px-3 md:px-7 py-10">
             <div className="">
               <HomeSlide activeItem={activeItem} />
             </div>

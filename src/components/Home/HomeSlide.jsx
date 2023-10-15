@@ -21,7 +21,10 @@ const HomeSlide = ({ activeItem }) => {
           </div>
 
           {/* overview  */}
-          <p className="mb-2 min-h-[80px] italic text-opacity-90 line-clamp-3">
+          <p
+            style={{ minHeight: "3ex" }}
+            className="mb-2 italic text-opacity-90 line-clamp-3"
+          >
             {activeItem.overview}
           </p>
 
