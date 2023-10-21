@@ -59,12 +59,6 @@ const router = createBrowserRouter(
           <Route path="detail/:id" element={<MovieDetail />} />
         </Route>
 
-        {/* <Route path="search" element={<SearchLayout />}>
-          <Route index element={<SearchPage />} />
-          <Route path="movie" />
-          <Route path="tv" />
-        </Route> */}
-
         <Route path="favorite" element={<Favorite />} />
       </Route>
       <Route path="/sign-up" element={<AccSignup />} />

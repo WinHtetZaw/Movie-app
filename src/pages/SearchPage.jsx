@@ -1,4 +1,4 @@
-import  { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useSearchMovieQuery } from "../redux/services/movieListApi";
 import MovieCard from "../components/MovieCard";
@@ -6,6 +6,7 @@ import StartBtn from "../components/pagination.jsx/StartBtn";
 import PrevBtn from "../components/pagination.jsx/PrevBtn";
 import NextBtn from "../components/pagination.jsx/NextBtn";
 import EndBtn from "../components/pagination.jsx/EndBtn";
+import { useSelector } from "react-redux";
 
 const SearchPage = () => {
   // * hooks
@@ -14,8 +15,7 @@ const SearchPage = () => {
   const navigate = useNavigate();
   const pageNum = useRef(1);
   const searchQuery = localStorage.getItem("searchInput");
-  const location = useLocation()
-  console.log("location in ssearch -----",location)
+  const location = useLocation();
 
   // localStorage.getItem("searchInput") && searchQuery( localStorage.getItem("searchInput"))
 
@@ -23,7 +23,7 @@ const SearchPage = () => {
     query: searchQuery,
     page: pageNum.current,
   });
-  isSuccess && console.log(data);
+  const { activeGenreIds } = useSelector((state) => state.genreSlice);
 
   // if (!searchParams.get("query")) {
   //   return navigate({
@@ -47,12 +47,31 @@ const SearchPage = () => {
   //   });
   // }, [pageNum.current]);
 
+  let filterLists;
+  if (activeGenreIds.length > 0) {
+    filterLists = popularMovieLists?.filter((popularMovieList) => {
+      // const arr = popularMovieList.genre_ids;
+      return popularMovieList.genre_ids
+        .toString()
+        .includes(activeGenreIds.toString());
+    });
+  }
+
+  // filterLists?.length > 0 ? filterLists : popularMovieLists;
+
   // * looping movie lists
-  const looping = lists?.map((list,index) => (
-    <div key={index} className={`${!list.poster_path && "hidden"}`}>
-      <MovieCard key={list.id} {...list} isLoading={isLoading} isMovie={true} />
-    </div>
-  ));
+  const looping = (filterLists?.length > 0 ? filterLists : lists)?.map(
+    (list, index) => (
+      <div key={index} className={`${!list.poster_path && "hidden"}`}>
+        <MovieCard
+          key={list.id}
+          {...list}
+          isLoading={isLoading}
+          isMovie={true}
+        />
+      </div>
+    )
+  );
 
   // * handle functions
   const handlePaginationBtnClick = (type) => {
@@ -164,9 +183,7 @@ const SearchPage = () => {
       </div>
 
       {/*  lists show  */}
-      <div className="grid-1">
-        {looping}
-      </div>
+      <div className="grid-1">{looping}</div>
 
       <div className="absolute bottom-0 z-0 flex gap-5 my-10 justify-evenly items-center min-[400px]:justify-end">
         {/* start  */}

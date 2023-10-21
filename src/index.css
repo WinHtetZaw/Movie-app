@@ -650,7 +650,7 @@ input[type="number"] {
     @apply bg-[#34495e];
   }
   .paginate-btn {
-    @apply overflow-hidden relative justify-center w-10 h-8 active:scale-90 bg-transparent disabled:opacity-50 flex items-center border-b-2 border-slate-50 text-slate-50 py-2 cursor-pointer transition duration-300;
+    @apply overflow-hidden relative justify-center w-10 h-8 bg-transparent disabled:opacity-50 flex items-center border-b-2 border-slate-50 text-slate-50 py-2 cursor-pointer transition duration-300;
   }
   .bg-img {
     @apply bg-[url(https://images.pexels.com/photos/2781760/pexels-photo-2781760.jpeg?auto=compress&cs=tinysrgb&w=400)] bg-no-repeat bg-cover bg-opacity-50;
