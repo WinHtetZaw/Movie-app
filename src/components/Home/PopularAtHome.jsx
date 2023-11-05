@@ -15,22 +15,18 @@ const PopularAtHome = () => {
     data: popularMovieListsData,
     isLoading,
     status,
-  } = useGetPopularMoviesQuery();
+  } = useGetPopularMoviesQuery(1);
   const {
     data: popularTvSeriesListsData,
     isLoading: isLoadingTv,
     status: statusTv,
-  } = useGetPopularTvSeriesQuery();
+  } = useGetPopularTvSeriesQuery(1);
 
   // * hooks
   const [isMovie, setIsMovie] = useState(true);
   const [isOpened, setIsOpened] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  // const [imgUrl, setImgUrl] = useState("");
   const [activeItem, setActiveItem] = useState([]);
-
-  // console.log("tv", statusTv);
-  // console.log("movie", status);
 
   // * get  popular movie lists from data fetching
   const popularMovieLists = popularMovieListsData?.results;
@@ -163,7 +159,7 @@ const PopularAtHome = () => {
         >
           <div className=" min-h-screen h-full pt-[80px] flex flex-col justify-between bg-black bg-opacity-40 text-[#cccccc] px-3 md:px-7 py-10">
             <div className="">
-              <HomeSlide activeItem={activeItem} />
+              <HomeSlide activeItem={activeItem ?? []} />
             </div>
 
             <section>
